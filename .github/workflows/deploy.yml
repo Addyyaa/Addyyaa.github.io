@@ -32,19 +32,29 @@ jobs:
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
 
-      - name: Ensure gh-pages branch exists (first-time init)
+      - name: Ensure gh-pages branch exists and is non-empty
         run: |
           set -e
           if ! git ls-remote --exit-code --heads origin gh-pages; then
             git fetch origin
             git checkout --orphan gh-pages
             git reset --hard
-            # add placeholder so later `git rm -rf .` won't fail on empty tree
             touch .nojekyll
             git add .nojekyll
             git commit -m "init gh-pages with placeholder"
             git push origin gh-pages
             git checkout main
+          else
+            git fetch origin gh-pages:gh-pages || true
+            # If remote gh-pages is empty (no tracked files), add placeholder
+            if [ -z "$(git ls-tree -r --name-only origin/gh-pages)" ]; then
+              git checkout gh-pages
+              touch .nojekyll
+              git add .nojekyll
+              git commit -m "chore: add placeholder to non-empty gh-pages"
+              git push origin gh-pages
+              git checkout main
+            fi
           fi
 
       - name: Install dependencies
