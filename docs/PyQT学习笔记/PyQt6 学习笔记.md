@@ -82,7 +82,7 @@
 
 11. 什么信号连接的函数，那么这个函数接收到的信号内容就是该信号相关的内容。例如，如果信号是clicked发出的，那么接收这个信号的函数就会得到布尔值，如果信号是widowTitleChanged，那么接收这个信号的函数就会是title内容
 
-    >![image-20240207130548944](../../../../AppData/Roaming/Typora/typora-user-images/image-20240207130548944.png)
+    >![image-20240207130548944](/img/docusaurus.png)
 
 ## 常用控件和布局
 
