@@ -19,11 +19,15 @@ const config: Config = {
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
+  // Avoid GH Pages redirect mismatch; make URLs consistently end with /
+  trailingSlash: true,
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'Addyyaa', // Usually your GitHub org/user name.
   projectName: 'Addyyaa.github.io', // Usually your repo name.
+  // Explicitly set deployment branch for org/user pages
+  deploymentBranch: 'gh-pages',
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
