@@ -39,7 +39,10 @@ jobs:
             git fetch origin
             git checkout --orphan gh-pages
             git reset --hard
-            git commit --allow-empty -m "init gh-pages"
+            # add placeholder so later `git rm -rf .` won't fail on empty tree
+            touch .nojekyll
+            git add .nojekyll
+            git commit -m "init gh-pages with placeholder"
             git push origin gh-pages
             git checkout main
           fi
