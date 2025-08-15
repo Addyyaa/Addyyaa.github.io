@@ -39,7 +39,15 @@ const config: Config = {
     defaultLocale: 'zh-Hans',
     locales: ['zh-Hans'],
   },
-
+  // 修复 TOC 渲染问题
+  markdown: { 
+    format: 'detect',
+    mdx1Compat: {
+      comments: true,
+      admonitions: true,
+      headingIds: true,
+    },
+  },
   presets: [
     [
       'classic',
@@ -50,6 +58,8 @@ const config: Config = {
           // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/Addyyaa/Addyyaa.github.io/tree/main/',
+          // 使用 remark-gfm 提供更宽松的 Markdown 解析
+          remarkPlugins: [require('remark-gfm')],
         },
         blog: {
           showReadingTime: true,
