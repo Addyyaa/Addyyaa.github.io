@@ -80,9 +80,9 @@
             self.setWindowTitle("SHEN'S App - Clicked")
     ```
 
-11. 什么信号连接的函数，那么这个函数接收到的信号内容就是该信号相关的内容。例如，如果信号是clicked发出的，那么接收这个信号的函数就会得到布尔值，如果信号是widowTitleChanged，那么接收这个信号的函数就会是title内容
+11. 什么信号连接的函数，那么这个函数接收到的信号内容就是该信号相关的内容。例如，如果信号是clicked发出的，那么接收这个信号的函数就会得到布尔值，如果信号是`widowTitleChanged`，那么接收这个信号的函数就会是title内容
 
-    >![image-20240207130548944](/img/docusaurus.png)
+    >![](./assets/image-20240207130548944.png)
 
 ## 常用控件和布局
 
