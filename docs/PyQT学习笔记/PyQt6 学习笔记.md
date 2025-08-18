@@ -1,4 +1,6 @@
-
+---
+sidebar_position: 3
+---
 
 # PyQt6 学习笔记
 
@@ -135,4 +137,3 @@
 | `Mouse Enter Event`       | 当鼠标进入窗口时触发   |
 | `Mouse Leave Event`       | 当鼠标离开窗口时触发   |
 | `Wheel Event`             | 滚轮事件               |
-
