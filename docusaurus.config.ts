@@ -40,7 +40,7 @@ const config: Config = {
     locales: ['zh-Hans'],
   },
   // 修复 TOC 渲染问题
-  markdown: { 
+  markdown: {
     format: 'detect',
     mdx1Compat: {
       comments: true,
@@ -58,8 +58,11 @@ const config: Config = {
           // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/Addyyaa/Addyyaa.github.io/tree/main/',
-          // 使用 remark-gfm 提供更宽松的 Markdown 解析
-          remarkPlugins: [require('remark-gfm')],
+          // 只使用兼容的插件
+          remarkPlugins: [
+            require('remark-gfm'),
+            require('remark-math'),
+          ],
         },
         blog: {
           showReadingTime: true,
