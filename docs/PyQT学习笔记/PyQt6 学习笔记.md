@@ -120,6 +120,8 @@ sidebar_position: 3
 
 ## 接收信号的槽函数
 
+<span style="color: red">信号定义的位置必须是在类变量，不能定义在构造函数内部，因为 Qt 的元对象系统在**类定义完成后、实例创建前**就已经完成了对类属性的扫描和信号注册。如果定义到构造函数内部，信号无法被注册</span>
+
 槽函数可以是自定义也可以是`PyQt`定义的一些函数
 
 如`setText`、`setTitle`、`deleteLater()`、`close()`等等
@@ -137,3 +139,153 @@ sidebar_position: 3
 | `Mouse Enter Event`       | 当鼠标进入窗口时触发   |
 | `Mouse Leave Event`       | 当鼠标离开窗口时触发   |
 | `Wheel Event`             | 滚轮事件               |
+
+## UI线程
+
+Qt 有一个重要的设计原则：只有创建 `QApplication` 的线程（主线程）才能直接操作 UI 组件。
+
+```python
+# 主线程（UI线程）
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.label = QLabel("Hello")  # 在主线程中创建
+        
+# 子线程
+class Md5Worker(QObject):
+    def run(self, file_path: str):
+        # 这里在子线程中执行
+        # 如果直接调用回调函数更新UI，会出问题
+        self.callback_func(result)  # ❌ 危险！
+```
+
+Qt 使用事件循环（Event Loop）来管理 UI 更新。每个线程都有自己的事件循环，但只有主线程的事件循环负责处理 UI 相关的事件。
+
+```python
+@dataclass
+class Md5Result:
+    """MD5 计算结果数据结构。"""
+
+    file_path: str
+    md5_hex: str
+
+
+class Md5Worker(QObject):
+    """在后台线程计算文件 MD5，避免阻塞 UI。"""
+
+    progress_changed = Signal(int)
+    finished = Signal(object)  # 传递 Md5Result 实例
+    failed = Signal(str)
+    canceled = Signal()
+
+    def __init__(self) -> None:
+        super().__init__()
+        self._should_cancel = False
+
+    @Slot()
+    def cancel(self) -> None:
+        self._should_cancel = True
+
+    @Slot(str)
+    def run(self, file_path: str) -> None:
+        try:
+            if not os.path.isfile(file_path):
+                self.failed.emit("文件不存在或不可访问")
+                return
+
+            file_size = os.path.getsize(file_path)
+            hasher = hashlib.md5()
+            bytes_read = 0
+            chunk_size = 1024 * 1024  # 1MB
+
+            with open(file_path, "rb") as file_obj:
+                while True:
+                    if self._should_cancel:
+                        self.canceled.emit()
+                        return
+
+                    chunk = file_obj.read(chunk_size)
+                    if not chunk:
+                        break
+
+                    hasher.update(chunk)
+                    bytes_read += len(chunk)
+
+                    if file_size > 0:
+                        progress = int(bytes_read * 100 / file_size)
+                        self.progress_changed.emit(progress)
+
+            self.progress_changed.emit(100)
+            self.finished.emit(Md5Result(file_path=file_path, md5_hex=hasher.hexdigest()))
+        except Exception as exc:  # noqa: BLE001
+            self.failed.emit(f"计算失败：{exc}")
+
+```
+
+
+
+Qt 的多线程架构要求：Md5Worker 在后台线程中执行 MD5 计算，而 Qt 规定只有主线程才能直接操作 UI 组件。如果使用 return，子线程无法将结果安全地传回主线程来更新界面，会导致程序崩溃或 UI 无响应。通过信号-槽机制，子线程发送 finished 信号携带 Md5Result 对象，主线程接收信号后安全地更新 UI，同时还能实时传递进度信息、处理取消操作，实现了线程间的安全通信和良好的用户体验。
+
+工作线程需要放到`QT`线程管理对象中
+
+如工作线程`woker = Woker()`  通过`.moveToThread`放到`QT`线程管理对象中。
+
+```python
+class MainWindow(QMainWindow):
+    def __init__(self) -> None:
+        super().__init__()
+        self.setWindowTitle("MD5 Caculator tool")
+        self.setGeometry(100, 100, 400, 200)
+
+        self.result_queue = Queue()
+
+        central_widget = QWidget()
+        self.setCentralWidget(central_widget)
+        layout = QVBoxLayout(central_widget)
+        self.status_label = QLabel("等待开始....")
+        self.result_label = QLabel("MD5:")
+        self.btn_calc = QPushButton("开始计算")
+
+        layout.addWidget(self.status_label)
+        layout.addWidget(self.result_label)
+        layout.addWidget(self.btn_calc)
+        self.btn_calc.clicked.connect(self.start_calc)
+
+        self.thread = None  # 创建一个线程管理对象
+        self.calculator = None # 工作对象
+
+    def start_calc(self):
+        self.status_label.setText("计算中....")
+        self.btn_calc.setEnabled(False)
+
+        self.thread = QThread()  # 实例化线程管理对象
+        self.calculator = Md5Calculator(self.result_queue)
+        self.calculator.moveToThread(self.thread) # 将工作对象添加到线程管理对象
+
+        self.thread.started.connect(lambda: self.calculator.calculate_md5("demo.py"))
+        self.calculator.finished.connect(self.on_finished)
+
+        self.thread.start()
+
+```
+
+## 队列
+
+**队列是引用传递，不是值传递**
+
+```python
+class MainWindow(QMainWindow):
+    def __init__(self) -> None:
+        # 创建队列对象
+        self.result_queue = Queue()  # 队列对象在内存中的地址是唯一的
+        
+        # 将同一个队列对象传递给工作对象
+        self.calculator = Md5Calculator(self.result_queue)
+
+class Md5Calculator(QObject):
+    def __init__(self, result_queue: Queue) -> None:
+        super().__init__()
+        # 这里接收的是队列对象的引用，不是副本
+        self.result_queue = result_queue  # 指向同一个队列对象
+```
+
