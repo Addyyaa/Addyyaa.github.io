@@ -736,3 +736,92 @@ class Md5Calculator(QObject):
         self.result_queue = result_queue  # 指向同一个队列对象
 ```
 
+## 引用
+
+## 一、强引用（Strong Reference）
+
+在 Python 中，**正常的变量赋值就是强引用**。
+
+- 强引用 = 有一个名字或者容器直接持有对象。
+- 只要有强引用存在，对象就不会被垃圾回收（GC）。
+
+```python
+a = [1, 2, 3]   # a 强引用这个列表
+b = a           # b 也强引用同一个列表
+```
+
+此时，列表 `[1, 2, 3]` 有两个强引用：`a` 和 `b`。
+ 只有当 `a` 和 `b` 都被删除时，这个对象才会被垃圾回收。
+
+## 二、弱引用（Weak Reference）
+
+**弱引用**不会增加对象的引用计数。
+ 对象如果**只剩弱引用**存在，它会被垃圾回收（并不会因为弱引用而“幸存”）。
+
+Python 提供 `weakref` 模块来创建弱引用。
+
+```python
+import weakref
+
+class Foo:
+    pass
+
+obj = Foo()
+r = weakref.ref(obj)   # 创建一个弱引用
+
+print(r())  # 还能访问到对象
+del obj     # 删除强引用
+print(r())  # 变成 None，因为对象已经被回收
+```
+
+**应用场景**：
+
+- 避免对象互相引用导致无法释放（环引用）。
+- 缓存（cache）机制：缓存里的对象若没人用了，就允许被自动回收。
+
+## 三、环引用（Circular Reference）
+
+环引用是指 **两个或多个对象互相强引用**，形成一个闭环。
+
+比如 A 引用 B，B 又引用 A。
+ 如果没有弱引用机制，它们就算没被外部使用，也不会被释放。
+
+```python
+class Node:
+    def __init__(self):
+        self.other = None
+
+a = Node()
+b = Node()
+
+a.other = b   # a 强引用 b
+b.other = a   # b 强引用 a
+
+del a
+del b
+```
+
+虽然我们删除了 `a` 和 `b` 的名字，但它们内部还互相强引用着，导致 Python 的**引用计数机制**无法自动释放。
+
+好在 CPython 的 GC 有**循环检测器**，会定期扫描并清理这种环引用，但如果对象实现了 `__del__`（析构函数），就可能引发内存泄漏风险。
+
+Qt 对象（`QObject`）在 Python 里也受这些机制影响：
+
+- **常见问题**：
+
+  - 你在窗口里创建了一个 worker，但没有把它存成成员变量 → worker 没有强引用，很快被垃圾回收，信号就不触发。
+  - 信号槽里用 lambda 捕获了 `self`，同时 `self` 又强引用了发射信号的对象 → 容易形成环引用。
+
+- **解决办法**：
+
+  - 保持强引用：`self.worker = Worker()`；
+  - 或者用弱引用：
+
+  ```python
+  import weakref
+  worker = Worker()
+  wr = weakref.ref(worker)
+  button.clicked.connect(lambda: wr() and wr().do_something())
+  ```
+
+  这样 worker 没有被外界使用时，可以被正常回收。
