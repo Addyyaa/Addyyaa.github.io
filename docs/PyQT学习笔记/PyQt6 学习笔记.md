@@ -118,6 +118,91 @@ sidebar_position: 3
 
 `widget = Qwidget()`
 
+### `QComboBox`
+
+`QComboBox`部件将一个按钮与一个下拉列表组合在一起。
+
+**属性：**
+
+- `count` - 组合框中项目的数量
+- `currentData` - 当前项目的数据
+- `currentIndex` - 当前项目在组合框中的索引
+- `currentTex`t - 当前文本
+- `duplicatesEnabled` - 用户是否可以在组合框中输入重复项目
+- `editable` - 组合框是否可由用户编辑
+- `frame` - 组合框是否绘制边框
+- `iconSize` - 组合框中显示的图标大小
+- `insertPolicy` - 用于确定用户插入的项目应在组合框中何处显示的策略
+- `labelDrawingMode` - 组合框用于绘制其标签的模式
+- `maxCount` - 组合框中允许的最大项目数
+- `maxVisibleItems` - 组合框在屏幕上允许的最大尺寸，以项目数衡量
+- `minimumContentsLength` - 应能放入组合框的最少字符数
+- `modelColumn` - 模型中可见的列
+- `placeholderText` - 设置当未设置有效索引时显示的占位符文本
+- `sizeAdjustPolicy` - 描述当内容变化时组合框大小如何变化的策略
+
+**方法：**
+
+- def [`__init__()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.__init__)
+- def [`addItem()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.addItem)
+- def [`addItems()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.addItems)
+- def [`completer()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.completer)
+- def [`count()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#id0)
+- def [`currentData()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#id2)
+- def [`currentIndex()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#id3)
+- def [`currentText()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#id4)
+- def [`duplicatesEnabled()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#id5)
+- def [`findData()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.findData)
+- def [`findText()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.findText)
+- def [`hasFrame()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.hasFrame)
+- def [`iconSize()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#id6)
+- def [`inputMethodQuery()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.inputMethodQuery)
+- def [`insertItem()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.insertItem)
+- def [`insertItems()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.insertItems)
+- def [`insertPolicy()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#id7)
+- def [`insertSeparator()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.insertSeparator)
+- def [`isEditable()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.isEditable)
+- def [`itemData()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.itemData)
+- def [`itemDelegate()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.itemDelegate)
+- def [`itemIcon()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.itemIcon)
+- def [`itemText()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.itemText)
+- def [`labelDrawingMode()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#id8)
+- def [`lineEdit()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.lineEdit)
+- def [`maxCount()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#id9)
+- def [`maxVisibleItems()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#id10)
+- def [`minimumContentsLength()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#id11)
+- def [`model()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.model)
+- def [`modelColumn()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#id12)
+- def [`placeholderText()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#id13)
+- def [`removeItem()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.removeItem)
+- def [`rootModelIndex()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.rootModelIndex)
+- def [`setCompleter()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.setCompleter)
+- def [`setDuplicatesEnabled()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.setDuplicatesEnabled)
+- def [`setEditable()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.setEditable)
+- def [`setFrame()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.setFrame)
+- def [`setIconSize()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.setIconSize)
+- def [`setInsertPolicy()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.setInsertPolicy)
+- def [`setItemData()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.setItemData)
+- def [`setItemDelegate()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.setItemDelegate)
+- def [`setItemIcon()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.setItemIcon)
+- def [`setItemText()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.setItemText)
+- def [`setLabelDrawingMode()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.setLabelDrawingMode)
+- def [`setLineEdit()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.setLineEdit)
+- def [`setMaxCount()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.setMaxCount)
+- def [`setMaxVisibleItems()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.setMaxVisibleItems)
+- def [`setMinimumContentsLength()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.setMinimumContentsLength)
+- def [`setModelColumn()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.setModelColumn)
+- def [`setPlaceholderText()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.setPlaceholderText)
+- def [`setRootModelIndex()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.setRootModelIndex)
+- def [`setSizeAdjustPolicy()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.setSizeAdjustPolicy)
+- def [`setValidator()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.setValidator)
+- def [`setView()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.setView)
+- def [`sizeAdjustPolicy()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#id14)
+- def [`validator()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.validator)
+- def [`view()`](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox.view)
+
+具体文档见[Qt for Python](https://doc.qt.io/qtforpython-6/PySide6/QtWidgets/QComboBox.html#PySide6.QtWidgets.QComboBox)
+
 ## 接收信号的槽函数
 
 <span style="color: red">信号定义的位置必须是在类变量，不能定义在构造函数内部，因为 Qt 的元对象系统在**类定义完成后、实例创建前**就已经完成了对类属性的扫描和信号注册。如果定义到构造函数内部，信号无法被注册</span>
@@ -125,6 +210,67 @@ sidebar_position: 3
 槽函数可以是自定义也可以是`PyQt`定义的一些函数
 
 如`setText`、`setTitle`、`deleteLater()`、`close()`等等
+
+**示例：A类有个变量a， B类的按钮点击后需要修改变量a**
+
+```python
+import sys
+from PySide6.QtCore import pyqtSignal  # PySide6版本的信号（PySide2类似，使用pyqtSignal）
+from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QPushButton, QVBoxLayout, QLabel
+
+# 类A：主窗口，包含变量a
+class A(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.a = 0  # 初始变量a
+        self.setWindowTitle("Class A")
+        self.setGeometry(100, 100, 300, 200)
+
+        # 创建类B的实例
+        self.b_widget = B()
+        
+        # 连接类B的信号到类A的槽
+        self.b_widget.valueChanged.connect(self.update_a)
+
+        # 显示类A的UI，包括类B的widget和一个label显示a的值
+        layout = QVBoxLayout()
+        layout.addWidget(self.b_widget)
+        self.label = QLabel(f"Current a: {self.a}")
+        layout.addWidget(self.label)
+
+        central_widget = QWidget()
+        central_widget.setLayout(layout)
+        self.setCentralWidget(central_widget)
+
+    # 槽函数：接收信号，修改a并更新UI
+    def update_a(self, new_value):
+        self.a = new_value
+        self.label.setText(f"Current a: {self.a}")
+        print(f"Variable a updated to: {self.a}")  # 控制台输出确认
+
+# 类B：自定义widget，包含按钮
+class B(QWidget):
+    # 定义自定义信号，可以携带int参数
+    valueChanged = pyqtSignal(int)
+
+    def __init__(self):
+        super().__init__()
+        layout = QVBoxLayout()
+        self.button = QPushButton("Click to change a's value")
+        layout.addWidget(self.button)
+        self.setLayout(layout)
+
+        # 按钮点击时发射信号（这里假设新值为42，你可以根据需要修改）
+        self.button.clicked.connect(lambda: self.valueChanged.emit(42))
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    window = A()
+    window.show()
+    sys.exit(app.exec())
+```
+
+
 
 ## 事件
 
