@@ -270,6 +270,307 @@ if __name__ == "__main__":
     sys.exit(app.exec())
 ```
 
+一、跨类的信号与槽：A 修改 B 的变量
+
+同线程、最直接的做法: A 不直接改 B 的属性；而是 **A 发信号 → B 的槽里改自己**。这样解耦、可测、也便于跨线程迁移。
+
+**关键点**
+
+- A 不知道 B 的内部结构，只发“值”事件；B 自己决定如何更新。
+- 这种方式在 GUI/业务分离中很常见（MVC/MVVM 风格）。
+
+```python
+from PySide6.QtCore import QObject, Signal, Slot
+
+class AProducer(QObject):
+    value_changed = Signal(int)  # A 只负责发“值变化”的事件
+
+    def set_value(self, v: int):
+        # ... A 自己的校验/计算 ...
+        self.value_changed.emit(v)  # 通知外界
+
+class BConsumer(QObject):
+    def __init__(self):
+        super().__init__()
+        self.value = 0
+
+    @Slot(int)  # 指明槽签名
+    def apply_value(self, v: int):
+        self.value = v
+        print("B.value =", self.value)
+
+# 组装
+a = AProducer()
+b = BConsumer()
+a.value_changed.connect(b.apply_value)
+
+a.set_value(42)   # 输出：B.value = 42
+
+```
+
+ 跨线程：A 在工作线程，B 在主线程（UI 不可跨线程直接改）
+
+**思想**：**跨线程只能传信号**，**UI 的改动必须在主线程的槽里做**。Qt 会自动把跨线程连接变成 **QueuedConnection**（排队到接收者线程的事件循环执行）。
+
+**补充**
+
+- 你也可以手动指定：`worker.progress.connect(b.on_progress, Qt.QueuedConnection)` 来**强制排队连接**（即便同线程）。
+- **不要**在工作线程里直接改 UI（也不要直接改主线程对象的属性）——要通过信号把数据送回来。
+
+```python
+from PySide6.QtCore import QObject, Signal, Slot, QThread
+
+class WorkerA(QObject):
+    progress = Signal(int)
+
+    def run_long_task(self):
+        # 假装做耗时任务（工作线程中）
+        for i in range(0, 101, 20):
+            self.progress.emit(i)  # 线程安全地通知主线程
+
+class MainB(QObject):
+    def __init__(self):
+        super().__init__()
+        self.percent = 0
+
+    @Slot(int)
+    def on_progress(self, p: int):
+        # 这里运行在 MainB 所在线程（通常主线程），可以安全改 UI/状态
+        self.percent = p
+        print("进度：", self.percent, "%")
+
+# 组装线程
+thread = QThread()
+worker = WorkerA()
+worker.moveToThread(thread)
+
+b = MainB()
+worker.progress.connect(b.on_progress)  # 不用强制指定，跨线程时 Qt 自动使用 Queued 连接
+
+thread.started.connect(worker.run_long_task)
+thread.start()
+
+```
+
+ A “请求”B 做事：带返回值的槽（少见但有用）
+
+可以给槽声明 **返回值**，通过 **直接连接**（同线程或强制 `Qt.BlockingQueuedConnection`）得到返回。但**跨线程同步阻塞**要慎用。
+
+```python
+from PySide6.QtCore import QObject, Signal, Slot, Qt
+
+class AskA(QObject):
+    ask = Signal(str)   # 发出请求事件
+
+class AnswerB(QObject):
+    @Slot(str, result=str)
+    def answer(self, q: str) -> str:
+        return f"收到：{q}"
+
+a = AskA()
+b = AnswerB()
+
+# 直接调用：需要用 invokeMethod 风格。PySide 里更常见是“发信号+单独拿回值”。
+# 简化起见，通常建议改为：A 发问，B 在槽里再 emit 一个结果信号回 A。
+
+```
+
+@slot 注解槽函数的好处：
+
+**作用与好处**
+
+1. **显式注册为 Qt 槽**（尤其用于 QML/跨线程调用时更稳）。
+2. **性能略好**（Qt 直接按签名派发，少做反射匹配）。
+3. **签名检查**更严格，能提前暴露参数不匹配的问题。
+4. **重载槽**：同名方法支持多签名（语法糖）：
+
+### 案例
+
+案例一
+
+```python
+from PySide6.QtWidgets import QApplication, QPushButton
+
+app = QApplication([])
+
+btn = QPushButton("点我")
+
+# 内置信号 clicked -> 自定义槽函数
+def on_clicked():
+    print("按钮被点击了！")
+
+btn.clicked.connect(on_clicked)
+btn.show()
+
+app.exec()
+
+```
+
+案例二：内置信号 + lambada
+
+```python
+from PySide6.QtWidgets import QApplication, QPushButton
+
+app = QApplication([])
+
+btn = QPushButton("点我")
+
+btn.clicked.connect(lambda: print("按钮点击，传参：", 123))
+btn.show()
+
+app.exec()
+
+```
+
+案例三：内置信号 + 带参数
+
+```python
+from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout
+
+class MainWindow(QWidget):
+    def __init__(self):
+        super().__init__()
+        layout = QVBoxLayout(self)
+        self.btn = QPushButton("点我")
+        layout.addWidget(self.btn)
+        # 信号 → 槽
+        self.btn.clicked.connect(self.on_clicked)
+
+    def on_clicked(self):
+        print("类方法作为槽函数")
+
+app = QApplication([])
+win = MainWindow()
+win.show()
+app.exec()
+
+```
+
+案例四：自定义信号 → 自定义槽
+
+```python
+from PySide6.QtCore import QObject, Signal
+
+class Worker(QObject):
+    # 定义一个带字符串参数的信号
+    finished = Signal(str)
+
+    def run(self):
+        print("任务执行中...")
+        # 触发信号
+        self.finished.emit("任务完成！")
+
+def on_finished(msg):
+    print("收到信号：", msg)
+
+w = Worker()
+w.finished.connect(on_finished)
+w.run()
+
+```
+
+### 注意事项
+
+**跨线程直接改 UI / 改主线程对象属性**
+
+- **现象**：随机崩溃、警告、UI 异常。
+- **原因**：Qt 的 GUI 只能在主线程操作。
+- **做法**：在工作线程只 `emit` 数据；在主线程槽里更新 UI/状态。必要时强制 `Qt.QueuedConnection`。
+
+**重复 connect，导致槽被调用多次**
+
+- **现象**：同一点击触发多次槽。
+
+- **原因**：多次 `connect` 叠加。
+
+- **做法**：
+
+  - 组件初始化时集中连接；
+
+  - 或在重连前先 `disconnect(slot)`；
+
+  - 或加布尔标志避免重复连接。
+
+  ```python
+  if not hasattr(self, "_wired"):
+      btn.clicked.connect(self.on_click)
+      self._wired = True
+  ```
+
+**对象被垃圾回收，信号无效**
+
+- **现象**：之前还好用，过一会儿不触发了。
+- **原因**：Python 层没有强引用，`QObject` 被回收。
+- **做法**：把对象存成成员变量或设置父子关系（`parent`）
+
+```python
+self.worker = Worker(parent=self)   # 或 self.worker = Worker(); self.worker.setParent(self)
+```
+
+ **lambda/partial 参数不匹配**
+
+- **现象**：连接不报错，触发时报类型错误或根本没调用。
+- **原因**：信号有参数，lambda 没接收/接收错。
+- **做法**：写清参数签名。
+
+```python
+edit.textChanged.connect(lambda text: self.on_text(text))
+# 而不是 lambda: self.on_text(edit.text())（后者也行，但容易捕获时机不对）
+```
+
+**信号签名与槽签名不匹配**
+
+- **现象**：不触发或运行时错误。
+- **做法**：
+  - 尽量在信号定义时用明确类型：`Signal(int, str)`；
+  - 槽用 `@Slot(int, str)` 或 `@Slot(object)`；
+  - 需要传任意 Python 对象时，信号用 `Signal(object)`。
+
+**阻塞 UI：耗时任务写在槽里（主线程）**
+
+- **现象**：窗口卡死、未响应。
+- **做法**：把耗时逻辑放到 `QThread`/`QtConcurrent`，或 `asyncio` + 线程池，再用信号回主线程更新 UI。
+
+**连接类型理解偏差（Direct/Queued/Auto）**
+
+- **规则**：
+  - **Auto**（默认）：同线程 → **Direct**；跨线程 → **Queued**。
+  - **Direct**：在发送处同步调用槽；
+  - **Queued**：把调用投递给 **接收者线程** 的事件循环；
+  - **BlockingQueued**：与 Queued 类似，但**发送方阻塞等待完成**（仅限不同线程）。
+- **建议**：绝大多数情况用默认 **Auto**；需要明确语义时才手动指定。
+
+**disconnect 的用法**
+
+- `signal.disconnect(slot)`：只断开这个槽；
+- `signal.disconnect()`（无参）：**断开所有**连接；
+- 未连接却断开会抛 `TypeError`，注意 try/except 或先判断标志。
+
+**self.sender() 滥用**
+
+**问题**：靠 `self.sender()` 判断谁触发，后期维护易错。
+
+**做法**：
+
+- 能分开就分开；
+- 或者用 `functools.partial`/`lambda` 显式传入“来源标识”。
+
+**环引用（lambda 捕获 self）**
+
+- **现象**：对象无法释放、内存涨。
+- **做法**：用弱引用（`weakref.ref(self)`）或把槽拆为普通方法，避免闭包长期持有大对象。
+
+**在组件初始化流程中过早触发信号**
+
+- **场景**：设置初值就触发 `textChanged` 等，导致未准备好的逻辑执行。
+- **做法**：初始化阶段临时屏蔽信号：
+
+```python
+edit.blockSignals(True)
+edit.setText("init")
+edit.blockSignals(False)
+```
+
 
 
 ## 事件
