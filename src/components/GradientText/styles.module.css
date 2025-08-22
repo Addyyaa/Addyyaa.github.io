@@ -1,0 +1,148 @@
+/* 基础渐变文字样式 */
+.gradientText {
+    display: inline-block;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* 悬停效果 */
+.gradientText:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+/* 尺寸变体 */
+.small {
+    font-size: 0.875rem;
+}
+
+.medium {
+    font-size: 1rem;
+}
+
+.large {
+    font-size: 1.25rem;
+}
+
+/* 渐变风格变体 */
+.rainbow {
+    background: linear-gradient(45deg,
+            #ff6b6b,
+            #4ecdc4,
+            #45b7d1,
+            #96ceb4,
+            #feca57,
+            #ff9ff3,
+            #54a0ff,
+            #5f27cd,
+            #00d2d3,
+            #ff9f43);
+    background-size: 400% 400%;
+}
+
+.ocean {
+    background: linear-gradient(45deg,
+            #667eea,
+            #764ba2,
+            #f093fb,
+            #f5576c,
+            #4facfe,
+            #00f2fe);
+    background-size: 400% 400%;
+}
+
+.sunset {
+    background: linear-gradient(45deg,
+            #fa709a,
+            #fee140,
+            #ff9a9e,
+            #fecfef,
+            #fecfef,
+            #fad0c4);
+    background-size: 400% 400%;
+}
+
+.forest {
+    background: linear-gradient(45deg,
+            #a8edea,
+            #fed6e3,
+            #ffecd2,
+            #fcb69f,
+            #ff9a9e,
+            #fecfef);
+    background-size: 400% 400%;
+}
+
+.neon {
+    background: linear-gradient(45deg,
+            #ff0080,
+            #7928ca,
+            #00d4ff,
+            #ff6b6b,
+            #4ecdc4,
+            #45b7d1);
+    background-size: 400% 400%;
+    filter: drop-shadow(0 0 10px rgba(255, 0, 128, 0.5));
+}
+
+/* 动画效果 */
+.animated {
+    animation: gradientShift 8s ease-in-out infinite;
+}
+
+/* 渐变动画关键帧 */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    25% {
+        background-position: 50% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    75% {
+        background-position: 50% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 768px) {
+    .gradientText {
+        animation-duration: 6s;
+    }
+
+    .large {
+        font-size: 1.1rem;
+    }
+}
+
+/* 深色主题适配 */
+@media (prefers-color-scheme: dark) {
+    .gradientText {
+        filter: brightness(1.2) contrast(1.1);
+    }
+
+    .neon {
+        filter: drop-shadow(0 0 15px rgba(255, 0, 128, 0.7));
+    }
+}
+
+/* 减少动画（用户偏好） */
+@media (prefers-reduced-motion: reduce) {
+    .animated {
+        animation: none;
+    }
+}
