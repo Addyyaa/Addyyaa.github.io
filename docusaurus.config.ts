@@ -63,6 +63,7 @@ const config: Config = {
             require('remark-gfm'),
             require('remark-math'),
           ],
+          rehypePlugins: [require('rehype-katex')],
         },
         blog: {
           showReadingTime: true,
