@@ -1,3 +1,7 @@
+---
+sidebar_position: 4
+---
+
 # Matplotlib 库
 
 ## 连续图
@@ -21,7 +25,7 @@ import numpy as np  # 常用于生成数据
 # 导入库
 import matplotlib.pyplot as plt
 import numpy as np
-
+1
 # 生成数据：x轴从0到10，y轴是x的平方
 x = np.linspace(0, 10, 100)  # 生成100个均匀分布的点
 y = x ** 2
