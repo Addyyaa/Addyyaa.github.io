@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="zh-Hans" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-AI/深度学习流程原理" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.8.1">
+<title data-rh="true">深度学习流程原理 | AddyNotes</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://Addyyaa.github.io/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://Addyyaa.github.io/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://Addyyaa.github.io/docs/AI/深度学习流程原理/"><meta data-rh="true" property="og:locale" content="zh_Hans"><meta data-rh="true" name="docusaurus_locale" content="zh-Hans"><meta data-rh="true" name="docsearch:language" content="zh-Hans"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="深度学习流程原理 | AddyNotes"><meta data-rh="true" name="description" content="深度学习的内部结构"><meta data-rh="true" property="og:description" content="深度学习的内部结构"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://Addyyaa.github.io/docs/AI/深度学习流程原理/"><link data-rh="true" rel="alternate" href="https://Addyyaa.github.io/docs/AI/深度学习流程原理/" hreflang="zh-Hans"><link data-rh="true" rel="alternate" href="https://Addyyaa.github.io/docs/AI/深度学习流程原理/" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"深度学习流程原理","item":"https://Addyyaa.github.io/docs/AI/深度学习流程原理"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="AddyNotes RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="AddyNotes Atom Feed"><link rel="stylesheet" href="/assets/css/styles.91ab18af.css">
+<script src="/assets/js/runtime~main.9cb841ba.js" defer="defer"></script>
+<script src="/assets/js/main.b8950cc6.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t="light";var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",e||t),document.documentElement.setAttribute("data-theme-choice",e||t)}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/logo.svg"><div role="region" aria-label="跳到主要内容"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">跳到主要内容</a></div><nav aria-label="主导航" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="切换导航栏" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.svg" alt="AddyNotes Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.svg" alt="AddyNotes Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">AddyNotes</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/docs/category/tutorial---basics/">文档</a><a class="navbar__item navbar__link" href="/blog/">博客</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/Addyyaa/Addyyaa.github.io" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="切换浅色/暗黑模式（当前为system mode）"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="回到顶部" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="文档侧边栏" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/docs/category/tutorial---basics/">Tutorial - Basics</a><button aria-label="展开侧边栏分类 &#x27;Tutorial - Basics&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/docs/category/tutorial---extras/">Tutorial - Extras</a><button aria-label="展开侧边栏分类 &#x27;Tutorial - Extras&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/docs/AI/协同过滤/">AI</a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/AI/协同过滤/">协同过滤</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/AI/深度学习流程原理/">深度学习流程原理</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/PyQT学习笔记/PyQt6 学习笔记/">PyQT学习笔记</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/pyqt/matplotlib/">Python笔记</a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/docs/intro/">intro</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/前端学习笔记/前端工程化学习路径/">前端学习笔记</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/面试复习笔记（主python、自动化）/面试准备资料/">面试复习笔记（主python、自动化）</a></div></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="页面路径"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="主页面" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">AI</span></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">深度学习流程原理</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">本页总览</button></div><div class="theme-doc-markdown markdown"><header><h1>深度学习流程原理</h1></header><h3 class="anchor anchorWithStickyNavbar_LWe7" id="深度学习的内部结构">深度学习的内部结构<a href="#深度学习的内部结构" class="hash-link" aria-label="深度学习的内部结构的直接链接" title="深度学习的内部结构的直接链接">​</a></h3>
+<p>深度学习的内部结构基于人工神经网络（Artificial Neural Network, ANN），它是一个由多层节点（神经元）组成的计算模型，用于处理输入数据并生成输出。以下是关键组件的详细描述：</p>
+<ul>
+<li>
+<p><strong>神经元（Neuron）</strong>：</p>
+<ul>
+<li>神经网络的基本计算单元。</li>
+<li>每个神经元接收多个输入值，进行加权求和（输入乘以权重，加上偏置），然后通过激活函数处理以产生输出。</li>
+<li>数学公式：输出 = 激活函数(∑(输入_i * 权重_i) + 偏置)。</li>
+<li>权重和偏置是可学习的参数，通过训练过程优化。</li>
+</ul>
+</li>
+<li>
+<p><strong>层（Layers）</strong>：</p>
+<ul>
+<li>神经网络由多层组成，每层包含多个神经元。</li>
+<li><strong>输入层（Input Layer）</strong>：接收原始数据，例如图像的像素值或文本的向量表示。维度等于输入特征的数量。</li>
+<li><strong>隐藏层（Hidden Layers）</strong>：中间层，通常有多层（深度来源于此）。每个隐藏层处理上一层的输出，进行特征提取和变换。</li>
+<li><strong>输出层（Output Layer）</strong>：生成最终结果，例如分类任务的概率分布或回归任务的数值预测。维度等于输出类别或变量的数量。</li>
+<li>层与层之间全连接（Fully Connected）或使用特定结构，如卷积层（Convolutional Layers）用于图像处理。</li>
+</ul>
+</li>
+<li>
+<p><strong>连接（Connections）</strong>：</p>
+<ul>
+<li>神经元之间通过权重矩阵连接，前一层的输出作为后一层的输入。</li>
+<li>在全连接网络中，每对相邻层神经元都有连接，权重矩阵的形状为（当前层神经元数 × 上一层神经元数）。</li>
+</ul>
+</li>
+<li>
+<p><strong>激活函数（Activation Functions）</strong>：</p>
+<ul>
+<li>引入非线性变换，使网络能处理复杂模式。</li>
+<li>常见类型：ReLU（Rectified Linear Unit，输出 max(0, x)）、Sigmoid（输出 1 / (1 + e^{-x})）、Tanh（输出 (e^x - e^{-x}) / (e^x + e^{-x})）。</li>
+</ul>
+<p><span style="color:red">解释：线性变换的复合仍是线性，导致模型表达能力有限；非线性变换打破了这一限制，使多层网络能学习复杂的、非线性的决策边界和函数映射。</span></p>
+<blockquote>
+<p><strong>线性变换的本质</strong></p>
+<ul>
+<li>神经网络的每一层（无激活函数）本质上是线性变换：输出 = 输入 × 权重矩阵 + 偏置（即矩阵乘法 + 偏移）。</li>
+<li>如果整个网络只有线性层，无论有多少层，其整体计算等价于一个单层线性模型。因为线性变换的复合（例如，Layer2(Layer1(x)) = W2 × (W1 × x + b1) + b2 ）= (W2 × W1) × x + (W2 × b1 + b2)）仍是一个线性变换（相当于一个等效的权重矩阵和偏置）。</li>
+<li>数学上，这意味着网络只能表示仿射函数（affine functions），即直线或平面形式的决策边界。</li>
+</ul>
+<p><strong>局限性</strong>：</p>
+<ul>
+<li>线性模型只能处理线性可分的问题。例如，在二维空间中，它只能绘制一条直线来分离数据点。</li>
+<li>对于非线性问题（如数据点分布成曲线、环形或交错模式），线性模型无法有效拟合。经典例子是<strong>XOR问题</strong>：线性模型无法分离XOR逻辑（输入(0,0)→0, (0,1)→1, (1,0)→1, (1,1)→0）的决策边界，因为它不是线性可分的。</li>
+<li>结果：网络无法捕捉现实世界中的复杂模式，如图像中的曲线边缘、语音中的非线性时序关系，或自然语言中的语义层次。</li>
+</ul>
+<p><strong>非线性变换如何扩展能力</strong></p>
+<p><strong>非线性激活函数的作用</strong>：</p>
+<ul>
+<li>激活函数（如ReLU: max(0, x)；Sigmoid: 1/(1 + e^{-x})）应用于线性变换的结果后，引入非线性：输出 = 激活函数(线性结果)。</li>
+<li>这打破了线性复合的等价性：非线性函数的复合不再是线性，而是能产生更复杂的映射。</li>
+<li>每层非线性激活允许网络在隐藏层中逐步构建高级特征：浅层学习简单模式（如边缘），深层组合成复杂模式（如物体形状）。</li>
+</ul>
+<p><strong>为什么能处理更复杂模式</strong>：</p>
+<ul>
+<li><strong>决策边界更灵活</strong>：非线性允许网络创建弯曲、片段化的决策边界。例如，多个ReLU激活的组合可以近似折线函数，足够多层就能拟合任意曲线。</li>
+<li><strong>函数逼近能力</strong>：根据<strong>通用逼近定理（Universal Approximation Theorem）</strong>，一个具有至少一个隐藏层和非线性激活的网络，能以任意精度逼近任何连续函数（在紧致集上）。这意味着网络能模拟现实中的非线性关系，如物理模拟中的混沌行为或金融市场的非线性趋势。</li>
+<li><strong>层次化特征提取</strong>：非线性使多层网络真正“深度”：每层非线性变换允许抽象更高层次的表示，而非简单叠加线性操作。</li>
+</ul>
+</blockquote>
+</li>
+<li>
+<p><strong>常见网络类型</strong>：</p>
+<ul>
+<li><strong>前馈神经网络（Feedforward Neural Network）</strong>：数据单向流动，用于分类和回归。</li>
+<li><strong>卷积神经网络（CNN）</strong>：用于图像和视频，包含卷积层、池化层和全连接层。</li>
+<li><strong>循环神经网络（RNN）</strong>：处理序列数据，如LSTM或GRU变体，用于时间序列或自然语言处理。</li>
+<li><strong>Transformer</strong>：基于自注意力机制，用于大规模语言模型，如BERT或GPT系列。</li>
+</ul>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>组件</th><th>描述</th><th>数学表示（简化）</th><th>作用</th></tr></thead><tbody><tr><td><strong>神经元</strong></td><td>接收输入，进行加权求和和激活</td><td>输出 = f(∑(x_i * w_i) + b)</td><td>基本计算单元</td></tr><tr><td><strong>输入层</strong></td><td>接收原始数据</td><td>维度 = 输入特征数</td><td>数据入口</td></tr><tr><td><strong>隐藏层</strong></td><td>多层特征提取</td><td>每层输出 = f(上一层输出 * W + b)</td><td>学习复杂模式</td></tr><tr><td><strong>输出层</strong></td><td>生成预测结果</td><td>维度 = 输出维度</td><td>最终决策</td></tr><tr><td><strong>激活函数</strong></td><td>非线性变换</td><td>如 ReLU: max(0, x)</td><td>增强表达能力</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="深度学习的整个流程">深度学习的整个流程<a href="#深度学习的整个流程" class="hash-link" aria-label="深度学习的整个流程的直接链接" title="深度学习的整个流程的直接链接">​</a></h3>
+<p>深度学习的流程是一个端到端的迭代过程，从数据处理到模型部署。以下按顺序描述每个步骤：</p>
+<ol>
+<li>
+<p><strong>数据准备（Data Preparation）</strong>：</p>
+<ul>
+<li>采集和预处理数据，包括清洗（移除噪声、缺失值）、归一化（标准化特征值）、分割（将数据分为训练集、验证集和测试集，通常比例为70%:15%:15%）。</li>
+<li>对于图像数据，进行resize或augmentation（数据增强，如旋转、翻转）；对于文本，进行tokenization和embedding。</li>
+<li>输出：准备好的数据集，通常使用DataLoader加载批次数据。</li>
+</ul>
+</li>
+<li>
+<p><strong>模型设计（Model Architecture）</strong>：</p>
+<ul>
+<li>定义网络结构，包括层数、神经元数量、激活函数和优化器。</li>
+<li>选择适当架构：例如，图像任务用CNN，序列任务用RNN或Transformer。</li>
+<li>初始化参数：权重通常随机初始化（Xavier或He初始化），偏置初始化为零。</li>
+</ul>
+</li>
+<li>
+<p><strong>训练（Training）</strong>：</p>
+<ul>
+<li>使用训练集迭代优化模型参数。</li>
+<li>子步骤：
+<ul>
+<li><strong>前向传播（Forward Propagation）</strong>：输入数据通过网络逐层计算，生成预测输出。计算公式：逐层矩阵乘法和激活。</li>
+<li><strong>损失计算（Loss Calculation）</strong>：比较预测输出与真实标签，使用损失函数量化误差。常见损失：分类用Cross-Entropy，回归用MSE（Mean Squared Error）。</li>
+<li><strong>反向传播（Backpropagation）</strong>：计算损失对每个参数的梯度，从输出层向输入层传播。使用链式法则（Chain Rule）求导。</li>
+<li><strong>参数更新（Optimization）</strong>：使用优化器（如SGD、Adam）根据梯度调整权重和偏置。学习率控制更新步长。</li>
+</ul>
+</li>
+<li>迭代次数：多个Epoch（完整遍历数据集一次），监控验证集损失以防止过拟合（使用Early Stopping或Regularization如L2正则化、Dropout）。</li>
+</ul>
+</li>
+<li>
+<p><strong>评估（Evaluation）</strong>：</p>
+<ul>
+<li>使用测试集计算性能指标：准确率（Accuracy）、精确率（Precision）、召回率（Recall）、F1分数（分类任务）；MSE或MAE（回归任务）。</li>
+<li>分析模型泛化能力，如果指标差，返回步骤1或2调整。</li>
+</ul>
+</li>
+<li>
+<p><strong>推理与部署（Inference and Deployment）</strong>：</p>
+<ul>
+<li>模型上线：输入新数据，只进行前向传播生成输出，无需训练。</li>
+<li>部署方式：转换为ONNX格式，集成到应用中；使用TensorRT或TorchServe优化推理速度。</li>
+<li>监控和更新：生产环境中收集反馈，定期微调模型。</li>
+</ul>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>流程步骤</th><th>关键操作</th><th>输入/输出</th><th>常见工具（PyTorch示例）</th></tr></thead><tbody><tr><td><strong>数据准备</strong></td><td>清洗、分割、增强</td><td>输入：原始数据；输出：数据集</td><td>torch.utils.data.DataLoader</td></tr><tr><td><strong>模型设计</strong></td><td>定义层、初始化参数</td><td>输入：架构规格；输出：模型实例</td><td>nn.Module, nn.Linear, nn.Conv2d</td></tr><tr><td><strong>训练</strong></td><td>前向传播、损失计算、反向传播、优化</td><td>输入：训练数据；输出：优化参数</td><td>optimizer = Adam(model.parameters())</td></tr><tr><td><strong>评估</strong></td><td>计算指标</td><td>输入：测试数据；输出：性能报告</td><td>accuracy = (preds == labels).mean()</td></tr><tr><td><strong>部署</strong></td><td>推理、前向传播</td><td>输入：新数据；输出：预测结果</td><td>torch.onnx.export(model, ...)</td></tr></tbody></table>
+<p>这个流程是迭代的，通常在GPU或TPU上运行以加速计算。深度学习的核心在于梯度下降优化参数，使模型从随机初始化到拟合数据。</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="数学知识解读">数学知识解读<a href="#数学知识解读" class="hash-link" aria-label="数学知识解读的直接链接" title="数学知识解读的直接链接">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="1-线性在数学中的含义">1. “线性”在数学中的含义<a href="#1-线性在数学中的含义" class="hash-link" aria-label="1. “线性”在数学中的含义的直接链接" title="1. “线性”在数学中的含义的直接链接">​</a></h4>
+<ul>
+<li>在线性代数中，“线性”指一个函数或变换 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em"></span><span class="mord mathnormal" style="margin-right:0.10764em">f</span></span></span></span> 满足以下两个性质（称为线性性质）：
+<ul>
+<li><strong>加法性</strong>： <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi mathvariant="bold">x</mi><mo>+</mo><mi mathvariant="bold">y</mi><mo stretchy="false">)</mo><mo>=</mo><mi>f</mi><mo stretchy="false">(</mo><mi mathvariant="bold">x</mi><mo stretchy="false">)</mo><mo>+</mo><mi>f</mi><mo stretchy="false">(</mo><mi mathvariant="bold">y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f(\mathbf{x} + \mathbf{y}) = f(\mathbf{x}) + f(\mathbf{y})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em"></span><span class="mord mathnormal" style="margin-right:0.10764em">f</span><span class="mopen">(</span><span class="mord mathbf">x</span><span class="mspace" style="margin-right:0.2222em"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em"></span><span class="mord mathbf" style="margin-right:0.01597em">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em"></span><span class="mord mathnormal" style="margin-right:0.10764em">f</span><span class="mopen">(</span><span class="mord mathbf">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em"></span><span class="mord mathnormal" style="margin-right:0.10764em">f</span><span class="mopen">(</span><span class="mord mathbf" style="margin-right:0.01597em">y</span><span class="mclose">)</span></span></span></span>。</li>
+<li><strong>齐次性</strong>： <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>a</mi><mo>⋅</mo><mi mathvariant="bold">x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>a</mi><mo>⋅</mo><mi>f</mi><mo stretchy="false">(</mo><mi mathvariant="bold">x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f(a \cdot \mathbf{x}) = a \cdot f(\mathbf{x})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em"></span><span class="mord mathnormal" style="margin-right:0.10764em">f</span><span class="mopen">(</span><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.2222em"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em"></span><span class="mord mathbf">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em"></span></span><span class="base"><span class="strut" style="height:0.4445em"></span><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.2222em"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em"></span><span class="mord mathnormal" style="margin-right:0.10764em">f</span><span class="mopen">(</span><span class="mord mathbf">x</span><span class="mclose">)</span></span></span></span>（其中 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em"></span><span class="mord mathnormal">a</span></span></span></span> 是标量）。</li>
+</ul>
+</li>
+<li>结合以上，线性函数满足： <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>a</mi><mi mathvariant="bold">x</mi><mo>+</mo><mi>b</mi><mi mathvariant="bold">y</mi><mo stretchy="false">)</mo><mo>=</mo><mi>a</mi><mi>f</mi><mo stretchy="false">(</mo><mi mathvariant="bold">x</mi><mo stretchy="false">)</mo><mo>+</mo><mi>b</mi><mi>f</mi><mo stretchy="false">(</mo><mi mathvariant="bold">y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f(a\mathbf{x} + b\mathbf{y}) = a f(\mathbf{x}) + b f(\mathbf{y})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em"></span><span class="mord mathnormal" style="margin-right:0.10764em">f</span><span class="mopen">(</span><span class="mord mathnormal">a</span><span class="mord mathbf">x</span><span class="mspace" style="margin-right:0.2222em"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em"></span><span class="mord mathnormal">b</span><span class="mord mathbf" style="margin-right:0.01597em">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em"></span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.10764em">f</span><span class="mopen">(</span><span class="mord mathbf">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em"></span><span class="mord mathnormal">b</span><span class="mord mathnormal" style="margin-right:0.10764em">f</span><span class="mopen">(</span><span class="mord mathbf" style="margin-right:0.01597em">y</span><span class="mclose">)</span></span></span></span>。</li>
+<li>这个定义不依赖于输入是连续还是离散，而是关注函数的代数结构。换句话说，即使输入是离散的向量（有限维度），只要满足这些性质，它就是线性的。</li>
+</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/Addyyaa/Addyyaa.github.io/tree/main/docs/AI/深度学习流程原理.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>编辑此页</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="文件选项卡"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/AI/协同过滤/"><div class="pagination-nav__sublabel">上一页</div><div class="pagination-nav__label">协同过滤</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/PyQT学习笔记/PyQt6 学习笔记/"><div class="pagination-nav__sublabel">下一页</div><div class="pagination-nav__label">PyQt6 学习笔记</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#深度学习的内部结构" class="table-of-contents__link toc-highlight">深度学习的内部结构</a></li><li><a href="#深度学习的整个流程" class="table-of-contents__link toc-highlight">深度学习的整个流程</a></li><li><a href="#数学知识解读" class="table-of-contents__link toc-highlight">数学知识解读</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/intro/">Tutorial</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://discordapp.com/invite/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Discord<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://x.com/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">X<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog/">Blog</a></li><li class="footer__item"><a href="https://github.com/Addyyaa/Addyyaa.github.io" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 AddyNotes. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>
