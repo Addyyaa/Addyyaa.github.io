@@ -1,0 +1,744 @@
+{
+    "planet_in_house": {
+        "moon": {
+            "1": {
+                "low": "Your emotions are reserved and not easily expressed outwardly, leaning toward self-protection, which may make you seem aloof or mysterious. The challenge lies in opening up to build deeper connections.",
+                "medium": "Your outward image carries a sensitive and gentle quality, allowing others to feel your emotional fluctuations, fostering resonance in social settings, but you should maintain emotional stability to avoid impacting first impressions.",
+                "high": "You often display emotions openly on your face, with strong infectious energy that easily influences those around you, granting powerful personal charisma, but this may lead to emotional overload, requiring boundary management.",
+                "exalted": "Your emotional expression is highly infectious and profound, with outer and inner emotions in perfect harmony, effortlessly inspiring resonance in others and making you an emotional leader, but balance is needed to avoid oversensitivity."
+            },
+            "2": {
+                "low": "In matters of money and security, you may overly rely on others, lacking inner stability, and are prone to emotional lows due to material changes. Build self-worth to boost confidence.",
+                "medium": "You invest emotions in material and value domains, seeking security and comfort in life, which makes you more patient in financial management, but avoid emotional spending.",
+                "high": "You have a strong emotional need for wealth and self-worth, actively building a secure foundation, which brings material abundance but may lead to attachment to possessions.",
+                "exalted": "Your sensitivity transforms into a powerful nurturing ability, creating stable environments for yourself and others, showing exceptional intuition and perseverance in value domains."
+            },
+            "3": {
+                "low": "In communication, you tend to be emotional, leading to unclear expression or frequent changes of mind. The challenge is to learn rational expression to improve interactions.",
+                "medium": "You infuse emotion into communication, making your words sincere and touching, aiding learning and short-term relationships, but be mindful of emotions affecting your thinking.",
+                "high": "Your learning and expression are filled with emotional intensity, deeply influencing others and bringing imaginative communication, but you may be overly sensitive to feedback.",
+                "exalted": "Your words carry rich emotion with poetic or artistic infectiousness, showing exceptional intuition and creative talent in communication."
+            },
+            "4": {
+                "low": "In family relationships, you seem dependent, lacking independence, and are prone to emotional fluctuations due to past memories. Establish personal boundaries to strengthen your foundation.",
+                "medium": "Your emotions are deeply rooted in the family environment, making family a source of emotional security, fostering patience and care in building foundations.",
+                "high": "You play an emotional core role in the family, with a strong need for familial support, creating warm connections but possibly leading to attachment to the past.",
+                "exalted": "You create powerful emotional bonds in the family, becoming a spiritual pillar, showing exceptional nurturing and protective strength in foundational domains."
+            },
+            "5": {
+                "low": "In romance and creativity, your emotional expression is reserved, and you may hesitate to fully show yourself. Release inner passion to enhance creativity.",
+                "medium": "You express emotions through romance and creativity, seeking sincere and romantic interactions, which makes you more imaginative in entertainment.",
+                "high": "Your emotions are intense in romance and creation, easily attracting attention and bringing vibrant expression, but avoid dramatization.",
+                "exalted": "Your emotional talent grants you artistic and creative power, with exceptional charisma and infectiousness in romance, inspiring others."
+            },
+            "6": {
+                "low": "In daily affairs, you are easily swayed by emotions, affecting work efficiency and health. Establish routines to stabilize emotions.",
+                "medium": "You fulfill emotional needs through work and service, showing care in health management, but be mindful of emotions impacting your body.",
+                "high": "You pour emotions into daily work, easily building close relationships with colleagues, bringing dedication but possibly leading to burnout.",
+                "exalted": "Your emotional nurturing makes you naturally influential in service and healing, showing exceptional care and efficiency."
+            },
+            "7": {
+                "low": "In close relationships, you overly depend on partners, lacking independence. Balance giving and taking.",
+                "medium": "You seek emotional balance in partnerships, meeting inner needs through cooperation.",
+                "high": "Your emotions play a dominant role in close relationships, influencing partner dynamics and creating deep connections.",
+                "exalted": "Your emotions show exceptional integration in partnerships, building deep and harmonious connections."
+            },
+            "8": {
+                "low": "When facing intimacy or transformative events, you feel uneasy or vulnerable, avoiding deep emotions. Explore through psychological methods.",
+                "medium": "You crave deep intimacy and transformation emotionally, making you more intuitive in shared resources.",
+                "high": "Your emotions are intensely strong in intimacy and relationships, leading to profound changes and regenerative potential.",
+                "exalted": "Your emotions have immense regenerative and healing power, playing a significant role and influence in deep relationships."
+            },
+            "9": {
+                "low": "In spiritual and distant matters, your emotional investment is low, lacking enthusiasm, and you may feel lost.",
+                "medium": "You fulfill emotional needs through exploring culture, philosophy, or distant places, seeking higher meaning.",
+                "high": "Your emotions are closely tied to spiritual pursuits, with idealistic tendencies, finding solace in travel.",
+                "exalted": "You combine emotions with philosophy, showing profound wisdom and faith, finding inner peace through exploration."
+            },
+            "10": {
+                "low": "In career, you lack emotional investment, possibly feeling uneasy or unfulfilled. Seek meaningful work.",
+                "medium": "You invest emotions in career and social status, gaining security through achievements.",
+                "high": "Your emotions drive you to excel in career, influencing public perception and bringing leadership potential.",
+                "exalted": "You transform emotional strength into career momentum, becoming a bearer and inspirer of public emotions."
+            },
+            "11": {
+                "low": "In group relationships, you feel alienated or lonely, with unmet emotional needs.",
+                "medium": "You invest emotions in friends and communities, gaining a sense of belonging through socializing.",
+                "high": "Your emotions are highly infectious in groups, making you a social core and cohesive force.",
+                "exalted": "Your emotions are deeply integrated with communities, bringing powerful warmth and support to collectives."
+            },
+            "12": {
+                "low": "In the subconscious and hidden realms, your emotions are unstable, prone to self-disturbance or escaping reality.",
+                "medium": "Your emotions are tied to the subconscious, requiring solitude to process and reflect on your inner world.",
+                "high": "You have intense emotional experiences in hidden and spiritual realms, often bringing profound spiritual insights.",
+                "exalted": "Your emotions are highly integrated with the collective subconscious, possessing extraordinary intuitive and healing gifts."
+            }
+        },
+        "sun": {
+            "1": {
+                "low": "Your self-expression is often subdued and reserved, not inclined to stand out in crowds, which may make you seem mysterious or unapproachable. Gradually engage in social activities to boost confidence and reveal your inner light.",
+                "medium": "You express your core identity through your outward image, focusing on personal style and first impressions, creating a steady and reliable vibe, but avoid overemphasizing surface over inner depth.",
+                "high": "Your personality is strong and confident, with a vibrant and charismatic outward image, naturally making you a focal point, bringing leadership potential but risking arrogance, requiring humility to maintain balance.",
+                "exalted": "Your self-expression is highly charismatic and influential, radiating like the sun, inspiring and impacting those around you as a natural role model, but avoid dominating others and guide with warmth."
+            },
+            "2": {
+                "low": "In material and value domains, your sense of self-identity is weak, prone to doubting your worth, leading to indecision in financial matters. Build confidence through small achievements.",
+                "medium": "You tie your core self to wealth and self-worth, seeking material stability and achievement, showing practicality in financial management, but avoid relying solely on external possessions for fulfillment.",
+                "high": "You have a strong sense of identity tied to wealth and personal value, actively building and maintaining a secure foundation, often leading to abundance but risking over-attachment to material things, requiring spiritual balance.",
+                "exalted": "Your self radiates immense confidence and abundance through material stability, naturally attracting resources and opportunities, becoming a guardian of wealth, but share to avoid greed and foster higher growth."
+            },
+            "3": {
+                "low": "In communication and learning, your self-expression is reserved, hesitant to share ideas openly, appearing introverted or unconfident. Practice writing or small-group discussions to open expression channels.",
+                "medium": "You show yourself through learning and communication, with an active and curious mind, finding fulfillment in short-term interactions and knowledge acquisition, but focus on depth over breadth to avoid superficiality.",
+                "high": "Your personality shines through communication and intellect, profoundly influencing others’ ideas and views, bringing strong expressiveness and leadership charm, but avoid verbosity and practice listening.",
+                "exalted": "Your expression has genius-like charm and infectiousness, thriving in learning domains and becoming a disseminator and innovator of ideas, but stay humble to avoid arrogance."
+            },
+            "4": {
+                "low": "In family and foundational domains, your self-identity is weak, prone to self-doubt due to past experiences, impacting inner security. Rebuild foundations through family healing or memory organization.",
+                "medium": "You root your core self in the family environment, valuing emotional foundations and belonging, fostering patience and care in building roots, but balance family with personal independence.",
+                "high": "You play a core role in the family, strongly identifying with your roots and heritage, creating warm and stable connections but possibly clinging to tradition, requiring flexibility to adapt to change.",
+                "exalted": "Your self radiates strong leadership and protective energy in the family, becoming a pillar and emotional center, achieving inner growth through nurturing others, but avoid taking on excessive burdens."
+            },
+            "5": {
+                "low": "In creativity and romance, your self-expression is conservative, lacking enthusiasm and adventure, making you seem reserved. Release inner vitality through art or hobbies.",
+                "medium": "You express yourself through creativity and romance, seeking joy and expression in life, finding fulfillment in entertainment and love, but focus on depth over surface.",
+                "high": "Your personality shines vibrantly in romance and creativity, full of energy and charm, bringing strong attraction and creative potential, but avoid dramatization and balance with rationality.",
+                "exalted": "Your self-expression is filled with artistic talent and infectiousness, a source of creativity, radiating high charisma in romance and inspiring others, but stay authentic to avoid exaggeration."
+            },
+            "6": {
+                "low": "In work and health domains, your self-identity is low, prone to neglecting details and daily efficiency, leading to burnout. Build structure through daily routines to boost confidence.",
+                "medium": "You establish self-worth through service and work, valuing practicality and dedication, showing discipline and responsibility in daily management, but avoid perfectionism.",
+                "high": "You display a strong personality in daily affairs, focusing on efficiency and professionalism, bringing dedication and achievement but risking workaholism, requiring rest for balance.",
+                "exalted": "Your self radiates exceptional dedication and leadership in service, becoming a role model in health and work, helping others efficiently but prioritizing personal well-being."
+            },
+            "7": {
+                "low": "In relationships, your self-identity relies on others, leading to excessive compromise and loss of independence, causing imbalance. Reflect to reclaim your center.",
+                "medium": "You define yourself through partnerships, seeking harmony and cooperation, valuing balance and reciprocity in interactions, but avoid codependency.",
+                "high": "Your personality dominates in close relationships, influencing partner dynamics, creating strong connections and leadership, but avoid controlling tendencies and learn to let go.",
+                "exalted": "Your self radiates exceptional harmony and charisma in relationships, building deep and balanced partnerships, becoming an emotional mediator and supporter."
+            },
+            "8": {
+                "low": "During transformative events, your self-identity is fragile, avoiding deep and intimate themes, hindering growth. Explore shadows through counseling.",
+                "medium": "You explore yourself through intimacy and transformation, seeking emotional depth, gaining insight in shared resources, but manage possessiveness.",
+                "high": "Your personality regenerates strongly in deep relationships, bringing powerful potential and transformative energy, but avoid overly intense emotions and balance control.",
+                "exalted": "Your self radiates immense power and depth in transformation, achieving regeneration and healing in intimacy, becoming a catalyst for change."
+            },
+            "9": {
+                "low": "In spiritual exploration, your self-identity is weak, lacking adventure and enthusiasm, leading to feelings of being lost. Expand horizons through reading.",
+                "medium": "You expand yourself through philosophy and travel, seeking higher meaning, finding fulfillment in knowledge acquisition, but avoid extremism.",
+                "high": "Your personality shines in distant pursuits, full of optimism and vision, bringing strong exploration and growth, but avoid restlessness.",
+                "exalted": "Your self-expression radiates wisdom in philosophical pursuits, becoming a spiritual mentor and explorer, inspiring others to seek truth."
+            },
+            "10": {
+                "low": "In career, your self-identity is weak, lacking ambition and drive, delaying achievements. Set long-term goals.",
+                "medium": "You define yourself through achievements and image, seeking social status, valuing recognition and structure in your profession.",
+                "high": "Your personality shines prominently in public, bringing leadership and influence, but manage high stress to avoid burnout.",
+                "exalted": "Your self radiates exceptional leadership and success in career, becoming a public role model and inspirer."
+            },
+            "11": {
+                "low": "In groups, your self-identity is subdued, feeling alienated or out of place, limiting social connections. Join group activities.",
+                "medium": "You express yourself through socializing and aspirations, seeking ideal networks, valuing innovation and cooperation in collectives.",
+                "high": "Your personality becomes a focal point in groups, full of innovation and transformative energy, but avoid rebelliousness and balance team dynamics.",
+                "exalted": "Your self radiates exceptional innovation and cohesion in communities, becoming a reformer and humanitarian."
+            },
+            "12": {
+                "low": "In the subconscious, your self-identity is blurred, prone to self-doubt or escaping reality, leading to isolation. Face it through meditation.",
+                "medium": "You explore yourself through inner spirituality, valuing subconscious and hidden themes, gaining depth in spiritual realms.",
+                "high": "Your personality shines profoundly in hidden realms, bringing intuitive potential and insights, but confront shadow selves.",
+                "exalted": "Your self radiates exceptional intuition and revelation in spiritual domains, becoming an inner mentor and healer."
+            }
+        },
+        "mercury": {
+            "1": {
+                "low": "Your mental expression is conservative, with a reserved outward image, appearing hesitant or unconfident, potentially missing opportunities in initial interactions. Read and practice to open expression channels.",
+                "medium": "You display intellect through your outward image, focusing on expression and first impressions, appearing witty and smart in social settings, but avoid overthinking that delays action.",
+                "high": "Your communication dominates outwardly, with a smart and charismatic image, easily influencing others’ ideas, bringing strong persuasiveness but risking glibness, requiring honesty.",
+                "exalted": "Your mind radiates charm and wit in outward expression, becoming a social focal point and mediator, resolving conflicts and inspiring others through wise words."
+            },
+            "2": {
+                "low": "In financial domains, your thinking is chaotic, with inaccurate value judgments, prone to small errors or indecision. Improve analytical skills through systematic learning.",
+                "medium": "You invest intellect in material and value management, seeking practical planning, focusing on details and efficiency in financial decisions.",
+                "high": "Your mind shows strong analytical power in wealth, bringing efficient decisions and resource optimization, often leading to success but risking over-calculation.",
+                "exalted": "Your intellect transforms into exceptional financial wisdom and planning, becoming a resource management expert, intuitively seizing opportunities for long-term benefits."
+            },
+            "3": {
+                "low": "In learning and communication, you’re easily distracted, with unclear expression, prone to misunderstandings. Improve focus through training.",
+                "medium": "Your intellect is active in communication and learning, with a flexible and varied mind, finding fulfillment in short-term interactions.",
+                "high": "You display genius-like thinking in communication, with intellect as a core strength, profoundly influencing others’ views, but avoid excessive debating.",
+                "exalted": "Your expression has exceptional infectiousness and depth, thriving in learning domains, becoming a disseminator and innovator of ideas."
+            },
+            "4": {
+                "low": "In family, your thinking is limited, with weak foundational intellect, prone to emotional judgment or memory confusion. Rebuild clarity through family discussions.",
+                "medium": "You develop intellect through the family environment, valuing memories and foundational learning, appearing wise in emotional roots.",
+                "high": "Your mind profoundly influences family, bringing wise heritage and deep conversations, but avoid excessive rationality over emotions.",
+                "exalted": "Your intellect radiates exceptional insight in family, becoming an emotional mentor and guardian of family wisdom."
+            },
+            "5": {
+                "low": "In creativity, your thinking is reserved, with unfluid romantic expression, lacking inspiration and humor. Release through games.",
+                "medium": "You display intellect through creativity, smart and witty in romance, making you attractive in entertainment.",
+                "high": "Your mind shines vibrantly in romance and creativity, full of energy and ingenuity, bringing genius-like expression but controlling impulsiveness.",
+                "exalted": "Your expression is exceptionally innovative and charming in art, becoming a source of inspiration in romance and creativity."
+            },
+            "6": {
+                "low": "In work, your thinking is broad but sometimes scattered, needing stronger systematic analysis and attention to detail, risking oversights in execution. Use task lists and checklists to build structured workflows, enhancing precision and reliability.",
+                "medium": "You invest intellect in daily service, valuing efficiency and practicality, making you more systematic in work management.",
+                "high": "Your mind is highly efficient and dominant in work, showing outstanding professionalism and analytical skills, often leading to excellent performance, but avoid perfectionism that disrupts overall rhythm and flexibility.",
+                "exalted": "Your intellect radiates exceptional analytical power and dedication in service, becoming an expert in health and work."
+            },
+            "7": {
+                "low": "In relationships, your communication is chaotic, leading to strained partner interactions and misunderstandings. Learn listening skills.",
+                "medium": "You develop intellectual expression through relationships, valuing diplomacy and balance, focusing on reciprocity in cooperation.",
+                "high": "Your mind strongly influences intimacy, bringing wise interactions and deep conversations.",
+                "exalted": "Your communication radiates diplomatic wisdom and depth in partnerships, becoming a mediator and intellectual partner."
+            },
+            "8": {
+                "low": "In transformation, your thinking is blurred, with difficulties in intimate expression, hiding true thoughts, risking distrust in relationships. Clarify feelings through journaling to enhance communication clarity and emotional flow.",
+                "medium": "You display intellect through deep investigation, seeking truth and insight, making you more analytical in shared resources.",
+                "high": "Your mind shows profound insight in intimacy, bringing powerful analysis and regenerative potential.",
+                "exalted": "Your intellect radiates regenerative power and depth in transformation, becoming a revealer of secrets and healer."
+            },
+            "9": {
+                "low": "In exploration, your thinking is narrow, with weak travel expression, prone to stagnation and bias. Expand through reading.",
+                "medium": "You expand intellect through exploration, seeking higher knowledge and vision, finding fulfillment in philosophy.",
+                "high": "Your mind dominates broadly in distant pursuits, full of wisdom and adventure.",
+                "exalted": "Your expression radiates innovation and vision in philosophy, becoming a mentor and exploration pioneer."
+            },
+            "10": {
+                "low": "In career, your thinking is unstable, with weak image expression, lacking clear strategies and long-term planning. Seek mentoring to improve professional positioning and strategic thinking, enhancing career direction and stability.",
+                "medium": "You display intellect through achievement planning, valuing professional expression and strategy.",
+                "high": "Your mind dominates strategically in public, bringing leadership and influence.",
+                "exalted": "Your intellect radiates wisdom and professionalism in career, becoming an industry thought leader."
+            },
+            "11": {
+                "low": "In socializing, your thinking is alienated, with inaccurate aspiration expression, prone to isolation or misunderstanding. Join discussion groups.",
+                "medium": "You develop intellectual networks through groups, valuing innovative communication and idea sharing.",
+                "high": "Your mind dominates innovatively in communities, bringing reform and collective wisdom.",
+                "exalted": "Your communication radiates foresight and humanitarianism in aspirations, becoming an innovator and team inspiration."
+            },
+            "12": {
+                "low": "In the subconscious, your thinking is chaotic, with weak spiritual expression, prone to self-confusion or anxiety. Clarify through meditation.",
+                "medium": "You explore intellect through inner exploration, valuing subconscious learning and intuition development.",
+                "high": "Your mind shows profound intuition in hidden realms, bringing revelations and spiritual depth.",
+                "exalted": "Your intellect radiates exceptional revelation and depth in spirituality, becoming an inner mentor and healer."
+            }
+        },
+        "venus": {
+            "1": {
+                "low": "Your expression of beauty is reserved, with subdued outward charm, appearing aloof or conservative, potentially impacting social encounters. Enhance attractiveness through personal style and smile practice.",
+                "medium": "You display beauty through your outward image, valuing harmony and elegance, creating a warm and charming first impression, but avoid overemphasizing appearance over inner depth.",
+                "high": "Your charm dominates outwardly, with a personality full of elegance and social allure, easily becoming a focal point, bringing strong attractiveness but risking vanity, requiring humility.",
+                "exalted": "Your outward expression radiates elegance and infectiousness, becoming a social mediator and focal point, influencing others through beauty and harmony, but stay authentic to avoid superficiality."
+            },
+            "2": {
+                "low": "In value domains, your sense of beauty is weak, with unstable financial decisions, neglecting enjoyment and comfort. Rebuild material satisfaction through budgeting and small luxuries.",
+                "medium": "You invest beauty in material pursuits, valuing comfortable and aesthetic environments, focusing on quality over quantity in financial management, but avoid overspending.",
+                "high": "You strongly identify with wealth and value, actively seeking an abundant lifestyle, bringing material stability but risking attachment to possessions, requiring sharing.",
+                "exalted": "Your sense of beauty transforms into exceptional abundance and enjoyment, naturally attracting resources, becoming a guardian of wealth, but balance greed through generosity."
+            },
+            "3": {
+                "low": "In communication, your expression of beauty is unfluid, with reserved learning, appearing shallow or socially awkward. Enhance through reading art books.",
+                "medium": "You display beauty through communication, with elegant and charming speech, valuing harmony and aesthetics in learning interactions.",
+                "high": "Your speech dominates elegantly in learning, full of social wisdom and charm, bringing persuasiveness and attractiveness.",
+                "exalted": "Your expression radiates artistic and diplomatic infectiousness in communication, becoming a mediator and inspiration."
+            },
+            "4": {
+                "low": "In family, your sense of beauty and harmony is weak, with unstable foundations, neglecting warmth and aesthetics. Enhance through home decoration.",
+                "medium": "You build beauty through family, valuing aesthetic homes and emotional harmony, focusing on comfort in foundational building.",
+                "high": "Your love dominates warmly in foundations, bringing harmonious connections and family aesthetics.",
+                "exalted": "Your harmony radiates nurturing and aesthetic power in family, becoming an emotional guardian and beautifier."
+            },
+            "5": {
+                "low": "In romance, your beauty is conservative, with subdued creativity, appearing reserved or lacking passion. Release through date activities.",
+                "medium": "You display beauty through romance, seeking harmonious and romantic interactions, valuing aesthetics and joy in entertainment.",
+                "high": "Your charm shines vibrantly in creativity, full of energy and attractiveness.",
+                "exalted": "Your love radiates artistic talent and infectiousness in romance, becoming a source of creativity and passion."
+            },
+            "6": {
+                "low": "In service, your beauty and efficiency are low, with unstable health, neglecting details and harmony. Improve through wellness aesthetics.",
+                "medium": "You pursue beauty and harmony through work, valuing aesthetics and efficiency in service.",
+                "high": "Your love dominates diligently in daily life, with silent dedication and elegance, embodying deep affection through consistent actions, infusing relationships with stability and beauty.",
+                "exalted": "Your harmony radiates healing and elegance in service, becoming a beautifier and healer in work."
+            },
+            "7": {
+                "low": "In relationships, your beauty is dependent, with unstable partnerships, compromising excessively and losing balance. Rebuild through communication.",
+                "medium": "You build beauty through partnerships, valuing harmony and reciprocity in relationships.",
+                "high": "Your love dominates harmoniously in intimacy, bringing deep connections and attractiveness.",
+                "exalted": "Your harmony radiates fusion and charm in relationships, becoming an inspiration for partners."
+            },
+            "8": {
+                "low": "In intimacy, your beauty is fragile, with unfluid transformation, avoiding depth and possessiveness. Explore through trust exercises.",
+                "medium": "You display beauty through depth, seeking harmonious intimacy and regeneration.",
+                "high": "Your love dominates possessively in transformation, bringing regenerative potential and power.",
+                "exalted": "Your harmony radiates depth and healing power in intimacy, becoming a catalyst for transformation."
+            },
+            "9": {
+                "low": "In exploration, your beauty is lacking, with unstable travel, neglecting ideals and aesthetics. Expand through cultural journeys.",
+                "medium": "You pursue beauty through philosophy, valuing cultural harmony and exploration.",
+                "high": "Your love dominates broadly in distant pursuits, full of optimism and charm.",
+                "exalted": "Your harmony radiates spirituality and aesthetic power in philosophy, becoming a mentor."
+            },
+            "10": {
+                "low": "In career, your beauty and image are weak, with unapparent achievements, appearing superficial. Enhance through professional styling.",
+                "medium": "You display beauty through public strategies, valuing harmonious image and diplomacy.",
+                "high": "Your charm dominates in image, bringing social success.",
+                "exalted": "Your love radiates elegance and infectiousness in career, becoming a public icon."
+            },
+            "11": {
+                "low": "In socializing, your beauty is alienated, with unstable aspirations, prone to isolation. Participate in group activities.",
+                "medium": "You pursue beauty through groups, valuing harmonious socializing and cooperation.",
+                "high": "Your love dominates innovatively in communities, bringing humanitarianism and charm.",
+                "exalted": "Your harmony radiates collective and infectious power in aspirations, becoming a reformer."
+            },
+            "12": {
+                "low": "In spirituality, your beauty is blurred, with unstable subconscious, prone to disillusionment or escape. Clarify through artistic meditation.",
+                "medium": "You display beauty through inner dreaminess, valuing spiritual harmony and intuition.",
+                "high": "Your love shows profound intuition in hidden realms, bringing revelations and depth.",
+                "exalted": "Your harmony radiates dissolution and healing power in spirituality, becoming an inner healer."
+            }
+        },
+        "mars": {
+            "1": {
+                "low": "Your action expression is reserved, with subdued outward energy, appearing passive or conservative, potentially impacting social proactivity. Boost confidence and outward energy through sports activities.",
+                "medium": "You display action through your image, valuing brave and decisive first impressions, creating a reliable and motivated vibe, but avoid impulsiveness to maintain balance.",
+                "high": "Your passion dominates outwardly with strong courage, with a personality full of energy and determination, naturally becoming a leader, bringing strong attraction and influence but risking domination, requiring cooperation.",
+                "exalted": "Your action radiates leadership and infectiousness outwardly, becoming a reform pioneer, inspiring others through determination and courage, but avoid excessive risk-taking and consider consequences."
+            },
+            "2": {
+                "low": "In financial domains, your actions are hesitant, with unstable value judgments, missing investment opportunities. Gain experience and confidence through small-scale practices.",
+                "medium": "You invest passion in material pursuits, valuing resource competition and accumulation, showing motivation and persistence in financial management.",
+                "high": "Your actions dominate persistently in wealth, actively seizing and maintaining a secure foundation, often leading to material success but risking possessiveness.",
+                "exalted": "Your energy transforms into exceptional financial drive and endurance, attracting resources through determination, becoming a guardian of wealth."
+            },
+            "3": {
+                "low": "In communication, your actions are scattered, with inaccurate learning, leading to fruitless arguments or impulsive expression. Improve through debate training.",
+                "medium": "You display passion through communication, with quick and decisive thinking, bringing vitality to learning interactions.",
+                "high": "Your actions dominate wittily in learning, full of argumentative power and quick responses, bringing strong expressive potential.",
+                "exalted": "Your expression radiates high argumentative and intellectual infectiousness, becoming a pioneer and persuader in communication."
+            },
+            "4": {
+                "low": "In family, your actions are dependent, with weak foundations, prone to emotional conflicts or avoiding responsibility. Strengthen through family activities.",
+                "medium": "You protect passion through family, valuing defense and stability, showing determination in foundational building.",
+                "high": "Your energy dominates defensively in foundations, bringing strong protective power and family connections.",
+                "exalted": "Your actions radiate stability and protective power in family, becoming an emotional pillar and reformer."
+            },
+            "5": {
+                "low": "In romance, your actions are reserved, with subdued creativity, lacking enthusiasm and adventure. Release through date activities.",
+                "medium": "You display passion through romance, seeking decisive and vibrant interactions, making you attractive in entertainment.",
+                "high": "Your actions dominate passionately in creativity, full of energy and conquest, bringing strong romantic potential.",
+                "exalted": "Your energy radiates conquest and charm in romance, becoming a source of passion and creativity."
+            },
+            "6": {
+                "low": "In work, your actions are inefficient, with unstable health, depleting energy or neglecting details. Improve through planning.",
+                "medium": "You pursue passion through service, valuing daily competition and efficiency, bringing motivation to management.",
+                "high": "Your actions dominate diligently in daily life, bringing strong dedication and professionalism.",
+                "exalted": "Your energy radiates discipline and enduring power in health, becoming a work pioneer."
+            },
+            "7": {
+                "low": "In relationships, your actions cause conflicts, with unstable partnerships, prone to arguments or domination. Balance through compromise.",
+                "medium": "You display passion through partnerships, valuing assertion and dynamic interactions, bringing vitality to cooperation.",
+                "high": "Your actions dominate assertively in intimacy, bringing dynamics and intensity.",
+                "exalted": "Your energy radiates balance and cooperative power in relationships, becoming a motivational source for partners."
+            },
+            "8": {
+                "low": "In transformation, your actions are fragile, with unfluid intimacy, avoiding conflicts or depth. Explore through challenges.",
+                "medium": "You display passion through depth, seeking regeneration and power, showing determination in shared resources.",
+                "high": "Your actions dominate possessively in transformation, bringing strong regenerative potential.",
+                "exalted": "Your energy radiates depth and regenerative power in intimacy, becoming a catalyst for transformation."
+            },
+            "9": {
+                "low": "In exploration, your action is insufficient, with unstable travel rhythms, prone to recklessness or stagnation. Balance impulsiveness and procrastination through planned adventures, making exploration a growth journey.",
+                "medium": "You pursue passion through philosophy, seeing distant pursuits as a call to mission, refining decisiveness and rooting your soul in vastness through expanding vision and faith.",
+                "high": "Your actions dominate adventurously in distant pursuits, full of enthusiasm and broad vision, breaking boundaries and forging your path in the unknown.",
+                "exalted": "Your energy radiates powerful expansion and wisdom in philosophy, driving you to question essence and transcend norms, becoming a pioneer in thought and spirituality."
+            },
+            "10": {
+                "low": "In career, your actions are hesitant, with unapparent image, retreating or lacking ambition. Elevate through goal setting.",
+                "medium": "You display passion through achievements, valuing competition and leadership.",
+                "high": "Your actions dominate ambitiously in public, bringing strong influence.",
+                "exalted": "Your energy radiates strategy and enduring power in career, becoming a success role model."
+            },
+            "11": {
+                "low": "In socializing, your actions are alienated, with unstable aspirations, prone to rebellion or isolation. Participate in team activities.",
+                "medium": "You pursue passion through groups, valuing reform and innovation.",
+                "high": "Your actions dominate rebelliously in communities, bringing dynamics and reform.",
+                "exalted": "Your energy radiates collective and liberating power in aspirations, becoming a reformer."
+            },
+            "12": {
+                "low": "In spirituality, your actions are hidden, with unstable subconscious, prone to inner depletion or escape. Release through meditation.",
+                "medium": "You display passion through inner pursuits, valuing intuitive and hidden power.",
+                "high": "Your actions dominate intuitively in hidden realms, bringing profound revelations.",
+                "exalted": "Your energy radiates powerful healing and depth in spirituality, granting resilient inner strength, making you a true inner warrior facing shadows and crossing lows."
+            }
+        },
+        "jupiter": {
+            "1": {
+                "low": "Your expansive expression is conservative, with a subdued optimistic outward image, prone to self-limitation and lack of confidence, appearing reserved in social encounters. Release inner potential through active participation.",
+                "medium": "You display expansion through your outward image, valuing confident and broad first impressions, creating a warm and visionary vibe, but avoid over-optimism that ignores reality.",
+                "high": "Your optimism dominates outwardly with strong confidence, with a personality full of energy and vision, naturally becoming an inspirer, but risking arrogance, requiring humility to maintain relationships.",
+                "exalted": "Your expansion radiates leadership and wise infectiousness outwardly, becoming a reform mentor, influencing others through vision and enthusiasm, but avoid over-expansion that scatters focus."
+            },
+            "2": {
+                "low": "In financial domains, your expansion is hesitant, with unstable value judgments, missing opportunities or wasting resources. Rebuild stability through cautious planning.",
+                "medium": "You invest luck in material pursuits, valuing abundant and growing environments, focusing on long-term investments in financial management.",
+                "high": "Your expansion dominates abundantly in wealth, actively pursuing opportunities, bringing material success but risking overspending.",
+                "exalted": "Your optimism transforms into exceptional financial expansion and wisdom, attracting resources, becoming a guardian of abundance, but balance greed through sharing."
+            },
+            "3": {
+                "low": "In learning, your expansion is scattered, with inaccurate communication, prone to superficiality or distraction. Improve through focus training.",
+                "medium": "You display luck through communication, with a broad and curious mind, finding fulfillment in learning interactions.",
+                "high": "Your expansion dominates visionarily in learning, full of wisdom and exploration.",
+                "exalted": "Your expression radiates philosophical and social infectiousness in communication, becoming a wisdom disseminator."
+            },
+            "4": {
+                "low": "In family, your expansion is lacking, with unstable foundations, neglecting warmth and growth. Enhance through family trips.",
+                "medium": "You pursue luck through family, valuing expansive foundations and emotional abundance.",
+                "high": "Your optimism dominates warmly in foundations, bringing nurturing and family growth.",
+                "exalted": "Your expansion radiates protective and wise power in family, becoming an emotional mentor."
+            },
+            "5": {
+                "low": "In romance, your expansion is conservative, with subdued creativity, lacking joy and adventure. Release through art.",
+                "medium": "You display luck through romance, seeking creative expansion and romantic opportunities.",
+                "high": "Your expansion dominates joyfully in creativity, full of enthusiasm and talent.",
+                "exalted": "Your optimism radiates artistic and growing power in romance, becoming an inspiration."
+            },
+            "6": {
+                "low": "In service, your expansion is lazy, with unstable health, neglecting opportunities and efficiency. Improve through goal setting.",
+                "medium": "You pursue luck through work, valuing service expansion and growth.",
+                "high": "Your expansion dominates opportunistically in daily life, bringing efficiency and dedication.",
+                "exalted": "Your optimism radiates healing and wise power in health, becoming a mentor."
+            },
+            "7": {
+                "low": "In relationships, your expansion is idealized, with unstable partnerships, compromising excessively or losing direction. Balance through communication.",
+                "medium": "You display luck through partnerships, valuing expansive relationships and harmonious growth.",
+                "high": "Your expansion dominates cooperatively in intimacy, bringing lucky connections.",
+                "exalted": "Your optimism radiates balance and wise power in relationships, becoming a partner mentor."
+            },
+            "8": {
+                "low": "In transformation, your expansion is excessive, with unfluid intimacy, risking recklessness or neglecting depth. Adjust through introspection.",
+                "medium": "You display luck through depth, seeking regenerative expansion and opportunities.",
+                "high": "Your expansion dominates deeply in transformation, bringing powerful growth.",
+                "exalted": "Your optimism radiates regenerative and wise power in intimacy, becoming a reformer."
+            },
+            "9": {
+                "low": "In philosophy, your expansion is extreme, with unstable travel, prone to being lost or superficial. Deepen through learning.",
+                "medium": "You pursue luck through exploration, valuing expansive vision and philosophy.",
+                "high": "Your expansion dominates growingly in distant pursuits, full of adventure and wisdom.",
+                "exalted": "Your optimism radiates wise and spiritual power in philosophy, becoming a mentor."
+            },
+            "10": {
+                "low": "In career, your expansion is inflated, with unapparent image, appearing unrealistic or lacking discipline. Adjust through planning.",
+                "medium": "You display luck through achievements, valuing career expansion and opportunities.",
+                "high": "Your expansion dominates successfully in public, bringing leadership and growth.",
+                "exalted": "Your optimism radiates ambition and achievement power in career, becoming an icon."
+            },
+            "11": {
+                "low": "In socializing, your expansion is alienated, with unstable aspirations, prone to isolation or idealization. Participate in groups.",
+                "medium": "You pursue luck through groups, valuing expansive networks and cooperation.",
+                "high": "Your expansion dominates networked in communities, bringing innovation and humanitarianism.",
+                "exalted": "Your optimism radiates collective and wise power in aspirations, becoming a reformer."
+            },
+            "12": {
+                "low": "In spirituality, your expansion is illusory, with unstable subconscious, prone to escape or being lost. Clarify through meditation.",
+                "medium": "You display luck through inner pursuits, valuing spiritual expansion and intuition.",
+                "high": "Your expansion dominates spiritually in hidden realms, bringing revelations and depth.",
+                "exalted": "Your optimism radiates healing and integrative power in spirituality, becoming a mentor."
+            }
+        },
+        "saturn": {
+            "1": {
+                "low": "Your responsibility expression is conservative, with a serious and reserved outward image, appearing stern or unapproachable, potentially impacting social encounters. Enhance confidence and warmth through gradual discipline practice.",
+                "medium": "You display discipline through your outward image, valuing steadiness and responsibility, creating a reliable and mature first impression, but avoid excessive seriousness that neglects human warmth.",
+                "high": "Your responsibility dominates outwardly with strong endurance, with a personality full of structure and persistence, naturally becoming an authority figure, bringing leadership potential but risking emotional closure, requiring softness.",
+                "exalted": "Your structure radiates stable and leadership power outwardly, becoming a role model, influencing others through discipline and wisdom, but balance rigor with human care."
+            },
+            "2": {
+                "low": "In value domains, your responsibility is weak, with unstable financial decisions, fearing scarcity or being overly frugal. Rebuild stability through budgeting.",
+                "medium": "You invest discipline in material management, valuing long-term accumulation and value building, focusing on endurance and planning in finance.",
+                "high": "Your responsibility dominates stably in wealth, actively maintaining and growing resources, bringing material security but risking harshness toward possessions.",
+                "exalted": "Your structure transforms into exceptional financial endurance and wisdom, attracting stability through persistence, but avoid stinginess through sharing."
+            },
+            "3": {
+                "low": "In learning, your responsibility suppresses expression, with inaccurate communication, prone to self-doubt or excessive caution. Improve through focus training.",
+                "medium": "You display discipline through communication, with a rigorous and focused mind, valuing depth and accuracy in learning interactions.",
+                "high": "Your responsibility dominates focused in learning, bringing profound analysis and enduring effort.",
+                "exalted": "Your structure radiates wise and organized power in expression, becoming a thought guardian and mentor."
+            },
+            "4": {
+                "low": "In family, your responsibility is stern, with unstable foundations, prone to emotional closure or neglecting nurturing. Rebuild warmth through family structure.",
+                "medium": "You build discipline through family, valuing structure and long-term foundations, focusing on responsibility and stability in roots.",
+                "high": "Your responsibility dominates structurally in foundations, bringing enduring family connections.",
+                "exalted": "Your structure radiates protective and enduring power in family, becoming an emotional pillar."
+            },
+            "5": {
+                "low": "In romance, your responsibility suppresses creativity, with subdued expression, lacking joy and flexibility. Release through small goals.",
+                "medium": "You display discipline through romance, seeking lasting and committed relationships.",
+                "high": "Your responsibility dominates enduringly in creativity, bringing depth and dedication.",
+                "exalted": "Your structure radiates balance and enduring power in romance, becoming a guardian of connections."
+            },
+            "6": {
+                "low": "In service, your responsibility is overly burdensome, with unstable health, prone to overworking or neglecting rest. Balance through time management.",
+                "medium": "You pursue discipline through work, valuing efficiency and practical structure.",
+                "high": "Your responsibility dominates efficiently in daily life, bringing professionalism and enduring effort.",
+                "exalted": "Your structure radiates dedication and healing power in health, becoming a work role model."
+            },
+            "7": {
+                "low": "In relationships, your responsibility restricts interactions, with unstable partnerships, fearing commitment or being overly serious. Soften through communication.",
+                "medium": "You display discipline through partnerships, valuing long-term commitment and balance.",
+                "high": "Your responsibility dominates loyally in intimacy, bringing loyalty and stability.",
+                "exalted": "Your structure radiates balance and enduring power in relationships, becoming a partner pillar."
+            },
+            "8": {
+                "low": "In transformation, your responsibility fears depth, with unfluid intimacy, avoiding conflicts or change. Explore through facing shadows.",
+                "medium": "You display discipline through depth, seeking regenerative structure and power.",
+                "high": "Your responsibility dominates deeply in transformation, bringing enduring regeneration.",
+                "exalted": "Your structure radiates regenerative and wise power in intimacy, becoming a guardian of transformation."
+            },
+            "9": {
+                "low": "In philosophy, your responsibility is dogmatic, with unstable travel, prone to narrowness or neglecting expansion. Broaden through learning.",
+                "medium": "You pursue discipline through exploration, valuing wisdom and long-term growth.",
+                "high": "Your responsibility dominates wisely in distant pursuits, bringing profound vision.",
+                "exalted": "Your structure radiates growth and balance power in philosophy, becoming a mentor."
+            },
+            "10": {
+                "low": "In career, your responsibility is overly pressured, with unapparent image, prone to self-doubt or retreat. Elevate through mentoring.",
+                "medium": "You display discipline through achievements, valuing structure and long-term goals.",
+                "high": "Your responsibility dominates leadingly in public, bringing achievement and authority.",
+                "exalted": "Your structure radiates balance and achievement power in career, becoming a role model."
+            },
+            "11": {
+                "low": "In socializing, your responsibility is isolating, with unstable aspirations, feeling burdened or alienated. Balance through group responsibilities.",
+                "medium": "You pursue discipline through groups, valuing loyalty and structured networks.",
+                "high": "Your responsibility dominates loyally in communities, bringing stable connections.",
+                "exalted": "Your structure radiates organized and balance power in aspirations, becoming a collective guardian."
+            },
+            "12": {
+                "low": "In spirituality, your responsibility is lonely, with unstable subconscious, prone to self-suppression or escape. Release through meditation.",
+                "medium": "You display discipline through inner pursuits, valuing spiritual structure and introspection.",
+                "high": "Your responsibility dominates introspectively in hidden realms, bringing profound revelations.",
+                "exalted": "Your structure radiates healing and balance power in spirituality, becoming an inner mentor."
+            }
+        },
+        "uranus": {
+            "1": {
+                "low": "Your innovative expression is conservative, with a subdued unique outward image, appearing traditional or conformist, potentially limiting personal freedom. Release inner rebellion through new styles.",
+                "medium": "You display uniqueness through your outward image, valuing independence and innovation, creating a progressive and interesting first impression, but avoid being overly abrupt to prevent misunderstandings.",
+                "high": "Your reform dominates outwardly with strong independence, with a personality full of surprises and originality, naturally becoming a reformer, bringing strong attraction but risking alienation, requiring social balance.",
+                "exalted": "Your innovation radiates infectiousness and foresight outwardly, becoming a pioneer and inspiration, influencing others through unique charm, but avoid excessive rebellion that neglects stability."
+            },
+            "2": {
+                "low": "In financial domains, your innovation is unstable, with chaotic value judgments, risking losses due to sudden changes. Protect resources through conservative investments.",
+                "medium": "You invest uniqueness in material pursuits, valuing innovative resource management, bringing flexibility to finance.",
+                "high": "Your reform dominates creatively in wealth, actively pursuing unexpected opportunities, bringing resource breakthroughs but risking instability.",
+                "exalted": "Your innovation transforms into exceptional financial reform and intuition, attracting unconventional resources, becoming a wealth innovator."
+            },
+            "3": {
+                "low": "In communication, your innovation is chaotic, with inaccurate learning, prone to erratic ideas without results. Improve through structured training.",
+                "medium": "You display uniqueness through communication, with progressive and inventive thinking, bringing inspiration to learning interactions.",
+                "high": "Your reform dominates inventively in learning, full of surprising insights.",
+                "exalted": "Your expression radiates technological wisdom and infectiousness in communication, becoming a pioneer."
+            },
+            "4": {
+                "low": "In family, your innovation is disruptive, with unstable foundations, prone to conflicts due to rebellion. Balance through dialogue.",
+                "medium": "You pursue uniqueness through family, valuing foundational reform.",
+                "high": "Your reform dominates reformingly in foundations, bringing family breakthroughs.",
+                "exalted": "Your innovation radiates liberating and forward-thinking power in family, becoming a reform guardian."
+            },
+            "5": {
+                "low": "In romance, your innovation is erratic, with subdued creativity, lacking stability. Release through experiments.",
+                "medium": "You display uniqueness through romance, seeking creative interactions.",
+                "high": "Your reform dominates originally in creativity, full of energy.",
+                "exalted": "Your innovation radiates genius and charm in romance."
+            },
+            "6": {
+                "low": "In service, your innovation is disruptive, with unstable health, prone to sudden issues. Stabilize through planning.",
+                "medium": "You pursue uniqueness through work, valuing efficiency reform.",
+                "high": "Your reform dominates efficiently in daily life, bringing innovation.",
+                "exalted": "Your innovation radiates technological and healing power in health."
+            },
+            "7": {
+                "low": "In relationships, your innovation is unstable, with rebellious partnerships, prone to conflicts. Liberate through communication.",
+                "medium": "You display uniqueness through partnerships, valuing free interactions.",
+                "high": "Your reform dominates freely in intimacy, bringing dynamics.",
+                "exalted": "Your innovation radiates liberating and balance power in relationships."
+            },
+            "8": {
+                "low": "In transformation, your innovation is crisis-prone, with unfluid intimacy, prone to sudden issues. Explore through facing challenges.",
+                "medium": "You display uniqueness through depth, seeking regenerative reform.",
+                "high": "Your reform dominates deeply in transformation, bringing power.",
+                "exalted": "Your innovation radiates regenerative and intuitive power in intimacy."
+            },
+            "9": {
+                "low": "In philosophy, your innovation is extreme, with unstable travel, prone to being lost. Stabilize through learning.",
+                "medium": "You pursue uniqueness through exploration, valuing reformative vision.",
+                "high": "Your reform dominates visionarily in distant pursuits, full of adventure.",
+                "exalted": "Your innovation radiates revolutionary and wise power in philosophy."
+            },
+            "10": {
+                "low": "In career, your innovation is disruptive, with unapparent image, prone to retreat. Elevate through goals.",
+                "medium": "You display uniqueness through achievements, valuing leadership reform.",
+                "high": "Your reform dominates leadingly in public, bringing influence.",
+                "exalted": "Your innovation radiates foresight and strategic power in career."
+            },
+            "11": {
+                "low": "In socializing, your innovation is alienated, with unstable aspirations, prone to isolation. Participate in teams.",
+                "medium": "You pursue uniqueness through groups, valuing network reform.",
+                "high": "Your reform dominates networked in communities, bringing collective innovation.",
+                "exalted": "Your innovation radiates humanitarian and liberating power in aspirations."
+            },
+            "12": {
+                "low": "In spirituality, your innovation is chaotic, with unstable subconscious, prone to self-disruption. Clarify through meditation.",
+                "medium": "You display uniqueness through inner pursuits, valuing intuitive reform.",
+                "high": "Your reform dominates intuitively in hidden realms, bringing revelations.",
+                "exalted": "Your innovation radiates revelatory and healing power in spirituality."
+            }
+        },
+        "neptune": {
+            "1": {
+                "low": "Your inspired expression is blurred, with a dreamy and unclear outward image, appearing mysterious or unrealistic, potentially making it hard for others to connect. Balance fantasy and reality through grounding practices to let spiritual beauty shine in reality.",
+                "medium": "You display dreaminess through your outward image, valuing spirituality and intuition, creating a gentle and charming first impression, but avoid over-idealization that neglects boundaries.",
+                "high": "Your illusion dominates outwardly with strong attraction, with a personality full of inspiration and artistic aura, naturally inspiring others’ hearts with unique charm and influence, but avoid detachment from reality through grounding practices to sustain visionary expression.",
+                "exalted": "Your inspiration radiates infectiousness and depth outwardly, becoming a spiritual pioneer, touching and influencing others with dreamy charm, but root in true self to avoid disillusionment from idealized expectations, keeping light enduring and authentic."
+            },
+            "2": {
+                "low": "In value domains, your inspiration is chaotic, with unstable financial decisions, fantasizing wealth while neglecting reality. Rebuild stability through budgeting.",
+                "medium": "You invest dreaminess in material pursuits, valuing intuitive value, focusing on spiritual satisfaction in finance.",
+                "high": "Your inspiration dominates intuitively in wealth, actively pursuing ideal resources, bringing unexpected abundance.",
+                "exalted": "Your illusion transforms into exceptional financial revelation and artistic value, attracting unconventional resources."
+            },
+            "3": {
+                "low": "In communication, your inspiration is blurred, with insufficient focus in learning, prone to erratic ideas without results. Clarify thoughts through journaling to transform scattered inspiration into clear expression, enhancing communication and learning effectiveness.",
+                "medium": "You display dreaminess through communication, with imaginative thinking, bringing creativity to learning.",
+                "high": "Your inspiration dominates creatively in learning, full of poetic expression.",
+                "exalted": "Your expression radiates artistic wisdom and infectiousness in communication, becoming a poet."
+            },
+            "4": {
+                "low": "In family, your inspiration escapes, with unstable foundations, fantasizing while neglecting reality. Balance through family meditation.",
+                "medium": "You pursue dreaminess through family, valuing emotional spirituality.",
+                "high": "Your inspiration dominates warmly in foundations, bringing family revelations.",
+                "exalted": "Your illusion radiates nurturing and healing power in family."
+            },
+            "5": {
+                "low": "In romance, your inspiration is idealized, with subdued creativity, prone to disappointment. Release through art.",
+                "medium": "You display dreaminess through romance, seeking artistic interactions.",
+                "high": "Your inspiration dominates artistically in creativity, full of charm.",
+                "exalted": "Your illusion radiates talent and infectiousness in romance."
+            },
+            "6": {
+                "low": "In service, your inspiration is chaotic, with unstable health, neglecting personal boundaries, leading to depletion and imbalance. Stabilize body and mind through routines and grounding practices, clarifying boundaries to make dedication sustainable and powerful.",
+                "medium": "You pursue dreaminess through work, valuing service spirituality.",
+                "high": "Your inspiration dominates empathetically in daily life, bringing healing.",
+                "exalted": "Your illusion radiates dedication and revelatory power in health."
+            },
+            "7": {
+                "low": "In relationships, your inspiration is disillusioned, with unstable partnerships, prone to idealization. Realize through communication.",
+                "medium": "You display dreaminess through partnerships, valuing relationship spirituality.",
+                "high": "Your inspiration dominates integratively in intimacy, bringing depth.",
+                "exalted": "Your illusion radiates dissolution and healing power in relationships."
+            },
+            "8": {
+                "low": "In transformation, your inspiration deceives, with unfluid intimacy, prone to avoidance. Face through confronting shadows.",
+                "medium": "You display dreaminess through depth, seeking regenerative spirituality.",
+                "high": "Your inspiration dominates deeply in transformation, bringing revelations.",
+                "exalted": "Your illusion radiates regenerative and intuitive power in intimacy."
+            },
+            "9": {
+                "low": "In philosophy, your inspiration is easily lost, with unstable travel and exploration, prone to illusions or detachment from reality. Anchor abstract thoughts in practical experience through systematic learning and grounding practices to achieve clear wisdom extension.",
+                "medium": "You pursue dreaminess through exploration, valuing vast vision and spiritual depth, finding meaning in the unknown, making journeys a path to soul awakening.",
+                "high": "Your inspiration dominates spiritually in distant pursuits, full of revelations, guiding like stars, capturing deep meaning in the unknown, transforming each journey into a soul awakening and echo of inner truth.",
+                "exalted": "Your illusion radiates profound wisdom and integrative power in philosophy, penetrating appearances and connecting opposites, fostering insights between reality and illusion, achieving new unity in transcendence."
+            },
+            "10": {
+                "low": "In career, your inspiration is unrealistic, with unapparent image, prone to disappointment. Realize through goals.",
+                "medium": "You display dreaminess through achievements, valuing image spirituality.",
+                "high": "Your inspiration dominates visionarily in public, bringing charm.",
+                "exalted": "Your illusion radiates infectious and forward-thinking power in career."
+            },
+            "11": {
+                "low": "In socializing, your inspiration is alienated, with unstable aspirations, prone to isolation. Engage through group meditation.",
+                "medium": "You pursue dreaminess through groups, valuing humanitarian spirituality.",
+                "high": "Your inspiration dominates humanitarily in communities, bringing collectives.",
+                "exalted": "Your illusion radiates integrative and revelatory power in aspirations."
+            },
+            "12": {
+                "low": "In spirituality, your inspiration dissolves, with unstable subconscious, prone to being lost. Clarify through art.",
+                "medium": "You display dreaminess through inner pursuits, valuing spiritual integration.",
+                "high": "Your inspiration dominates revelatorily in hidden realms, bringing depth.",
+                "exalted": "Your illusion radiates healing and dissolutive power in spirituality."
+            }
+        },
+        "pluto": {
+            "1": {
+                "low": "Your transformative expression is conservative, with a subdued powerful outward image, appearing mysterious or closed, potentially limiting personal regeneration. Release inner potential through self-exploration.",
+                "medium": "You display regeneration through your outward image, valuing depth and change, creating a powerful and deep first impression, but avoid excessive control that causes distance.",
+                "high": "Your power dominates outwardly with strong depth, with a personality full of transformation and intensity, naturally becoming a catalyst, bringing strong magnetism and influence but risking possessiveness, requiring sharing.",
+                "exalted": "Your transformation radiates regenerative and infectious power outwardly, becoming a reform pioneer, influencing others through deep charm, but avoid excessive destruction and focus on rebuilding."
+            },
+            "2": {
+                "low": "In financial domains, your transformation is possessive and unstable, with chaotic value judgments, risking losses due to crises. Protect resources through cautious management.",
+                "medium": "You invest regeneration in material pursuits, valuing resource depth, bringing intuition and endurance to finance.",
+                "high": "Your power dominates deeply in wealth, actively pursuing transformative opportunities, bringing resource rebirth but risking control.",
+                "exalted": "Your transformation transforms into exceptional financial power and regeneration, attracting deep resources, becoming a wealth transformer."
+            },
+            "3": {
+                "low": "In communication, your transformation manipulates, with inaccurate learning, hiding ideas and misleading. Improve through honest practice.",
+                "medium": "You display regeneration through communication, with deep and investigative thinking, bringing insight to learning.",
+                "high": "Your power dominates insightfully in learning, full of profound analysis.",
+                "exalted": "Your transformation radiates deep wisdom and infectiousness in expression, becoming a secret revealer in communication."
+            },
+            "4": {
+                "low": "In family, your transformation is traumatic, with unstable foundations, closing off due to past experiences. Rebuild through healing.",
+                "medium": "You pursue regeneration through family, valuing emotional depth.",
+                "high": "Your power dominates deeply in foundations, bringing family rebirth.",
+                "exalted": "Your transformation radiates healing and protective power in family, becoming an emotional catalyst."
+            },
+            "5": {
+                "low": "In romance, your transformation is dramatic, with subdued creativity, lacking depth. Release through experiments.",
+                "medium": "You display regeneration through romance, seeking passionate depth.",
+                "high": "Your power dominates passionately in creativity, full of transformative power.",
+                "exalted": "Your transformation radiates talent and regenerative power in romance."
+            },
+            "6": {
+                "low": "In service, your transformation is crisis-prone, with unstable health, prone to sudden issues. Stabilize through planning.",
+                "medium": "You pursue regeneration through work, valuing efficiency depth.",
+                "high": "Your power dominates deeply in daily life, bringing reform.",
+                "exalted": "Your transformation radiates healing and regenerative power in health."
+            },
+            "7": {
+                "low": "In relationships, your transformation is power-driven, with unstable partnerships, prone to conflicts. Explore through balance.",
+                "medium": "You display regeneration through partnerships, valuing deep interactions.",
+                "high": "Your power dominates integratively in intimacy, bringing transformation.",
+                "exalted": "Your transformation radiates depth and regenerative power in relationships."
+            },
+            "8": {
+                "low": "In transformation, your transformation is dark, with unfluid intimacy, prone to avoidance. Release through facing shadows.",
+                "medium": "You display regeneration through depth, seeking power balance.",
+                "high": "Your power dominates regeneratively in transformation, bringing intensity.",
+                "exalted": "Your transformation radiates regenerative and deep power in intimacy."
+            },
+            "9": {
+                "low": "In philosophy, your transformation is extreme, with unstable travel, prone to crises. Balance through learning.",
+                "medium": "You pursue regeneration through exploration, valuing deep vision.",
+                "high": "Your power dominates wisely in distant pursuits, full of reform.",
+                "exalted": "Your transformation radiates revelatory and regenerative power in philosophy."
+            },
+            "10": {
+                "low": "In career, your transformation is destructive, with unapparent image, prone to retreat. Rebuild through goals.",
+                "medium": "You display regeneration through achievements, valuing leadership depth.",
+                "high": "Your power dominates leadingly in public, bringing influence.",
+                "exalted": "Your transformation radiates power and regenerative force in career."
+            },
+            "11": {
+                "low": "In socializing, your transformation is disruptive, with unstable aspirations, prone to isolation. Balance through groups.",
+                "medium": "You pursue regeneration through groups, valuing network depth.",
+                "high": "Your power dominates reformingly in communities, bringing collectives.",
+                "exalted": "Your transformation radiates humanitarian and regenerative power in aspirations."
+            },
+            "12": {
+                "low": "In spirituality, your transformation is destructive, with unstable subconscious, prone to inner depletion. Release through meditation.",
+                "medium": "You display regeneration through inner pursuits, valuing spiritual depth.",
+                "high": "Your power dominates revelatorily in hidden realms, bringing profound depth.",
+                "exalted": "Your transformation radiates healing and regenerative power in spirituality."
+            }
+        }
+    }
+}
