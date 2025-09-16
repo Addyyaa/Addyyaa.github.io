@@ -2,7 +2,7 @@
 
 ## 背景介绍
 
-astAPI 是一个现代、快速（高性能）的 Python Web 框架，用于构建 API。它基于 Python 的类型提示（Type Hints）和异步编程，结合 Starlette 和 Pydantic，提供高效、易用的开发体验。
+fastAPI 是一个现代、快速（高性能）的 Python Web 框架，用于构建 API。它基于 Python 的类型提示（Type Hints）和异步编程，结合 Starlette 和 Pydantic，提供高效、易用的开发体验。
 
 **核心特性**：
 
@@ -19,11 +19,17 @@ FastAPI 构建在以下核心库之上：
 - **Pydantic**：用于数据验证和序列化，确保输入输出数据的类型安全和格式正确。
 - **Uvicorn**：一个 ASGI 服务器实现，用于运行 FastAPI 应用，支持高并发。
 
+<span style="color: orange; font-family: 'kaiti'">如果ide使用的是`pycharm`，建议使用 [Pydantic PyCharm 插件](https://github.com/koxudaxi/pydantic-pycharm-plugin/)</span>
+
 ## 安装
 
 `pip install fastapi`
 
 `pip install "uvicorn[standard]"`     --运行fastapi的ASGI服务器
+
+## 运行服务
+
+`uvicorn main:app --reload`   --mian -> main.py     --app fastapi的实例名    --reload  开发模式下自动重载代码
 
 ## 类型提示
 
@@ -65,6 +71,7 @@ external_data = {
     "id": "123",
     "signup_ts": "2017-06-01 12:22",
     "friends": [1, "2", b"3"],
+    "test": "test"  # 额外字段，默认会被忽视，如果要报错，可以在User里设置 model_config = {"extra": "forbid"}
 }
 user = User(**external_data)
 print(user)
@@ -73,8 +80,11 @@ print(user.id)
 # > 123
 ```
 
-• 如果类型不匹配，Pydantic 会尝试智能转换
-• 如果无法转换，就会抛出 ，阻止错误数据进入你的程序
+- 如果类型不匹配，Pydantic 会尝试智能转换
+- 如果无法转换，就会抛出 ，阻止错误数据进入你的程序
+- 额外字段会被忽视
+
+**也就是使用这个库，可以实现无需手动转换数据类型，如字符串的日期“2025-01-01 12:00”  如果不用这个库，需要手动`datatime.strptime("2025-01-01 12:00", "%Y-%m-%d %H:%M")`**
 
 ## async/await
 
@@ -204,7 +214,7 @@ async def read_user(user_id: str):
 
 <span style="color: red">所以要养成固定路径放在动态路径前面的习惯</span>
 
-重复路径，会使用后面的路径，前面的不会使用。
+<span style="color: red">重复路径，会使用后面的路径，前面的不会使用。</span>
 
 ### 预设值
 
@@ -226,7 +236,7 @@ def get_model(model_name: ModelName):
     return {"model_name": model_name}
 ```
 
-这样 `/models/alexnet` 是合法的，而 `/models/unknown` 会返回 422 错误，因为它不在枚举值中。
+这样 `/models/alexnet` 是合法的，而 `/models/unknown` 会返回 422 错误，因为它不在枚举**值**中。<span style="color: red; font-family: 'kaiti'; font-size: 15.5px;">注意 访问时的`url`参数是值而不是成员名</span>
 
 API 文档会显示预定义*路径参数*的可用值
 
@@ -256,7 +266,7 @@ async def read_file(file_path: str):
 
 ## 查询参数
 
-当声明不属于路径参数的其他函数参数时，它们会被自动解释为“查询”参数。
+如果函数的参数不在路径参数内，它们会被自动解释为“查询”参数。
 
 ```python
 from fastapi import FastAPI
@@ -277,7 +287,7 @@ async def read_item(skip: int = 0, limit: int = 10):
 
 ### 默认值
 
-由于查询参数并非路劲的固定组成部分，因此它们可以是可选的，并且可以有默认值。，上面的代码中的默认参数便是默认值。
+由于查询参数并非路径的固定组成部分，因此它们可以是可选的，并且可以有默认值。，上面的代码中的默认参数便是默认值。
 
 ### 可选参数
 
@@ -334,5 +344,628 @@ app = FastAPI()
 async def read_user_item(item_id: str, needy: str):
     item = {"item_id": item_id, "needy": needy}
     return item
+```
+
+## 请求体
+
+函数的参数若不在路径中，则就是body的参数
+
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+
+class Item(BaseModel):
+    name: str
+    description: str | None = None   # 代表可选参数
+    price: float
+    tax: float | None = None  # 代表可选参数
+
+
+app = FastAPI()
+
+
+@app.post("/items/")
+async def create_item(item: Item):
+    return item
+```
+
+`BaseModel`对象提供dict方法，只需要.dict()调用
+
+### 请求体+路径参数
+
+FastAPI能够识别与路径匹配的函数参数以及请求体中的`Pydantic`类的函数参数
+
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+
+class Item(BaseModel):
+    name: str
+    description: str | None = None
+    price: float
+    tax: float | None = None
+
+
+app = FastAPI()
+
+
+@app.put("/items/{item_id}") 
+async def update_item(item_id: int, item: Item): # 第一个参数被识别为路径参数，第二个参数被识别为`Pydantic`参数
+    return {"item_id": item_id, **item.dict()}
+```
+
+### 请求体+路径参数+查询参数
+
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+
+class Item(BaseModel):
+    name: str
+    description: str | None = None
+    price: float
+    tax: float | None = None
+
+
+app = FastAPI()
+
+
+@app.put("/items/{item_id}")
+async def update_item(item_id: int, item: Item, q: str | None = None):
+    result = {"item_id": item_id, **item.dict()}
+    if q:
+        result.update({"q": q})
+    return result
+```
+
+## 查询参数和字符串校验
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+
+@app.get("/items/")
+async def read_items(q: str | None = None):
+    results = {"items": [{"item_id": "Foo"}, {"item_id": "Bar"}]}
+    if q:
+        results.update({"q": q})
+    return results
+```
+
+### 字符数约束
+
+在 FastAPI 中，**查询参数**（Query Parameters）是通过 URL `?key=value` 形式传递的参数。
+ `Query` 是 FastAPI 提供的一个**函数**，用于：
+
+- 显式声明某个参数是**查询参数**（即使有默认值）
+- 添加**验证规则**（长度、范围、正则等）
+- 添加**元数据**（描述、示例、别名等）
+- 让这些规则自动反映到 **OpenAPI 文档** 中
+
+```python
+from typing import Union
+
+from fastapi import FastAPI, Query
+
+app = FastAPI()
+
+
+@app.get("/items/")
+async def read_items(q: Union[str, None] = Query(default=None, max_length=50)):
+    results = {"items": [{"item_id": "Foo"}, {"item_id": "Bar"}]}
+    if q:
+        results.update({"q": q})
+    return results
+```
+
+也可以添加正则表达式,不符合正则的会报错
+
+```python
+from typing import Union
+
+from fastapi import FastAPI, Query
+
+app = FastAPI()
+
+
+@app.get("/items/")
+async def read_items(
+    q: Union[str, None] = Query(
+        default=None, min_length=3, max_length=50, pattern="^fixedquery$"
+    ),
+):
+    results = {"items": [{"item_id": "Foo"}, {"item_id": "Bar"}]}
+    if q:
+        results.update({"q": q})
+    return results
+```
+
+
+
+必要参数，但可以接收None
+
+```python
+from typing import Union
+
+from fastapi import FastAPI, Query
+
+app = FastAPI()
+
+
+@app.get("/items/")
+async def read_items(q: Union[str, None] = Query(min_length=3)):
+    results = {"items": [{"item_id": "Foo"}, {"item_id": "Bar"}]}
+    if q:
+        results.update({"q": q})
+    return results
+```
+
+### 多个查询参数
+
+```python
+from typing import List, Union
+
+from fastapi import FastAPI, Query
+
+app = FastAPI()
+
+
+@app.get("/items/")
+async def read_items(q: Union[List[str], None] = Query(default=None)):
+    query_items = {"q": q}
+    return query_items
+```
+
+然后地址栏输入`http://localhost:8000/items/?q=foo&q=bar`
+
+### 别名参数
+
+如果查询的参数带有python中的非法字符(-)，但又想使用时，可以使用别名参数。
+
+```python
+from typing import Union
+
+from fastapi import FastAPI, Query
+
+app = FastAPI()
+
+
+@app.get("/items/")
+async def read_items(q: Union[str, None] = Query(default=None, alias="item-query")):
+    results = {"items": [{"item_id": "Foo"}, {"item_id": "Bar"}]}
+    if q:
+        results.update({"q": q})
+    return results
+```
+
+对于外部来讲，参数名就不是`q`了，而是`item-query`
+
+### 参数弃用
+
+`Query`参数`deprecated=True,`将参数标记为弃用，仅作提醒，没有实际限制
+
+## 路径参数和数值校验
+
+路径参数的校验使用`Path`
+
+```python
+from typing import Annotated
+
+from fastapi import FastAPI, Path, Query
+
+app = FastAPI()
+
+
+@app.get("/items/{item_id}")
+async def read_items(
+    item_id: Annotated[int, Path(title="The ID of the item to get")],
+    q: Annotated[str | None, Query(alias="item-query")] = None,
+):
+    results = {"item_id": item_id}
+    if q:
+        results.update({"q": q})
+    return results
+```
+
+还可以数值约束，如`Path`的参数使用`ge`代表大于等于，`gt`代表大于，以及其他。
+
+## 查询参数模型
+
+使用`Pydantic`模型的参数
+
+```python
+from typing import Annotated, Literal
+
+from fastapi import FastAPI, Query
+from pydantic import BaseModel, Field
+
+app = FastAPI()
+
+
+class FilterParams(BaseModel):
+    limit: int = Field(100, gt=0, le=100)
+    offset: int = Field(0, ge=0)
+    order_by: Literal["created_at", "updated_at"] = "created_at"
+    tags: list[str] = []
+
+
+@app.get("/items/")
+async def read_items(filter_query: Annotated[FilterParams, Query()]): # 通过Annotated声明参数类型
+    return filter_query
+```
+
+### 禁止传入额外的参数
+
+```python
+from typing import Annotated, Literal
+
+from fastapi import FastAPI, Query
+from pydantic import BaseModel, Field
+
+app = FastAPI()
+
+
+class FilterParams(BaseModel):
+    model_config = {"extra": "forbid"}
+
+    limit: int = Field(100, gt=0, le=100)
+    offset: int = Field(0, ge=0)
+    order_by: Literal["created_at", "updated_at"] = "created_at"
+    tags: list[str] = []
+
+
+@app.get("/items/")
+async def read_items(filter_query: Annotated[FilterParams, Query()]):
+    return filter_query
+```
+
+## 请求体-多个参数
+
+### 多个查询参数
+
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+
+class Item(BaseModel):
+    name: str
+    description: str | None = None
+    price: float
+    tax: float | None = None
+
+
+class User(BaseModel):
+    username: str
+    full_name: str | None = None
+
+
+@app.put("/items/{item_id}")
+async def update_item(item_id: int, item: Item, user: User):
+    results = {"item_id": item_id, "item": item, "user": user}
+    return results
+```
+
+请求体应为：
+
+```json
+{
+    "item": {
+        "name": "Foo",
+        "description": "The pretender",
+        "price": 42.0,
+        "tax": 3.2
+    },
+    "user": {
+        "username": "dave",
+        "full_name": "Dave Grohl"
+    }
+}
+```
+
+可以使用`FastApi`的`Body`声明参数是请求体。
+
+默认情况下单一值被解释为查询参数，因此你不必显式地添加 `Query`
+
+### 同时存在查询参数和请求体
+
+```python
+from typing import Annotated
+
+from fastapi import Body, FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+
+class Item(BaseModel):
+    name: str
+    description: str | None = None
+    price: float
+    tax: float | None = None
+
+
+class User(BaseModel):
+    username: str
+    full_name: str | None = None
+
+
+@app.put("/items/{item_id}")
+async def update_item(
+    *,
+    item_id: int,
+    item: Item,
+    user: User,
+    importance: Annotated[int, Body(gt=0)],
+    q: str | None = None,
+):
+    results = {"item_id": item_id, "item": item, "user": user, "importance": importance}
+    if q:
+        results.update({"q": q})
+    return results
+```
+
+### 嵌入参数
+
+当使用`Pydantic`模型时，`FastAPI`期望客户端发送的是直接包含模型字段的内容。
+如，`Pydantic`定义的模型：
+
+```python
+class Item(BaseModel):
+    name: str
+    price: float
+    tax: float | None = None
+```
+
+服务端期望
+
+```json
+{
+  "name": "Foo",
+  "price": 42.0,
+  "tax": 3.2
+}
+```
+
+如果期望使用嵌套类型（这里的`item`是参数名）：
+
+```json
+{
+  "item": {
+    "name": "Foo",
+    "price": 42.0,
+    "tax": 3.2
+  }
+}
+```
+
+那么需要对请求体使用`Body(..., embed=True)`，这样 `FastAPI` 就会正确解析嵌套在 `item` 键中的模型内容。
+
+## 请求体-字段
+
+与在*路径操作函数*中使用 `Query`、`Path` 、`Body` 声明校验与元数据的方式一样，可以使用 Pydantic 的 `Field` 在 Pydantic 模型内部声明校验和元数据。
+
+与`Query`、`Path`、`Body`不同，`Field`从`pydantic`导入。
+
+```python
+from typing import Annotated
+
+from fastapi import Body, FastAPI
+from pydantic import BaseModel, Field
+
+app = FastAPI()
+
+
+class Item(BaseModel):
+    name: str
+    description: str | None = Field(
+        default=None, title="The description of the item", max_length=300
+    )
+    price: float = Field(gt=0, description="The price must be greater than zero")
+    tax: float | None = None
+
+
+@app.put("/items/{item_id}")
+async def update_item(item_id: int, item: Annotated[Item, Body(embed=True)]):
+    results = {"item_id": item_id, "item": item}
+    return results
+```
+
+## 请求体-嵌套模型
+
+### List 字段
+
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+
+class Item(BaseModel):
+    name: str
+    description: str | None = None
+    price: float
+    tax: float | None = None
+    tags: list = []
+
+
+@app.put("/items/{item_id}")
+async def update_item(item_id: int, item: Item):
+    results = {"item_id": item_id, "item": item}
+    return results
+```
+
+### 具有子类型的`List`字段
+
+```python
+from typing import List, Union
+
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+
+class Item(BaseModel):
+    name: str
+    description: Union[str, None] = None
+    price: float
+    tax: Union[float, None] = None
+    tags: List[str] = []
+
+
+@app.put("/items/{item_id}")
+async def update_item(item_id: int, item: Item):
+    results = {"item_id": item_id, "item": item}
+    return results
+```
+
+### Set类型
+
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+
+class Item(BaseModel):
+    name: str
+    description: str | None = None
+    price: float
+    tax: float | None = None
+    tags: set[str] = set()
+
+
+@app.put("/items/{item_id}")
+async def update_item(item_id: int, item: Item):
+    results = {"item_id": item_id, "item": item}
+    return results
+```
+
+Pydantic 模型的每个属性都具有类型。
+
+## Pydantic 的额外信息
+
+### 通过`BaseMode`配置额外信息
+
+给模型的 **JSON Schema** 添加额外信息（尤其是示例数据 `example` / `examples`），让它在自动生成的 API 文档（Swagger UI）里更直观地展示。
+
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+
+class Item(BaseModel):
+    name: str
+    description: str | None = None
+    price: float
+    tax: float | None = None
+
+    model_config = {
+        "json_schema_extra": {
+            "examples": [
+                {
+                    "name": "Foo",
+                    "description": "A very nice Item",
+                    "price": 35.4,
+                    "tax": 3.2,
+                }
+            ]
+        }
+    }
+
+
+@app.put("/items/{item_id}")
+async def update_item(item_id: int, item: Item):
+    results = {"item_id": item_id, "item": item}
+    return results
+```
+
+![image-20250916170750753](./typora_resource/python%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6-fastapi/image-20250916170750753.png)![image-20250916170801517](./typora_resource/python%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6-fastapi/image-20250916170801517.png)
+
+### `Field`附加参数
+
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel, Field
+
+app = FastAPI()
+
+
+class Item(BaseModel):
+    name: str = Field(examples=["Foo"])
+    description: str | None = Field(default=None, examples=["A very nice Item"])
+    price: float = Field(examples=[35.4])
+    tax: float | None = Field(default=None, examples=[3.2])
+
+
+@app.put("/items/{item_id}")
+async def update_item(item_id: int, item: Item):
+    results = {"item_id": item_id, "item": item}
+    return results
+```
+
+```python
+class FieldExtraItem(BaseModel):
+    name: str = Field(title="The name of the item", examples=["MR.SHEN"])
+    description: str | None = Field(
+        title="The description of the item", examples=["A very nice Item"]
+    )
+    price: float
+    tax: float | None = None
+```
+
+
+
+![image-20250916171402226](./typora_resource/python%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6-fastapi/image-20250916171402226.png)
+
+### `Body`额外参数
+
+```python
+from typing import Annotated
+
+from fastapi import Body, FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+
+class Item(BaseModel):
+    name: str
+    description: str | None = None
+    price: float
+    tax: float | None = None
+
+
+@app.put("/items/{item_id}")
+async def update_item(
+    item_id: int,
+    item: Annotated[
+        Item,
+        Body(
+            examples=[
+                {
+                    "name": "Foo",
+                    "description": "A very nice Item",
+                    "price": 35.4,
+                    "tax": 3.2,
+                }
+            ],
+        ),
+    ],
+):
+    results = {"item_id": item_id, "item": item}
+    return results
 ```
 
