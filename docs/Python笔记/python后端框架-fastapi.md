@@ -969,3 +969,383 @@ async def update_item(
     return results
 ```
 
+## 额外数据类型
+
+常用：
+
+- `int`
+- `float`
+- `str`
+- `bool`
+
+更复杂的数据类型：
+
+- `UUID`:
+  - 一种标准的 "通用唯一标识符" ，在许多数据库和系统中用作ID。
+  - 在请求和响应中将以 `str` 表示。
+- `datetime.datetime`:
+  - 一个 Python `datetime.datetime`.
+  - 在请求和响应中将表示为 ISO 8601 格式的 `str` ，比如: `2008-09-15T15:53:00+05:00`.
+- `datetime.date`:
+  - Python `datetime.date`.
+  - 在请求和响应中将表示为 ISO 8601 格式的 `str` ，比如: `2008-09-15`.
+- `datetime.time`:
+  - 一个 Python `datetime.time`.
+  - 在请求和响应中将表示为 ISO 8601 格式的 `str` ，比如: `14:23:55.003`.
+- `datetime.timedelta`:
+  - 一个 Python `datetime.timedelta`.
+  - 在请求和响应中将表示为 `float` 代表总秒数。
+  - Pydantic 也允许将其表示为 "ISO 8601 时间差异编码", [查看文档了解更多信息](https://docs.pydantic.dev/latest/concepts/serialization/#json_encoders)。
+- `frozenset`:
+  - 在请求和响应中，作为 `set` 对待：
+    - 在请求中，列表将被读取，消除重复，并将其转换为一个 `set`。
+    - 在响应中 `set` 将被转换为 `list` 。
+    - 产生的模式将指定那些 `set` 的值是唯一的 (使用 JSON 模式的 `uniqueItems`)。
+- `bytes`:
+  - 标准的 Python `bytes`。
+  - 在请求和响应中被当作 `str` 处理。
+  - 生成的模式将指定这个 `str` 是 `binary` "格式"。
+- `Decimal`:
+  - 标准的 Python `Decimal`。
+  - 在请求和响应中被当做 `float` 一样处理。
+
+```python
+from datetime import datetime, time, timedelta
+from typing import Annotated
+from uuid import UUID
+
+from fastapi import Body, FastAPI
+
+app = FastAPI()
+
+
+@app.put("/items/{item_id}")
+async def read_items(
+    item_id: UUID,
+    start_datetime: Annotated[datetime, Body()],
+    end_datetime: Annotated[datetime, Body()],
+    process_after: Annotated[timedelta, Body()],
+    repeat_at: Annotated[time | None, Body()] = None,
+):
+    start_process = start_datetime + process_after
+    duration = end_datetime - start_process
+    return {
+        "item_id": item_id,
+        "start_datetime": start_datetime,
+        "end_datetime": end_datetime,
+        "process_after": process_after,
+        "repeat_at": repeat_at,
+        "start_process": start_process,
+        "duration": duration,
+    }
+```
+
+## Cookie 参数
+
+### 查看cookie
+
+```python
+from typing import Annotated
+
+from fastapi import Cookie, FastAPI
+
+app = FastAPI()
+
+
+@app.get("/items/")
+async def read_items(ads_id: Annotated[str | None, Cookie()] = None):
+    return {"ads_id": ads_id}  # 这回返回前端传的cookie值
+```
+
+## Header 参数
+
+```python
+from typing import Annotated
+
+from fastapi import FastAPI, Header
+
+app = FastAPI()
+
+
+@app.get("/items/")
+async def read_items(user_agent: Annotated[str | None, Header()] = None):
+    return {"User-Agent": user_agent}
+```
+
+大部分请求头用连字符`-`分割，但是python中这是属于违法变量，所以`Header`会将`-`转换为`_`。同时`HTTP`请求头不区分大小写。如需要禁用下划线自动转换为连字符，可以把 `Header` 的 `convert_underscores` 参数设置为 `False`
+
+**重复的请求头**
+
+使用 Python `list` 可以接收重复请求头所有的值。
+
+```python
+from typing import Annotated
+
+from fastapi import FastAPI, Header
+
+app = FastAPI()
+
+
+@app.get("/items/")
+async def read_items(x_token: Annotated[list[str] | None, Header()] = None):
+    return {"X-Token values": x_token}
+```
+
+## Cookie 参数模型
+
+**用一个 Pydantic 模型统一声明并验证一组相关的 Cookie，从而在多个接口中复用**
+
+```python
+from typing import Annotated
+
+from fastapi import Cookie, FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+
+class Cookies(BaseModel):
+    session_id: str
+    fatebook_tracker: str | None = None
+    googall_tracker: str | None = None
+
+
+@app.get("/items/")
+async def read_items(cookies: Annotated[Cookies, Cookie()]):
+    return cookies
+```
+
+![image-20250918135109194](./typora_resource/python%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6-fastapi/image-20250918135109194.png)
+
+**禁止接收额外的cookie**
+
+```python
+from typing import Annotated, Union
+
+from fastapi import Cookie, FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+
+class Cookies(BaseModel):
+    model_config = {"extra": "forbid"}
+
+    session_id: str
+    fatebook_tracker: Union[str, None] = None
+    googall_tracker: Union[str, None] = None
+
+
+@app.get("/items/")
+async def read_items(cookies: Annotated[Cookies, Cookie()]):
+    return cookies
+```
+
+## Header 参数模型
+
+```python
+from typing import Annotated
+
+from fastapi import FastAPI, Header
+from pydantic import BaseModel
+
+app = FastAPI()
+
+
+class CommonHeaders(BaseModel):
+    host: str
+    save_data: bool
+    if_modified_since: str | None = None
+    traceparent: str | None = None
+    x_tag: list[str] = []
+
+
+@app.get("/items/")
+async def read_items(headers: Annotated[CommonHeaders, Header()]):
+    return headers
+```
+
+## 响应模型
+
+适用于各种类型的路径操作
+
+### 常规操作
+
+```python
+from typing import Any
+
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+
+class Item(BaseModel):
+    name: str
+    description: str | None = None
+    price: float
+    tax: float | None = None
+    tags: list[str] = []
+
+
+@app.post("/items/", response_model=Item)
+async def create_item(item: Item) -> Any:
+    return item
+
+
+@app.get("/items/", response_model=list[Item])
+async def read_items() -> Any:
+    return [
+        {"name": "Portal Gun", "price": 42.0},
+        {"name": "Plumbus", "price": 32.0},
+    ]
+```
+
+<span style="color: red">注意，`response_model`是「装饰器」方法（`get`，`post` 等）的一个参数。不像之前的所有参数和请求体，它不属于*路径操作函数*。</span>
+
+### 返回与输入内容相同
+
+```python
+from typing import Union
+
+from fastapi import FastAPI
+from pydantic import BaseModel, EmailStr
+
+app = FastAPI()
+
+
+class UserIn(BaseModel):
+    username: str
+    password: str
+    email: EmailStr
+    full_name: Union[str, None] = None
+
+
+# Don't do this in production!
+@app.post("/user/")
+async def create_user(user: UserIn) -> UserIn:
+    return user
+```
+
+现在，每当浏览器使用一个密码创建用户时，API 都会在响应中返回相同的密码。
+
+在这个案例中，这可能不算是问题，因为用户自己正在发送密码。
+
+但是，如果我们在其他的*路径操作*中使用相同的模型，则可能会将用户的密码发送给每个客户端。
+
+### 添加输出模型
+
+以创建一个有明文密码的输入模型和一个没有明文密码的输出模型：
+
+```python
+from typing import Any
+
+from fastapi import FastAPI
+from pydantic import BaseModel, EmailStr
+
+app = FastAPI()
+
+
+class UserIn(BaseModel):
+    username: str
+    password: str
+    email: EmailStr
+    full_name: str | None = None
+
+
+class UserOut(BaseModel):
+    username: str
+    email: EmailStr
+    full_name: str | None = None
+
+
+@app.post("/user/", response_model=UserOut)
+async def create_user(user: UserIn) -> Any:
+    return user
+```
+
+![img](https://fastapi.tiangolo.com/img/tutorial/response-model/image01.png)
+
+![img](https://fastapi.tiangolo.com/img/tutorial/response-model/image02.png)
+
+### 响应模型编码参数
+
+响应模型可以具有默认值：
+
+```python
+from typing import List, Union
+
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+
+class Item(BaseModel):
+    name: str
+    description: Union[str, None] = None
+    price: float
+    tax: float = 10.5
+    tags: List[str] = []
+
+
+items = {
+    "foo": {"name": "Foo", "price": 50.2},
+    "bar": {"name": "Bar", "description": "The bartenders", "price": 62, "tax": 20.2},
+    "baz": {"name": "Baz", "description": None, "price": 50.2, "tax": 10.5, "tags": []},
+}
+
+
+@app.get("/items/{item_id}", response_model=Item, response_model_exclude_unset=True)
+async def read_item(item_id: str):
+    return items[item_id]
+```
+
+上面代码，如果前端请请求的是`foo`路径，则会返回{"name": "Foo", "price": 50.2}， `bar`返回{"name": "Bar", "description": "The bartenders", "price": 62, "tax": 20.2}
+
+其中`response_model_exclude_unset`是过滤掉默认值的参数
+
+如没有`response_model_exclude_unset`，前端请求`foo`则会返回`{  "name": "Foo",  "description": null,  "price": 50.2,  "tax": 10.5,  "tags": [] }`
+
+即使用模型内部的默认值。
+
+**`response_model_include`的作用是只返回指定值**
+
+```python
+from typing import Union, List
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+class Item(BaseModel):
+    name: str
+    description: Union[str, None] = None
+    price: float
+    tax: float = 10.5
+    tags: List[str] = []
+    
+@app.get(
+    "/items/{item_id}",
+    response_model=Item,
+    response_model_include={"name", "price"}
+)
+async def read_item(item_id: str):
+    return {
+        "name": "Foo",
+        "description": "A very nice item",
+        "price": 50.2,
+        "tax": 20.2,
+        "tags": ["x", "y"]
+    }
+```
+
+返回：
+
+```json
+{
+  "name": "Foo",
+  "price": 50.2
+}
+```
+
