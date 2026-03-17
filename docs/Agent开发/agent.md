@@ -169,4 +169,4 @@ flowchart TB
 - **<span style="color:red;">架构选择</span>**：快速验证用 ReAct；要稳定、可维护选 MCP；多角色协作考虑 A2A。
 - **<span style="color:red;">入门路径</span>**：从「单目标 + 单工具 + 最小 ReAct 循环」开始，再逐步加记忆、多工具和多 Agent。
 
-后续可以在此基础上继续学习：[LangChain 与同类框架详解](../agent-langchain-and-frameworks)、Prompt 设计、[RAG 技术（检索增强生成）](../agent-rag)、以及 Memory / Reflection 的进阶用法。
+后续可以在此基础上继续学习：[LangChain 与同类框架详解](../agent-langchain-and-frameworks)、[LangChain 使用指南](../langchain-usage-guide)、Prompt 设计、[RAG 技术（检索增强生成）](../agent-rag)、以及 Memory / Reflection 的进阶用法。

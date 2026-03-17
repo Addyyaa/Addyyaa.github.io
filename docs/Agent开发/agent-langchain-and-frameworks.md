@@ -1,6 +1,7 @@
 # LangChain 与同类框架详解
 
-> 本文讲解 **LangChain** 及其核心概念，并对比 **LangGraph、LlamaIndex、AutoGen、CrewAI** 等同类框架的定位与适用场景，帮助你在做 [Agent](../agent) 或 RAG 时选型与上手。
+> 本文讲解 **LangChain** 及其核心概念，并对比 **LangGraph、LlamaIndex、AutoGen、CrewAI** 等同类框架的定位与适用场景，帮助你在做 [Agent](../agent) 或 RAG 时选型与上手。  
+> **动手实操**：安装、创建 Agent、工具、流式与调试步骤见 [LangChain 使用指南](../langchain-usage-guide)。
 
 ---
 
