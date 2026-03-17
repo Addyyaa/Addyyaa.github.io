@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="zh-Hans" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-Agent开发/agent-langchain-and-frameworks" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.8.1">
+<title data-rh="true">LangChain 与同类框架详解 | AddyNotes</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://Addyyaa.github.io/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://Addyyaa.github.io/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://Addyyaa.github.io/docs/Agent开发/agent-langchain-and-frameworks/"><meta data-rh="true" property="og:locale" content="zh_Hans"><meta data-rh="true" name="docusaurus_locale" content="zh-Hans"><meta data-rh="true" name="docsearch:language" content="zh-Hans"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="LangChain 与同类框架详解 | AddyNotes"><meta data-rh="true" name="description" content="本文讲解 LangChain 及其核心概念，并对比 LangGraph、LlamaIndex、AutoGen、CrewAI 等同类框架的定位与适用场景，帮助你在做 Agent 或 RAG 时选型与上手。"><meta data-rh="true" property="og:description" content="本文讲解 LangChain 及其核心概念，并对比 LangGraph、LlamaIndex、AutoGen、CrewAI 等同类框架的定位与适用场景，帮助你在做 Agent 或 RAG 时选型与上手。"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://Addyyaa.github.io/docs/Agent开发/agent-langchain-and-frameworks/"><link data-rh="true" rel="alternate" href="https://Addyyaa.github.io/docs/Agent开发/agent-langchain-and-frameworks/" hreflang="zh-Hans"><link data-rh="true" rel="alternate" href="https://Addyyaa.github.io/docs/Agent开发/agent-langchain-and-frameworks/" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"LangChain 与同类框架详解","item":"https://Addyyaa.github.io/docs/Agent开发/agent-langchain-and-frameworks"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="AddyNotes RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="AddyNotes Atom Feed"><link rel="stylesheet" href="/assets/css/styles.91ab18af.css">
+<script src="/assets/js/runtime~main.96cd7d1a.js" defer="defer"></script>
+<script src="/assets/js/main.4d9a6052.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t="light";var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",e||t),document.documentElement.setAttribute("data-theme-choice",e||t)}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/logo.svg"><div role="region" aria-label="跳到主要内容"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">跳到主要内容</a></div><nav aria-label="主导航" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="切换导航栏" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.svg" alt="AddyNotes Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.svg" alt="AddyNotes Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">AddyNotes</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/docs/category/tutorial---basics/">文档</a><a class="navbar__item navbar__link" href="/blog/">博客</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/Addyyaa/Addyyaa.github.io" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="切换浅色/暗黑模式（当前为system mode）"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="回到顶部" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="文档侧边栏" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/docs/category/tutorial---basics/">Tutorial - Basics</a><button aria-label="展开侧边栏分类 &#x27;Tutorial - Basics&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/docs/category/tutorial---extras/">Tutorial - Extras</a><button aria-label="展开侧边栏分类 &#x27;Tutorial - Extras&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/AI/协同过滤/">AI</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/docs/Agent开发/agent-a2a-arch/">Agent开发</a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Agent开发/agent-a2a-arch/">agent-a2a-arch</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Agent开发/agent-core-modules/">agent-core-modules</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/Agent开发/agent-langchain-and-frameworks/">LangChain 与同类框架详解</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Agent开发/agent-mcp-arch/">agent-mcp-arch</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Agent开发/agent-minimal-react-demo/">agent-minimal-react-demo</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Agent开发/agent-rag/">RAG 技术：检索增强生成</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Agent开发/agent-react-arch/">agent-react-arch</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Agent开发/agent/">AI Agent 入门笔记</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Agent开发/long-term-memory/">长期记忆实现原理</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/PyQT学习笔记/PyQt6 学习笔记/">PyQT学习笔记</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/pyqt/matplotlib/">Python笔记</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/Youtube视频下载/youtubeDownload/">Youtube视频下载</a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/docs/intro/">intro</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/产品调研/塔罗牌调研/">产品调研</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/前端学习笔记/前端工程化学习路径/">前端学习笔记</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/自动化心得/部分元素定位不到/">自动化心得</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/语言学习/日语学习/">语言学习</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/面试复习笔记（主python、自动化）/面试准备资料/">面试复习笔记（主python、自动化）</a></div></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="页面路径"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="主页面" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">Agent开发</span></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">LangChain 与同类框架详解</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">本页总览</button></div><div class="theme-doc-markdown markdown"><header><h1>LangChain 与同类框架详解</h1></header>
+<blockquote>
+<p>本文讲解 <strong>LangChain</strong> 及其核心概念，并对比 <strong>LangGraph、LlamaIndex、AutoGen、CrewAI</strong> 等同类框架的定位与适用场景，帮助你在做 <a href="/docs/Agent开发/agent/">Agent</a> 或 RAG 时选型与上手。</p>
+</blockquote>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="一langchain-是什么">一、LangChain 是什么？<a href="#一langchain-是什么" class="hash-link" aria-label="一、LangChain 是什么？的直接链接" title="一、LangChain 是什么？的直接链接">​</a></h2>
+<p><strong>LangChain</strong> 是一个用于构建「大模型应用」的<strong>编排框架</strong>（orchestration framework），而不是某个具体的大模型或某个固定形态的 Agent。</p>
+<p>它提供：</p>
+<ul>
+<li><strong>统一抽象</strong>：把 LLM 调用、Prompt 管理、工具、记忆、链式调用等拆成可组合的组件。</li>
+<li><strong>现成集成</strong>：对接 OpenAI、Anthropic、通义、DeepSeek、本地模型等，以及向量库、文档加载器、检索器等。</li>
+<li><strong>可编程流水线</strong>：用「链（Chain）」或「图（LangGraph）」把多步逻辑串起来，方便实现 ReAct、RAG、多 Agent 等模式。</li>
+</ul>
+<p>因此，<a href="/docs/Agent开发/agent/">Agent 总览</a> 里提到的「大脑、记忆、规划、工具、反思」在 LangChain 里都有对应组件，你可以用 LangChain <strong>实现</strong>这些模块，而不是「LangChain = Agent」。</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="二langchain-核心概念">二、LangChain 核心概念<a href="#二langchain-核心概念" class="hash-link" aria-label="二、LangChain 核心概念的直接链接" title="二、LangChain 核心概念的直接链接">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="1-模型封装models">1. 模型封装（Models）<a href="#1-模型封装models" class="hash-link" aria-label="1. 模型封装（Models）的直接链接" title="1. 模型封装（Models）的直接链接">​</a></h3>
+<p>把不同厂商/开源模型统一成同一套接口，方便切换。</p>
+<ul>
+<li><strong>LLM</strong>：纯文本进、文本出（如 <code>ChatOpenAI</code>、<code>ChatAnthropic</code>）。</li>
+<li><strong>Chat Model</strong>：支持 <code>system / user / assistant</code> 消息列表，是当前做 Agent 和对话的主流。</li>
+<li><strong>Embeddings</strong>：文本 → 向量，用于 <a href="/docs/Agent开发/long-term-memory/">长期记忆</a> 或 <a href="/docs/Agent开发/agent-rag/">RAG</a>。</li>
+</ul>
+<div class="language-python codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-python codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"># 概念示例（非完整可运行）</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">from</span><span class="token plain"> langchain_openai </span><span class="token keyword" style="color:#00009f">import</span><span class="token plain"> ChatOpenAI</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">llm </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> ChatOpenAI</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">model</span><span class="token operator" style="color:#393A34">=</span><span class="token string" style="color:#e3116c">&quot;gpt-4o-mini&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> temperature</span><span class="token operator" style="color:#393A34">=</span><span class="token number" style="color:#36acaa">0</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="2-prompt-与模板prompts">2. Prompt 与模板（Prompts）<a href="#2-prompt-与模板prompts" class="hash-link" aria-label="2. Prompt 与模板（Prompts）的直接链接" title="2. Prompt 与模板（Prompts）的直接链接">​</a></h3>
+<p>把「系统说明 + 用户输入 + 占位符」做成可复用模板，避免在代码里拼字符串。</p>
+<ul>
+<li><strong>PromptTemplate</strong>：<code>&quot;你是一个{role}，用户说：{input}&quot;</code>，运行时填入变量。</li>
+<li><strong>ChatPromptTemplate</strong>：多消息角色（system / user / assistant），与 Chat Model 配套。</li>
+<li><strong>Few-shot</strong>：在模板里塞进示例，做小样本引导。</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="3-输出解析output-parsers">3. 输出解析（Output Parsers）<a href="#3-输出解析output-parsers" class="hash-link" aria-label="3. 输出解析（Output Parsers）的直接链接" title="3. 输出解析（Output Parsers）的直接链接">​</a></h3>
+<p>把 LLM 的自由文本输出转成结构化数据（JSON、列表、自定义类），方便后续逻辑和 <a href="/docs/Agent开发/agent-react-arch/">ReAct</a> 的「下一步动作」解析。</p>
+<ul>
+<li><strong>PydanticOutputParser</strong>：要求 LLM 按指定 JSON Schema 输出，再反序列化成 Pydantic 模型。</li>
+<li><strong>StructuredOutputParser</strong>、<strong>JsonOutputParser</strong> 等：不同格式与校验方式。</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="4-链chains">4. 链（Chains）<a href="#4-链chains" class="hash-link" aria-label="4. 链（Chains）的直接链接" title="4. 链（Chains）的直接链接">​</a></h3>
+<p>把「多个步骤」串成一条流水线：例如「Prompt → LLM → Parser」或「检索 → Prompt → LLM」。</p>
+<ul>
+<li><strong>LCEL（LangChain Expression Language）</strong>：用 <code>|</code> 管道符组合组件，例如 <code>prompt | llm | parser</code>，支持流式、批量、异步。</li>
+<li><strong>Chain</strong> 的旧式写法：<code>LLMChain</code>、<code>SequentialChain</code> 等，逐渐被 LCEL 取代。</li>
+</ul>
+<p>链适合<strong>步骤固定</strong>的流程；若需要「根据结果再决定下一步」（即 <a href="/docs/Agent开发/agent-react-arch/">ReAct</a> 循环），一般用 <strong>Agent</strong> 或 <strong>LangGraph</strong>。</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="5-记忆memory">5. 记忆（Memory）<a href="#5-记忆memory" class="hash-link" aria-label="5. 记忆（Memory）的直接链接" title="5. 记忆（Memory）的直接链接">​</a></h3>
+<p>对应 <a href="/docs/Agent开发/agent-core-modules/">五大核心模块</a> 里的 Memory。</p>
+<ul>
+<li><strong>短期</strong>：<code>ConversationBufferMemory</code>、<code>ConversationBufferWindowMemory</code>（只保留最近 N 轮）。</li>
+<li><strong>摘要</strong>：<code>ConversationSummaryBufferMemory</code>，用 LLM 把历史压成摘要以省上下文。</li>
+<li><strong>与向量库结合</strong>：可用 <code>VectorStoreRetriever</code> 做长期记忆或 RAG，和 <a href="/docs/Agent开发/long-term-memory/">长期记忆实现原理</a> 一致。</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="6-工具tools">6. 工具（Tools）<a href="#6-工具tools" class="hash-link" aria-label="6. 工具（Tools）的直接链接" title="6. 工具（Tools）的直接链接">​</a></h3>
+<p>对应 <a href="/docs/Agent开发/agent-core-modules/">五大核心模块</a> 里的 Tool-use：给 Agent「手脚」。</p>
+<ul>
+<li><strong>Tool</strong>：一个「名称 + 描述 + 函数」，描述会进 Prompt，让 LLM 决定是否调用。</li>
+<li><strong>Toolkit</strong>：一组相关 Tool 的集合。</li>
+<li><strong>绑定到模型</strong>：通过 <code>bind_tools()</code> 或 <code>with_structured_output()</code> 让 Chat Model 支持 Function Calling / Tool Calling。</li>
+</ul>
+<p>Agent 在每轮推理时选择要调用的 Tool，执行后把结果塞回上下文，形成 <a href="/docs/Agent开发/agent-react-arch/">ReAct</a> 式的「推理 → 行动 → 观察」循环。</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="7-agent-与-agentexecutor">7. Agent 与 AgentExecutor<a href="#7-agent-与-agentexecutor" class="hash-link" aria-label="7. Agent 与 AgentExecutor的直接链接" title="7. Agent 与 AgentExecutor的直接链接">​</a></h3>
+<ul>
+<li><strong>Agent</strong>：负责根据当前上下文<strong>决定下一步</strong>（调用哪个工具、传什么参数，或直接回答）。</li>
+<li><strong>AgentExecutor</strong>：负责<strong>循环</strong>：调用 Agent → 若选工具则执行 → 把结果写回 → 再调 Agent，直到 Agent 输出最终答案或达到步数上限。</li>
+</ul>
+<p>内置 Agent 类型包括 <strong>ReAct</strong>、<strong>Tool Calling</strong>、<strong>OpenAI Functions</strong> 等，本质都是「LLM + 工具列表 + 解析下一步」的组合，对应 <a href="/docs/Agent开发/agent-react-arch/">ReAct 架构</a> 的工程实现。</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="三langgraph有状态可循环的图">三、LangGraph：有状态、可循环的图<a href="#三langgraph有状态可循环的图" class="hash-link" aria-label="三、LangGraph：有状态、可循环的图的直接链接" title="三、LangGraph：有状态、可循环的图的直接链接">​</a></h2>
+<p><strong>LangGraph</strong> 是 LangChain 生态里专门做「<strong>有状态、多步、可分支/循环</strong>」的扩展，适合复杂流程和 <a href="/docs/Agent开发/agent-mcp-arch/">MCP</a> 式的控制流。</p>
+<p>与「链」的区别：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>维度</th><th>Chain（LCEL）</th><th>LangGraph</th></tr></thead><tbody><tr><td><strong>结构</strong></td><td>线性管道 A→B→C</td><td>图：节点 + 边，可分支、循环</td></tr><tr><td><strong>状态</strong></td><td>每步输入输出，无全局状态</td><td>有<strong>状态对象</strong>在节点间传递、可更新</td></tr><tr><td><strong>适用</strong></td><td>固定步骤的 RAG、简单问答</td><td>多步推理、ReAct、多 Agent、人工介入节点</td></tr></tbody></table>
+<p>核心概念：</p>
+<ul>
+<li><strong>State</strong>：在图里流转的数据结构（如当前消息列表、已调用的工具结果、当前节点名）。</li>
+<li><strong>Node</strong>：一个函数，接收状态、返回状态更新（或下一跳）。</li>
+<li><strong>Edge</strong>：节点之间的转移；可以是固定边，也可以是<strong>由节点返回值决定的动态边</strong>（例如「若需要调工具则跳到 tool 节点，否则跳到 end」）。</li>
+</ul>
+<p>这样就能显式实现「规划 → 执行工具 → 观察 → 再规划」的循环，以及 <a href="/docs/Agent开发/agent-a2a-arch/">A2A</a> 中的多 Agent 路由。
+在 <a href="/docs/Agent开发/agent/">总览</a> 里提到的「LangGraph 的调度器」就是指用图来驱动 Planner / Controller 的调度逻辑。</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="四同类框架与概念对比">四、同类框架与概念对比<a href="#四同类框架与概念对比" class="hash-link" aria-label="四、同类框架与概念对比的直接链接" title="四、同类框架与概念对比的直接链接">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="1-llamaindex原-gpt-index">1. LlamaIndex（原 GPT Index）<a href="#1-llamaindex原-gpt-index" class="hash-link" aria-label="1. LlamaIndex（原 GPT Index）的直接链接" title="1. LlamaIndex（原 GPT Index）的直接链接">​</a></h3>
+<ul>
+<li><strong>侧重</strong>：<strong>数据层 + 检索</strong>，主打「把私有数据接到 LLM」：文档加载、解析、分块、建索引、检索、与 LLM 的查询流程。</li>
+<li><strong>与 LangChain 的关系</strong>：LangChain 偏「编排与 Agent」；LlamaIndex 偏「数据管道与 RAG」。两者可一起用：用 LlamaIndex 做索引与检索，用 LangChain 做链/Agent 和工具。</li>
+<li><strong>适用</strong>：文档问答、知识库 RAG、多数据源索引。对应本系列中的 <a href="/docs/Agent开发/agent-rag/">RAG 技术</a> 与 <a href="/docs/Agent开发/long-term-memory/">长期记忆</a> 的数据侧。</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="2-autogenmicrosoft">2. AutoGen（Microsoft）<a href="#2-autogenmicrosoft" class="hash-link" aria-label="2. AutoGen（Microsoft）的直接链接" title="2. AutoGen（Microsoft）的直接链接">​</a></h3>
+<ul>
+<li><strong>侧重</strong>：<strong>多 Agent 对话与协作</strong>，Agent 之间通过对话（消息）完成任务。</li>
+<li><strong>特点</strong>：支持人类参与（Human-in-the-loop）、代码执行、群聊式多 Agent。</li>
+<li><strong>与 LangChain 的关系</strong>：LangChain 单 Agent 或需自己用 LangGraph 拼多 Agent；AutoGen 直接提供多 Agent 会话抽象。</li>
+<li><strong>适用</strong>：需要多个角色（如分析师 + 写手 + 审核）协作的场景，对应 <a href="/docs/Agent开发/agent-a2a-arch/">A2A 架构</a>。</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="3-crewai">3. CrewAI<a href="#3-crewai" class="hash-link" aria-label="3. CrewAI的直接链接" title="3. CrewAI的直接链接">​</a></h3>
+<ul>
+<li><strong>侧重</strong>：<strong>角色化多 Agent + 任务编排</strong>，每个 Agent 有角色、目标、背景，任务以 DAG 形式分解。</li>
+<li><strong>特点</strong>：强调「角色—任务」建模，适合剧本式的多角色协作（如研究员 + 写手 + 审稿人）。</li>
+<li><strong>与 LangChain 的关系</strong>：可底层用 LangChain 的 LLM/Tool；上层提供更高阶的 Crew/Task 抽象。</li>
+<li><strong>适用</strong>：内容生产、调研报告、需要明确分工的多 Agent 项目，也是 <a href="/docs/Agent开发/agent-a2a-arch/">A2A</a> 的一种实现方式。</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="4-haystackdeepset">4. Haystack（deepset）<a href="#4-haystackdeepset" class="hash-link" aria-label="4. Haystack（deepset）的直接链接" title="4. Haystack（deepset）的直接链接">​</a></h3>
+<ul>
+<li><strong>侧重</strong>：<strong>检索与 NLP 流水线</strong>（检索、阅读、生成、路由等），偏「管道 + 组件」而非「Agent 循环」。</li>
+<li><strong>与 LangChain 的关系</strong>：更偏检索/RAG 流水线；Agent 与复杂控制流一般用 LangChain/LangGraph。</li>
+<li><strong>适用</strong>：搜索增强、文档 QA、需要精细控制检索与阅读器的场景。</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="5-semantic-kernelmicrosoft">5. Semantic Kernel（Microsoft）<a href="#5-semantic-kernelmicrosoft" class="hash-link" aria-label="5. Semantic Kernel（Microsoft）的直接链接" title="5. Semantic Kernel（Microsoft）的直接链接">​</a></h3>
+<ul>
+<li><strong>侧重</strong>：<strong>插件（Plugins）、规划（Planner）、记忆</strong>，与 LangChain 的 Tool / Agent / Memory 概念类似，但用 C# / Python 的「Kernel + Plugin」模型组织。</li>
+<li><strong>适用</strong>：微软技术栈、企业内已有 SK 投入的团队；与 LangChain 二选一或按生态选型。</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="五框架选型简表">五、框架选型简表<a href="#五框架选型简表" class="hash-link" aria-label="五、框架选型简表的直接链接" title="五、框架选型简表的直接链接">​</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>需求</th><th>更合适的框架/组合</th></tr></thead><tbody><tr><td>快速接 LLM + 简单链式调用 / RAG</td><td><strong>LangChain</strong>（LCEL + 内置 RAG）</td></tr><tr><td>单 Agent + 工具调用（ReAct）</td><td><strong>LangChain</strong>（Agent + AgentExecutor）或 <strong>LangGraph</strong></td></tr><tr><td>复杂状态、循环、分支、人工介入</td><td><strong>LangGraph</strong></td></tr><tr><td>多 Agent 协作、角色对话</td><td><strong>AutoGen</strong>、<strong>CrewAI</strong>，或 <strong>LangGraph</strong> 自建</td></tr><tr><td>文档/知识库索引与检索为主</td><td><strong>LlamaIndex</strong>，或 LangChain + 向量库</td></tr><tr><td>企业级、微软技术栈</td><td><strong>Semantic Kernel</strong> 或 LangChain</td></tr></tbody></table>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="六与本系列文档的对应关系">六、与本系列文档的对应关系<a href="#六与本系列文档的对应关系" class="hash-link" aria-label="六、与本系列文档的对应关系的直接链接" title="六、与本系列文档的对应关系的直接链接">​</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>本系列文档</th><th>在 LangChain / 同类框架中的体现</th></tr></thead><tbody><tr><td><a href="/docs/Agent开发/agent/">Agent 总览</a></td><td>LangChain Agent + Tool + Memory；LangGraph 图与状态</td></tr><tr><td><a href="/docs/Agent开发/agent-core-modules/">五大核心模块</a></td><td>Models、Memory、Tools、Output Parsers、可自建 Planner/Reflection</td></tr><tr><td><a href="/docs/Agent开发/agent-react-arch/">ReAct 架构</a></td><td>LangChain ReAct Agent、Tool Calling Agent；LangGraph 的 ReAct 子图</td></tr><tr><td><a href="/docs/Agent开发/agent-mcp-arch/">MCP 架构</a></td><td>可用 LangGraph 实现 Controller + Planner + Memory 的状态机</td></tr><tr><td><a href="/docs/Agent开发/agent-a2a-arch/">A2A 架构</a></td><td>LangGraph 多节点多 Agent；AutoGen / CrewAI 现成多 Agent</td></tr><tr><td><a href="/docs/Agent开发/long-term-memory/">长期记忆</a></td><td>LangChain Memory + VectorStore Retriever；LlamaIndex 索引</td></tr><tr><td><a href="/docs/Agent开发/agent-rag/">RAG 技术</a></td><td>LangChain 的 RAG Chain、Retriever；LlamaIndex 的 Index + Query Engine</td></tr></tbody></table>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="七小结">七、小结<a href="#七小结" class="hash-link" aria-label="七、小结的直接链接" title="七、小结的直接链接">​</a></h2>
+<ul>
+<li><strong>LangChain</strong>：编排框架，提供 Models、Prompts、Chains、Memory、Tools、Agent/Executor 等组件，用于实现 <a href="/docs/Agent开发/agent/">Agent</a> 与 RAG。</li>
+<li><strong>LangGraph</strong>：在 LangChain 生态内做有状态、可循环的图，适合复杂控制流与 <a href="/docs/Agent开发/agent-mcp-arch/">MCP</a> / <a href="/docs/Agent开发/agent-react-arch/">ReAct</a> 的显式实现。</li>
+<li><strong>LlamaIndex</strong>：偏数据与检索，适合 RAG 与长期记忆的数据侧；可与 LangChain 组合使用。</li>
+<li><strong>AutoGen / CrewAI</strong>：多 Agent 协作的现成方案，对应 <a href="/docs/Agent开发/agent-a2a-arch/">A2A</a>；可按项目在「自建（LangGraph）」与「现成框架」之间选择。</li>
+</ul>
+<p>先理解 <a href="/docs/Agent开发/agent/">Agent 架构</a> 与 <a href="/docs/Agent开发/agent-core-modules/">五大模块</a>，再按需求选 LangChain / LangGraph 或其它框架，更容易对上概念、少走弯路。</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/Addyyaa/Addyyaa.github.io/tree/main/docs/Agent开发/agent-langchain-and-frameworks.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>编辑此页</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="文件选项卡"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/Agent开发/agent-core-modules/"><div class="pagination-nav__sublabel">上一页</div><div class="pagination-nav__label">agent-core-modules</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/Agent开发/agent-mcp-arch/"><div class="pagination-nav__sublabel">下一页</div><div class="pagination-nav__label">agent-mcp-arch</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#一langchain-是什么" class="table-of-contents__link toc-highlight">一、LangChain 是什么？</a></li><li><a href="#二langchain-核心概念" class="table-of-contents__link toc-highlight">二、LangChain 核心概念</a><ul><li><a href="#1-模型封装models" class="table-of-contents__link toc-highlight">1. 模型封装（Models）</a></li><li><a href="#2-prompt-与模板prompts" class="table-of-contents__link toc-highlight">2. Prompt 与模板（Prompts）</a></li><li><a href="#3-输出解析output-parsers" class="table-of-contents__link toc-highlight">3. 输出解析（Output Parsers）</a></li><li><a href="#4-链chains" class="table-of-contents__link toc-highlight">4. 链（Chains）</a></li><li><a href="#5-记忆memory" class="table-of-contents__link toc-highlight">5. 记忆（Memory）</a></li><li><a href="#6-工具tools" class="table-of-contents__link toc-highlight">6. 工具（Tools）</a></li><li><a href="#7-agent-与-agentexecutor" class="table-of-contents__link toc-highlight">7. Agent 与 AgentExecutor</a></li></ul></li><li><a href="#三langgraph有状态可循环的图" class="table-of-contents__link toc-highlight">三、LangGraph：有状态、可循环的图</a></li><li><a href="#四同类框架与概念对比" class="table-of-contents__link toc-highlight">四、同类框架与概念对比</a><ul><li><a href="#1-llamaindex原-gpt-index" class="table-of-contents__link toc-highlight">1. LlamaIndex（原 GPT Index）</a></li><li><a href="#2-autogenmicrosoft" class="table-of-contents__link toc-highlight">2. AutoGen（Microsoft）</a></li><li><a href="#3-crewai" class="table-of-contents__link toc-highlight">3. CrewAI</a></li><li><a href="#4-haystackdeepset" class="table-of-contents__link toc-highlight">4. Haystack（deepset）</a></li><li><a href="#5-semantic-kernelmicrosoft" class="table-of-contents__link toc-highlight">5. Semantic Kernel（Microsoft）</a></li></ul></li><li><a href="#五框架选型简表" class="table-of-contents__link toc-highlight">五、框架选型简表</a></li><li><a href="#六与本系列文档的对应关系" class="table-of-contents__link toc-highlight">六、与本系列文档的对应关系</a></li><li><a href="#七小结" class="table-of-contents__link toc-highlight">七、小结</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/intro/">Tutorial</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://discordapp.com/invite/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Discord<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://x.com/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">X<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog/">Blog</a></li><li class="footer__item"><a href="https://github.com/Addyyaa/Addyyaa.github.io" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 AddyNotes. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>
