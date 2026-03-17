@@ -184,5 +184,5 @@ const tools: Record<string, ToolDef> = {
 2. 再加一个 `search_web` 工具，支持「先搜索，再选一个网页去总结」。  
 3. 在 history 中显式记录工具调用和结果，让你可以在日志里完整看到 ReAct 决策过程。  
 
-当你能稳定跑通上述 Demo，就已经掌握了 ReAct 的主干实现，可以进一步与「记忆」「多 Agent」「工作流编排」等更复杂场景结合。若用现成框架实现 ReAct（如 LangChain Agent、LangGraph），可参考 [LangChain 与同类框架详解](./agent-langchain-and-frameworks)。
+当你能稳定跑通上述 Demo，就已经掌握了 ReAct 的主干实现，可以进一步与「记忆」「多 Agent」「工作流编排」等更复杂场景结合。若用现成框架实现 ReAct（如 LangChain Agent、LangGraph），可参考 [LangChain 与同类框架详解](../agent-langchain-and-frameworks)。
 

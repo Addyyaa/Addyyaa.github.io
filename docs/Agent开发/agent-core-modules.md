@@ -57,7 +57,7 @@ export class HttpLLMClient implements LLMClient {
 
 ## 二、Memory（记忆）——会话缓冲 + 语义检索
 
-短期记忆用会话缓冲即可；长期记忆需要向量化与语义检索，实现原理见 **[长期记忆实现原理](./long-term-memory)**。若要从**文档/知识库**中检索内容并增强 LLM 回答，可配合 **[RAG 技术](./agent-rag)**（与长期记忆共用向量检索，但数据来源为事先建好的知识库）。
+短期记忆用会话缓冲即可；长期记忆需要向量化与语义检索，实现原理见 **[长期记忆实现原理](../long-term-memory)**。若要从**文档/知识库**中检索内容并增强 LLM 回答，可配合 **[RAG 技术](../agent-rag)**（与长期记忆共用向量检索，但数据来源为事先建好的知识库）。
 
 ### 1. 会话缓冲（短期记忆）
 
@@ -100,7 +100,7 @@ export class InMemoryMemory implements Memory {
 - 用「问题」做向量检索，找到最相关的过往事件。  
 
 接口不变，只是在 Memory 内部增加一个 `vectorStore`。  
-**实现细节（Embedding、向量库选型、检索策略、与 Memory 的衔接）见 [长期记忆实现原理](./long-term-memory)。**
+**实现细节（Embedding、向量库选型、检索策略、与 Memory 的衔接）见 [长期记忆实现原理](../long-term-memory)。**
 
 ---
 
@@ -266,7 +266,7 @@ export async function reflectProcess(llm: LLMClient, events: MemoryEvent[]): Pro
 }
 ```
 
-可以把这个总结作为「长期记忆」写入 Memory，供下次相似任务检索使用（长期记忆的存储与检索机制见 [长期记忆实现原理](./long-term-memory)）。
+可以把这个总结作为「长期记忆」写入 Memory，供下次相似任务检索使用（长期记忆的存储与检索机制见 [长期记忆实现原理](../long-term-memory)）。
 
 ---
 
@@ -327,7 +327,7 @@ async function runAgent(goal: string) {
 1. **先实现 LLMClient + ToolRegistry + 最简单 Memory（数组）**。  
 2. **再实现一个非常简单的 Planner（硬编码 if/else），不使用 LLM**，先验证「流程」而不是「智能」。  
 3. **然后换成 LLMPlanner**，让 LLM 参与决策。  
-4. **需要跨会话回忆时**，再为 Memory 增加长期记忆能力（见 [长期记忆实现原理](./long-term-memory)）。  
+4. **需要跨会话回忆时**，再为 Memory 增加长期记忆能力（见 [长期记忆实现原理](../long-term-memory)）。  
 5. **最后再引入 Reflection**，做质量控制与经验沉淀。  
 
 这样可以避免一上来就所有概念叠加导致调试困难，让你更清楚地看到每个模块带来的边际价值。

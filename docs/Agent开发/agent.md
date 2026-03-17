@@ -77,7 +77,7 @@ flowchart LR
 ### 4. Tool-use（工具调用）——Agent 的「手脚」
 
 - **作用**：真正与外部世界交互——调 API、查数据库、读文件、发请求等。没有工具调用，Agent 只能「说」不能「做」。
-- **常见形态**：API、数据库、文件读写、以及基于文档/知识库的 **[RAG](./agent-rag)**（检索增强生成）——先检索相关片段再交给 LLM，减少幻觉。
+- **常见形态**：API、数据库、文件读写、以及基于文档/知识库的 **[RAG](../agent-rag)**（检索增强生成）——先检索相关片段再交给 LLM，减少幻觉。
 - **工程要点**：工具的描述（Schema）、工具选择（Tool Router）、错误处理与重试。
 
 ### 5. Reflection（反思）——元认知与策略调整
@@ -126,7 +126,7 @@ flowchart TD
 | **A2A** | Agent-to-Agent        | 多 Agent 协作、分工与通信    | 复杂协作、角色分工 |
 
 - **MCP**：偏工程化，适合对稳定性和可控性要求高的 B 端。
-- **ReAct**：上手快，很多教程和框架（如 [LangChain](./agent-langchain-and-frameworks)）都围绕它。
+- **ReAct**：上手快，很多教程和框架（如 [LangChain](../agent-langchain-and-frameworks)）都围绕它。
 - **A2A**：当你需要「多个专业 Agent 一起干活」时考虑。
 
 ---
@@ -154,7 +154,7 @@ flowchart TB
 
 1. **<span style="color:red;">明确需求</span>**：先想清楚你要 Agent 做什么（例如：自动查天气、总结网页、写周报），避免一上来就堆技术。
 2. **<span style="color:red;">选模型</span>**：选一个带「工具调用 / Function Calling」的模型（如 GPT、Claude、通义、DeepSeek 等），并确认 API 支持。
-3. **<span style="color:red;">选框架</span>**：新手可先用 **LangChain** 或 **LangGraph** 做 ReAct 式 Agent；想更工程化再看 MCP、多 Agent 框架（如 AutoGen、CrewAI）。各框架概念与选型见 [LangChain 与同类框架详解](./agent-langchain-and-frameworks)。
+3. **<span style="color:red;">选框架</span>**：新手可先用 **LangChain** 或 **LangGraph** 做 ReAct 式 Agent；想更工程化再看 MCP、多 Agent 框架（如 AutoGen、CrewAI）。各框架概念与选型见 [LangChain 与同类框架详解](../agent-langchain-and-frameworks)。
 4. **<span style="color:red;">设计最小闭环</span>**：先实现：用户目标 → 规划 1～2 步 → 调 1 个工具 → 把结果塞回 LLM → 输出。确保「规划→工具→反思」跑通。
 5. **<span style="color:red;">加记忆（可选）</span>**：在单轮闭环稳定后，再加短期记忆（会话缓冲）或简单长期记忆（向量检索）。
 6. **<span style="color:red;">测试与迭代</span>**：用典型场景和边界 case 测试，再逐步加工具、加反思、加多 Agent。
@@ -169,4 +169,4 @@ flowchart TB
 - **<span style="color:red;">架构选择</span>**：快速验证用 ReAct；要稳定、可维护选 MCP；多角色协作考虑 A2A。
 - **<span style="color:red;">入门路径</span>**：从「单目标 + 单工具 + 最小 ReAct 循环」开始，再逐步加记忆、多工具和多 Agent。
 
-后续可以在此基础上继续学习：[LangChain 与同类框架详解](./agent-langchain-and-frameworks)、Prompt 设计、[RAG 技术（检索增强生成）](./agent-rag)、以及 Memory / Reflection 的进阶用法。
+后续可以在此基础上继续学习：[LangChain 与同类框架详解](../agent-langchain-and-frameworks)、Prompt 设计、[RAG 技术（检索增强生成）](../agent-rag)、以及 Memory / Reflection 的进阶用法。

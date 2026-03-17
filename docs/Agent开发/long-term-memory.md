@@ -1,8 +1,8 @@
 # 长期记忆实现原理
 
 > 本文说明 Agent 中「长期记忆」的常见实现方式：向量化存储、检索流程、与短期记忆的配合，以及工程上的取舍。  
-> 与 [五大核心模块](./agent-core-modules) 中的 Memory 小节对应，可作为其扩展阅读。  
-> **与 RAG 的区别**：长期记忆检索的是「过去交互/经验」；若要从**固定文档/知识库**中取知识并增强回答，见 [RAG 技术（检索增强生成）](./agent-rag)。
+> 与 [五大核心模块](../agent-core-modules) 中的 Memory 小节对应，可作为其扩展阅读。  
+> **与 RAG 的区别**：长期记忆检索的是「过去交互/经验」；若要从**固定文档/知识库**中取知识并增强回答，见 [RAG 技术（检索增强生成）](../agent-rag)。
 
 ---
 
@@ -94,7 +94,7 @@ export interface SearchResult {
 
 ## 四、与 Memory 接口的衔接
 
-在 [五大核心模块](./agent-core-modules) 里，Memory 已有 `append` 和 `getRecent`。长期记忆可以在此基础上扩展，而不破坏原有接口：
+在 [五大核心模块](../agent-core-modules) 里，Memory 已有 `append` 和 `getRecent`。长期记忆可以在此基础上扩展，而不破坏原有接口：
 
 - **写入**：在 `append` 时（或单独在「需要沉淀为长期记忆」的时机），把内容交给 Embedding + VectorStore 写入。  
 - **读取**：在 Planner 或 LLM 调用前，用当前「目标/问题」做一次向量检索，把得到的若干条记忆与 `getRecent` 的短期记忆**合并**，一起塞进 Prompt。
@@ -147,4 +147,4 @@ export interface Memory {
 | **衔接** | 在 Memory 上扩展 `searchRelevant`，与 `getRecent` 合并后喂给 LLM。 |
 | **写入策略** | 按类型/重要性/摘要写，避免全量写入造成噪音与成本过高。 |
 
-实现并接好长期记忆后，Agent 就具备了「跨会话回忆」的能力；再结合 [五大核心模块](./agent-core-modules) 中的 Planner、Reflection，可以进一步做「从历史经验中学习」的迭代。
+实现并接好长期记忆后，Agent 就具备了「跨会话回忆」的能力；再结合 [五大核心模块](../agent-core-modules) 中的 Planner、Reflection，可以进一步做「从历史经验中学习」的迭代。
