@@ -298,9 +298,41 @@ agent.invoke(
 
 工具在执行时可能失败：**网络超时**、**参数不合法**、**第三方 API 限流/报错**、**权限不足**等。若不处理，异常会向上抛出，轻则整轮 Agent 报错，重则把堆栈信息塞进 ToolMessage，模型难以理解。
 
-**原则**：在工具**内部**捕获异常，返回**字符串**形式的错误说明（不要将异常抛给框架）。框架会把该字符串作为对应 ToolMessage 的 content 交给模型，模型会「观察」到失败并选择重试、换参数或向用户友好解释。
+**官方推荐**：要**自定义工具错误的处理方式**，请使用 **`@wrap_tool_call` 装饰器**创建中间件，在工具执行外层统一捕获异常、打日志，并返回一个内容为友好错误说明的 `ToolMessage`，这样模型看到的是可读文案而非堆栈。与 `@wrap_model_call` 类似，每次执行工具前都会先进入该中间件，你可在其中决定是否调用 `handler(request)`、调用几次（重试），或在异常时直接返回自定义的 `ToolMessage`。
 
-**推荐写法**：工具内 `try/except`，成功时返回业务结果字符串，失败时返回统一、可读的错误描述（避免暴露内部细节），并打日志便于排查。
+```python
+from langchain.agents.middleware import wrap_tool_call
+from langchain.tools.tool_node import ToolCallRequest
+from langchain.messages import ToolMessage
+from typing import Callable
+import logging
+
+logger = logging.getLogger(__name__)
+
+@wrap_tool_call
+def handle_tool_errors(
+    request: ToolCallRequest,
+    handler: Callable[[ToolCallRequest], ToolMessage],
+) -> ToolMessage:
+    try:
+        return handler(request)
+    except Exception as e:
+        logger.exception("Tool %s failed", request.tool_call.get("name"))
+        # 返回友好错误文案给模型，避免堆栈进入 ToolMessage
+        return ToolMessage(
+            content=f"Error: 工具执行失败（{type(e).__name__}），请稍后重试或换一种方式。",
+            tool_call_id=request.tool_call.get("id", ""),
+        )
+
+agent = create_agent(
+    model="openai:gpt-4o-mini",
+    tools=[get_weather, search_docs],
+    middleware=[handle_tool_errors],
+)
+```
+
+**可选：工具内 try/except**  
+若希望每个工具自己决定错误文案，也可在工具**内部**用 `try/except` 返回字符串形式的错误说明（不抛异常），框架会将该字符串作为 ToolMessage 的 content。与中间件方式可二选一或同时使用（中间件作为最后一道防线）。示例（工具内处理）：
 
 ```python
 import logging
