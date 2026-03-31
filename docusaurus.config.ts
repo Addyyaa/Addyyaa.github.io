@@ -104,6 +104,7 @@ const config: Config = {
           label: '文档',
         },
         { to: '/blog', label: '博客', position: 'left' },
+        { to: '/v2ray-outbounds-generator.html', label: '配置生成工具', position: 'left' },
         {
           href: 'https://github.com/Addyyaa/Addyyaa.github.io',
           label: 'GitHub',
