@@ -1,13 +1,13 @@
-import { themes as prismThemes } from 'prism-react-renderer';
-import type { Config } from '@docusaurus/types';
-import type * as Preset from '@docusaurus/preset-classic';
+import { themes as prismThemes } from "prism-react-renderer";
+import type { Config } from "@docusaurus/types";
+import type * as Preset from "@docusaurus/preset-classic";
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'AddyNotes',
-  tagline: '学习笔记',
-  favicon: 'img/favicon.ico',
+  title: "AddyNotes",
+  tagline: "学习笔记",
+  favicon: "img/favicon.ico",
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
@@ -15,33 +15,33 @@ const config: Config = {
   },
 
   // Set the production url of your site here
-  url: 'https://Addyyaa.github.io',
+  url: "https://Addyyaa.github.io",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl: "/",
   // Avoid GH Pages redirect mismatch; make URLs consistently end with /
   trailingSlash: true,
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'Addyyaa', // Usually your GitHub org/user name.
-  projectName: 'Addyyaa.github.io', // Usually your repo name.
+  organizationName: "Addyyaa", // Usually your GitHub org/user name.
+  projectName: "Addyyaa.github.io", // Usually your repo name.
   // Explicitly set deployment branch for org/user pages
-  deploymentBranch: 'gh-pages',
+  deploymentBranch: "gh-pages",
 
-  onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenLinks: "throw",
+  onBrokenMarkdownLinks: "warn",
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'zh-Hans',
-    locales: ['zh-Hans'],
+    defaultLocale: "zh-Hans",
+    locales: ["zh-Hans"],
   },
   // 修复 TOC 渲染问题
   markdown: {
-    format: 'detect',
+    format: "detect",
     mdx1Compat: {
       comments: true,
       admonitions: true,
@@ -50,38 +50,33 @@ const config: Config = {
   },
   presets: [
     [
-      'classic',
+      "classic",
       {
         docs: {
-          sidebarPath: './sidebars.ts',
+          sidebarPath: "./sidebars.ts",
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/Addyyaa/Addyyaa.github.io/tree/main/',
+          editUrl: "https://github.com/Addyyaa/Addyyaa.github.io/tree/main/",
           // 只使用兼容的插件
-          remarkPlugins: [
-            require('remark-gfm'),
-            require('remark-math'),
-          ],
-          rehypePlugins: [require('rehype-katex')],
+          remarkPlugins: [require("remark-gfm"), require("remark-math")],
+          rehypePlugins: [require("rehype-katex")],
         },
         blog: {
           showReadingTime: true,
           feedOptions: {
-            type: ['rss', 'atom'],
+            type: ["rss", "atom"],
             xslt: true,
           },
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/Addyyaa/Addyyaa.github.io/tree/main/',
+          editUrl: "https://github.com/Addyyaa/Addyyaa.github.io/tree/main/",
           // Useful options to enforce blogging best practices
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
+          onInlineTags: "warn",
+          onInlineAuthors: "warn",
+          onUntruncatedBlogPosts: "warn",
         },
         theme: {
-          customCss: './src/css/custom.css',
+          customCss: "./src/css/custom.css",
         },
       } satisfies Preset.Options,
     ],
@@ -89,68 +84,77 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    image: "img/docusaurus-social-card.jpg",
     navbar: {
-      title: 'AddyNotes',
+      title: "AddyNotes",
       logo: {
-        alt: 'AddyNotes Logo',
-        src: 'img/logo.svg',
+        alt: "AddyNotes Logo",
+        src: "img/logo.svg",
       },
       items: [
         {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
-          position: 'left',
-          label: '文档',
+          type: "docSidebar",
+          sidebarId: "tutorialSidebar",
+          position: "left",
+          label: "文档",
         },
-        { to: '/blog', label: '博客', position: 'left' },
-        { to: '/v2ray-outbounds-generator.html', label: '配置生成工具', position: 'left' },
+        // { to: "/blog", label: "博客", position: "left" },
         {
-          href: 'https://github.com/Addyyaa/Addyyaa.github.io',
-          label: 'GitHub',
-          position: 'right',
+          to: "/v2ray-outbounds-generator.html",
+          label: "博客",
+          position: "left",
+        },
+        {
+          to: "/v2ray-outbounds-generator.html",
+          label: "配置生成工具",
+          position: "left",
+        },
+        {
+          href: "https://github.com/Addyyaa/Addyyaa.github.io",
+          label: "GitHub",
+          position: "right",
         },
       ],
     },
     footer: {
-      style: 'dark',
+      style: "dark",
       links: [
         {
-          title: 'Docs',
+          title: "Docs",
           items: [
             {
-              label: 'Tutorial',
-              to: '/docs/intro',
+              label: "Tutorial",
+              to: "/docs/intro",
             },
           ],
         },
         {
-          title: 'Community',
+          title: "Community",
           items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+              label: "Stack Overflow",
+              href: "https://stackoverflow.com/questions/tagged/docusaurus",
             },
             {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
+              label: "Discord",
+              href: "https://discordapp.com/invite/docusaurus",
             },
             {
-              label: 'X',
-              href: 'https://x.com/docusaurus',
+              label: "X",
+              href: "https://x.com/docusaurus",
             },
           ],
         },
         {
-          title: 'More',
+          title: "More",
           items: [
             {
-              label: 'Blog',
-              to: '/blog',
+              label: "Blog",
+              to: "/blog",
             },
             {
-              label: 'GitHub',
-              href: 'https://github.com/Addyyaa/Addyyaa.github.io',
+              label: "GitHub",
+              href: "https://github.com/Addyyaa/Addyyaa.github.io",
             },
           ],
         },
@@ -162,8 +166,6 @@ const config: Config = {
       darkTheme: prismThemes.dracula,
     },
   } satisfies Preset.ThemeConfig,
-
-
 };
 
 export default config;
