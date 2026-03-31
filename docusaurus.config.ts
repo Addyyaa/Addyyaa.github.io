@@ -20,7 +20,7 @@ const config: Config = {
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: "/",
   // Avoid GH Pages redirect mismatch; make URLs consistently end with /
-  trailingSlash: true,
+  trailingSlash: false,
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
