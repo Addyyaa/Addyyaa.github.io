@@ -1,0 +1,696 @@
+<!doctype html>
+
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>V2Ray Outbounds 生成器</title>
+    <style>
+      :root {
+        --bg: #0b1220;
+        --card: rgba(255, 255, 255, 0.06);
+        --card2: rgba(255, 255, 255, 0.04);
+        --text: rgba(255, 255, 255, 0.92);
+        --muted: rgba(255, 255, 255, 0.7);
+        --accent: #6ea8fe;
+        --danger: #ff6b6b;
+        --ok: #3ddc97;
+        --border: rgba(255, 255, 255, 0.14);
+        --shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
+      }
+      body {
+        margin: 0;
+        font-family:
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          "PingFang SC",
+          "Microsoft YaHei",
+          "Helvetica Neue",
+          Arial,
+          "Noto Sans CJK SC",
+          "WenQuanYi Micro Hei",
+          sans-serif;
+        background:
+          radial-gradient(
+            1000px 500px at 20% 0%,
+            rgba(110, 168, 254, 0.25),
+            transparent
+          ),
+          radial-gradient(
+            800px 420px at 90% 30%,
+            rgba(61, 220, 151, 0.18),
+            transparent
+          ),
+          var(--bg);
+        color: var(--text);
+      }
+      .wrap {
+        max-width: 920px;
+        margin: 0 auto;
+        padding: 28px 16px 48px;
+      }
+      .header {
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+      .logo {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        background: linear-gradient(
+          135deg,
+          rgba(110, 168, 254, 0.9),
+          rgba(61, 220, 151, 0.8)
+        );
+        box-shadow: var(--shadow);
+      }
+      h1 {
+        font-size: 18px;
+        margin: 0;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+      }
+      p.sub {
+        margin: 6px 0 0;
+        color: var(--muted);
+        line-height: 1.4;
+        font-size: 13px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      @media (min-width: 900px) {
+        .grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 16px;
+        box-shadow: var(--shadow);
+      }
+      .card h2 {
+        margin: 0 0 10px;
+        font-size: 14px;
+        font-weight: 700;
+      }
+      label {
+        display: block;
+        margin: 12px 0 6px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        background: var(--card2);
+        color: var(--text);
+        outline: none;
+      }
+      input {
+        padding: 10px 12px;
+        font-size: 14px;
+        background: rgba(12, 22, 40, 0.86);
+        color: #eef5ff;
+      }
+      select {
+        padding: 10px 12px;
+        font-size: 14px;
+        background: rgba(12, 22, 40, 0.9);
+        color: #eef5ff;
+      }
+      select option {
+        color: #111827;
+        background: #ffffff;
+      }
+      input::placeholder,
+      textarea::placeholder {
+        color: rgba(216, 229, 247, 0.72);
+      }
+      textarea {
+        padding: 12px;
+        min-height: 260px;
+        resize: vertical;
+        font-family:
+          "JetBrains Mono", "SFMono-Regular", Menlo, Monaco, Consolas,
+          "Liberation Mono", "Courier New", monospace;
+        font-size: 14px;
+        line-height: 1.7;
+        color: #eef5ff;
+        background: rgba(9, 16, 30, 0.72);
+        word-break: break-word;
+        overflow-wrap: anywhere;
+        caret-color: #9cc4ff;
+      }
+      .row {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      button {
+        padding: 11px 12px;
+        cursor: pointer;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+      }
+      .btn-primary {
+        background: linear-gradient(
+          135deg,
+          rgba(110, 168, 254, 0.95),
+          rgba(61, 220, 151, 0.85)
+        );
+        border: none;
+      }
+      .btn-secondary {
+        background: transparent;
+      }
+      .hint {
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.45;
+      }
+      .status {
+        margin-top: 12px;
+        font-size: 13px;
+        padding: 10px 12px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--muted);
+        display: none;
+      }
+      .status.ok {
+        display: block;
+        color: rgba(61, 220, 151, 0.98);
+      }
+      .status.err {
+        display: block;
+        color: rgba(255, 107, 107, 0.98);
+      }
+      .footer {
+        margin-top: 14px;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.5;
+      }
+      .small {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .session-badge {
+        margin-top: 10px;
+        padding: 8px 10px;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--muted);
+        font-size: 12px;
+      }
+      @media (orientation: landscape) and (max-width: 980px) {
+        .wrap {
+          max-width: 1120px;
+          padding: 18px 12px 24px;
+        }
+        .grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        textarea {
+          min-height: 220px;
+        }
+      }
+      @media (orientation: portrait) {
+        textarea {
+          min-height: 300px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="header">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1>V2Ray Outbounds 生成器</h1>
+          <p class="sub">
+            输入账号/密码后，本页面在浏览器端解密隐藏参数并生成 `outbounds`
+            配置。
+          </p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <section class="card">
+          <h2>输入</h2>
+          <label for="account">账号（用于密钥派生）</label>
+          <input
+            id="account"
+            type="email"
+            autocomplete="off"
+            placeholder="例如：xxxx@qq.com"
+          />
+
+          <label for="password">密码（用于密钥派生）</label>
+          <input
+            id="password"
+            type="password"
+            autocomplete="off"
+            placeholder="输入密码后才会生成"
+          />
+
+          <div class="row" style="margin-top: 14px">
+            <button id="btnLogin" class="btn-secondary" type="button">
+              登录并建立会话
+            </button>
+          </div>
+          <div class="row" style="margin-top: 10px">
+            <button id="btnGenerate" class="btn-primary" type="button">
+              生成配置
+            </button>
+          </div>
+          <div class="row" style="margin-top: 10px">
+            <button id="btnCopy" class="btn-secondary" type="button">
+              复制输出
+            </button>
+          </div>
+
+          <div
+            id="status"
+            class="status"
+            role="status"
+            aria-live="polite"
+          ></div>
+          <div id="sessionBadge" class="session-badge">当前会话：未登录</div>
+
+          <div class="hint">安全说明：这是“纯前端”方案，无法达到真正的保密</div>
+        </section>
+
+        <section class="card">
+          <h2>输出（outbounds）</h2>
+          <label for="outputFormat">输出格式</label>
+          <select id="outputFormat">
+            <option value="json">JSON</option>
+            <option value="url" selected>URL（vless 链接）</option>
+          </select>
+          <textarea
+            id="output"
+            readonly
+            placeholder="点击“生成配置/生成 URL”后，这里会填入 vless 链接..."
+          ></textarea>
+          <div class="footer">
+            你可以把输出内容粘贴到你的客户端（或保存为文件）。
+          </div>
+          <div class="small" style="margin-top: 12px">
+            提示：若账号/密码不正确，解密会失败，页面不会生成配置。
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script>
+      // =========================
+      // 1) 以密文隐藏参数
+      // =========================
+      // 说明：以下 ciphertext/tag 均为“由页面内算法在你输入正确账号/密码后解密”的结果。
+      //       源代码不包含明文 IP 与明文 realitySettings.password。
+
+      const KDF = {
+        // 为简化演示：使用 PBKDF2(account + ":" + password) 派生 AES-GCM key
+        // 注意：纯前端无法保证强安全；这里主要满足“源代码不出现明文”的要求。
+        iterations: 120000,
+        hash: "SHA-256",
+      };
+
+      // 用于解密 IP 的密文参数
+      const ENCRYPTED_IP = {
+        saltB64: "uhmu5bjtX/vFUeZZk0FxFg==",
+        ivB64: "KeBcQ4AussoscyRN",
+        ciphertextB64: "1OfY+XXkf7woaF8uMw==",
+        tagB64: "Fl9lvV+4hsM8RTjutSBIkw==",
+      };
+
+      // 用于解密 realitySettings.password 的密文参数
+      const ENCRYPTED_REALITY_PASSWORD = {
+        saltB64: "YYRzupf8wudqRlhk3WrTjw==",
+        ivB64: "AR7Z2DakOy0oPl6h",
+        ciphertextB64:
+          "ATBJUCtoNz44/LE+w+Slf4foJgA5kYqx75feMCOqKpIH3Vi9BYlZVGNB9g==",
+        tagB64: "pKQL7tHTXpzQPT5OgbyF3Q==",
+      };
+
+      // =========================
+      // 2) UI
+      // =========================
+      const elAccount = document.getElementById("account");
+      const elPassword = document.getElementById("password");
+      const elOutput = document.getElementById("output");
+      const elOutputFormat = document.getElementById("outputFormat");
+      const elStatus = document.getElementById("status");
+      const elSessionBadge = document.getElementById("sessionBadge");
+      const btnLogin = document.getElementById("btnLogin");
+      const btnGenerate = document.getElementById("btnGenerate");
+      const btnCopy = document.getElementById("btnCopy");
+
+      const SESSION_KEY = "v2ray_gen_session_v1";
+      const SESSION_TTL_MS = 2 * 60 * 60 * 1000; // 2小时
+      let activeSession = null;
+
+      function showStatus(text, kind) {
+        elStatus.textContent = text;
+        elStatus.className = "status";
+        if (kind === "ok") elStatus.classList.add("ok");
+        if (kind === "err") elStatus.classList.add("err");
+        if (kind === "ok" || kind === "err") elStatus.style.display = "block";
+      }
+
+      function base64ToBytes(b64) {
+        const bin = atob(b64);
+        const bytes = new Uint8Array(bin.length);
+        for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+        return bytes;
+      }
+
+      function bytesToBase64(bytes) {
+        let bin = "";
+        for (let i = 0; i < bytes.length; i++)
+          bin += String.fromCharCode(bytes[i]);
+        return btoa(bin);
+      }
+
+      async function deriveAesKey(account, password, saltBytes) {
+        const enc = new TextEncoder();
+        const keyMaterial = enc.encode(account + ":" + password);
+        const baseKey = await crypto.subtle.importKey(
+          "raw",
+          keyMaterial,
+          "PBKDF2",
+          false,
+          ["deriveKey"],
+        );
+
+        return crypto.subtle.deriveKey(
+          {
+            name: "PBKDF2",
+            salt: saltBytes,
+            iterations: KDF.iterations,
+            hash: KDF.hash,
+          },
+          baseKey,
+          { name: "AES-GCM", length: 256 },
+          false,
+          ["decrypt"],
+        );
+      }
+
+      async function decryptAesGcmText(account, password, encBlob) {
+        const saltBytes = base64ToBytes(encBlob.saltB64);
+        const ivBytes = base64ToBytes(encBlob.ivB64);
+        const ciphertextBytes = base64ToBytes(encBlob.ciphertextB64);
+        const tagBytes = base64ToBytes(encBlob.tagB64);
+
+        // WebCrypto 的 decrypt 输入需要“密文 + tag”
+        const combined = new Uint8Array(
+          ciphertextBytes.length + tagBytes.length,
+        );
+        combined.set(ciphertextBytes, 0);
+        combined.set(tagBytes, ciphertextBytes.length);
+
+        const key = await deriveAesKey(account, password, saltBytes);
+        const dec = await crypto.subtle.decrypt(
+          { name: "AES-GCM", iv: ivBytes },
+          key,
+          combined,
+        );
+        return new TextDecoder().decode(dec);
+      }
+
+      function randomHex(len) {
+        const bytes = new Uint8Array(Math.ceil(len / 2));
+        crypto.getRandomValues(bytes);
+        return Array.from(bytes, (b) => b.toString(16).padStart(2, "0"))
+          .join("")
+          .slice(0, len);
+      }
+
+      function generateRandomSpiderX() {
+        const keywords = [
+          "office",
+          "microsoft",
+          "onedrive",
+          "windows",
+          "outlook",
+          "teams",
+          "azure",
+          "bing",
+        ];
+        const keyword = keywords[Math.floor(Math.random() * keywords.length)];
+        const nonce = randomHex(10);
+        const page = 1 + Math.floor(Math.random() * 9);
+        return `/search?q=${encodeURIComponent(keyword)}&page=${page}&v=${nonce}`;
+      }
+
+      function updateSessionBadge() {
+        if (!activeSession) {
+          elSessionBadge.textContent = "当前会话：未登录";
+          return;
+        }
+        const remainMs = Math.max(0, activeSession.expiresAt - Date.now());
+        const min = Math.ceil(remainMs / 60000);
+        elSessionBadge.textContent = `当前会话：已登录（剩余约 ${min} 分钟）`;
+      }
+
+      function clearSession() {
+        activeSession = null;
+        sessionStorage.removeItem(SESSION_KEY);
+        updateSessionBadge();
+      }
+
+      function persistSession(session) {
+        activeSession = session;
+        sessionStorage.setItem(SESSION_KEY, JSON.stringify(session));
+        updateSessionBadge();
+      }
+
+      function restoreSession() {
+        try {
+          const raw = sessionStorage.getItem(SESSION_KEY);
+          if (!raw) return;
+          const parsed = JSON.parse(raw);
+          if (!parsed || !parsed.expiresAt || Date.now() > parsed.expiresAt) {
+            clearSession();
+            return;
+          }
+          activeSession = parsed;
+          updateSessionBadge();
+        } catch {
+          clearSession();
+        }
+      }
+
+      function buildConfig(ip, realityPassword) {
+        // 这里直接拼你提供的“outbounds”结构
+        // 注意：ip 与 realityPassword 仅在解密后才会写入对象。
+        return {
+          outbounds: [
+            {
+              protocol: "vless",
+              settings: {
+                vnext: [
+                  {
+                    address: ip,
+                    port: 443,
+                    users: [
+                      {
+                        id: "3d3d23dd-8271-4a06-a9f0-37f02bc41d1d",
+                        flow: "xtls-rprx-vision",
+                        encryption: "none",
+                      },
+                    ],
+                  },
+                ],
+              },
+              streamSettings: {
+                network: "tcp",
+                security: "reality",
+                realitySettings: {
+                  show: false,
+                  fingerprint: "chrome",
+                  serverName: "www.microsoft.com",
+                  password: realityPassword,
+                  publicKey: realityPassword,
+                  server_key: realityPassword,
+                  "reality-public-key": realityPassword,
+                  "public-key": realityPassword,
+                  shortId: "a1b2c3d4",
+                  mldsa65Verify: "",
+                  spiderX: generateRandomSpiderX(),
+                },
+              },
+            },
+          ],
+        };
+      }
+
+      async function createSessionWithCredentials(account, password) {
+        const ip = await decryptAesGcmText(account, password, ENCRYPTED_IP);
+        const realityPassword = await decryptAesGcmText(
+          account,
+          password,
+          ENCRYPTED_REALITY_PASSWORD,
+        );
+        const now = Date.now();
+        return {
+          account,
+          // 说明：纯前端无法做到强保密，这里只做 session 存储避免频繁重复输入。
+          ipB64: bytesToBase64(new TextEncoder().encode(ip)),
+          realityPasswordB64: bytesToBase64(
+            new TextEncoder().encode(realityPassword),
+          ),
+          createdAt: now,
+          expiresAt: now + SESSION_TTL_MS,
+        };
+      }
+
+      function getSessionSecrets() {
+        if (!activeSession || Date.now() > activeSession.expiresAt) {
+          clearSession();
+          return null;
+        }
+        const ip = new TextDecoder().decode(base64ToBytes(activeSession.ipB64));
+        const realityPassword = new TextDecoder().decode(
+          base64ToBytes(activeSession.realityPasswordB64),
+        );
+        return { ip, realityPassword };
+      }
+
+      async function onLogin() {
+        const account = (elAccount.value || "").trim();
+        const password = elPassword.value || "";
+
+        if (!account || !password) {
+          showStatus("请先输入账号与密码，再登录。", "err");
+          return;
+        }
+
+        try {
+          btnLogin.disabled = true;
+          btnLogin.textContent = "登录中...";
+          const session = await createSessionWithCredentials(account, password);
+          persistSession(session);
+          elPassword.value = "";
+          showStatus("登录成功，已建立会话。会话有效期 2 小时。", "ok");
+        } catch {
+          clearSession();
+          showStatus("登录失败：账号或密码不正确。", "err");
+        } finally {
+          btnLogin.disabled = false;
+          btnLogin.textContent = "登录并建立会话";
+        }
+      }
+
+      function configToVlessUrl(config) {
+        const outbound = config.outbounds[0];
+        const vnext = outbound.settings.vnext[0];
+        const user = vnext.users[0];
+        const rs = outbound.streamSettings.realitySettings;
+
+        const params = new URLSearchParams({
+          encryption: user.encryption,
+          flow: user.flow,
+          security: outbound.streamSettings.security,
+          type: outbound.streamSettings.network,
+          sni: rs.serverName,
+          fp: rs.fingerprint,
+          pbk: rs.publicKey,
+          sid: rs.shortId,
+          spx: rs.spiderX,
+        });
+
+        return `vless://${encodeURIComponent(user.id)}@${vnext.address}:${vnext.port}?${params.toString()}#${encodeURIComponent("reality-auto-generated")}`;
+      }
+
+      function renderOutput(config) {
+        if (elOutputFormat.value === "url") {
+          elOutput.value = configToVlessUrl(config);
+          return;
+        }
+        elOutput.value = JSON.stringify(config, null, 2);
+      }
+
+      async function onGenerate() {
+        elOutput.value = "";
+        showStatus("", "ok");
+
+        const secrets = getSessionSecrets();
+        if (!secrets) {
+          showStatus("请先登录。登录后 2 小时内无需重复登录。", "err");
+          return;
+        }
+
+        try {
+          btnGenerate.disabled = true;
+          btnGenerate.textContent = "生成中...";
+          const config = buildConfig(secrets.ip, secrets.realityPassword);
+          renderOutput(config);
+          showStatus(
+            `生成成功。已输出 ${elOutputFormat.value === "url" ? "URL" : "JSON"} 格式。`,
+            "ok",
+          );
+        } catch (err) {
+          showStatus("生成失败，请重新登录后重试。", "err");
+          elOutput.value = "";
+        } finally {
+          btnGenerate.disabled = false;
+          btnGenerate.textContent = "生成配置";
+        }
+      }
+
+      async function onCopy() {
+        const text = elOutput.value || "";
+        if (!text) {
+          showStatus("没有可复制的内容，请先生成。", "err");
+          return;
+        }
+        try {
+          await navigator.clipboard.writeText(text);
+          const oldText = btnCopy.textContent;
+          btnCopy.textContent = "已复制 ✓";
+          btnCopy.disabled = true;
+          showStatus("已复制到剪贴板。", "ok");
+          setTimeout(() => {
+            btnCopy.textContent = oldText;
+            btnCopy.disabled = false;
+          }, 1200);
+        } catch {
+          // 兜底：尝试使用 textarea 选中复制
+          elOutput.focus();
+          elOutput.select();
+          document.execCommand("copy");
+          showStatus("已复制到剪贴板。", "ok");
+        }
+      }
+
+      restoreSession();
+      btnGenerate.addEventListener("click", onGenerate);
+      btnLogin.addEventListener("click", onLogin);
+      btnCopy.addEventListener("click", onCopy);
+      elOutputFormat.addEventListener("change", () => {
+        elOutput.value = "";
+        showStatus("已切换输出格式，请重新点击“生成配置”。", "ok");
+      });
+    </script>
+
+  </body>
+</html>
