@@ -100,7 +100,7 @@ const config: Config = {
         },
         { to: "/blog", label: "博客", position: "left" },
         {
-          to: "/static/v2ray-outbounds-generator.html",
+          to: "/v2ray-outbounds-generator.html/",
           label: "配置生成工具",
           position: "left",
         },
