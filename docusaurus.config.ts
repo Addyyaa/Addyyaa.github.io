@@ -98,14 +98,9 @@ const config: Config = {
           position: "left",
           label: "文档",
         },
-        // { to: "/blog", label: "博客", position: "left" },
+        { to: "/blog", label: "博客", position: "left" },
         {
-          to: "/v2ray-outbounds-generator.html",
-          label: "博客",
-          position: "left",
-        },
-        {
-          to: "/v2ray-outbounds-generator.html",
+          to: "/static/v2ray-outbounds-generator.html",
           label: "配置生成工具",
           position: "left",
         },
