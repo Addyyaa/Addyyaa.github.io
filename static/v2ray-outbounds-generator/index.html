@@ -301,13 +301,15 @@
           <h2>输出（outbounds）</h2>
           <label for="outputFormat">输出格式</label>
           <select id="outputFormat">
-            <option value="json">JSON</option>
-            <option value="url" selected>URL（vless 链接）</option>
+            <option value="json-vless">JSON（vless）</option>
+            <option value="url-vless" selected>URL（vless）</option>
+            <option value="json-hysteria2">JSON（hysteria2）</option>
+            <option value="url-hysteria2">URL（hysteria2）</option>
           </select>
           <textarea
             id="output"
             readonly
-            placeholder="点击“生成配置/生成 URL”后，这里会填入 vless 链接..."
+            placeholder="点击“生成配置”后，这里会填入 vless / hysteria2 配置..."
           ></textarea>
           <div class="footer">
             你可以把输出内容粘贴到你的客户端（或保存为文件）。
@@ -324,7 +326,7 @@
       // 1) 以密文隐藏参数
       // =========================
       // 说明：以下 ciphertext/tag 均为“由页面内算法在你输入正确账号/密码后解密”的结果。
-      //       源代码不包含明文 IP 与明文 realitySettings.password。
+      //       源代码不包含明文 IP、realitySettings.password 及 Hysteria2 敏感参数。
 
       const KDF = {
         // 为简化演示：使用 PBKDF2(account + ":" + password) 派生 AES-GCM key
@@ -350,6 +352,40 @@
         tagB64: "pKQL7tHTXpzQPT5OgbyF3Q==",
       };
 
+      // 用于解密 Hysteria2 服务器地址的密文参数
+      const ENCRYPTED_HY2_SERVER = {
+        saltB64: "CrLSeO/hsk0raKOql8Ylrw==",
+        ivB64: "gUFLuG/Ntyw06DYT",
+        ciphertextB64: "IlEuC5Hb6Zi6mUjSG+aSbpt9oC0=",
+        tagB64: "roOcpdo5ZVRxAH+ReMC5NQ==",
+      };
+
+      // 用于解密 Hysteria2 认证密码的密文参数
+      const ENCRYPTED_HY2_AUTH_PASSWORD = {
+        saltB64: "w9+3BEa6DNuiK/JOpfWRow==",
+        ivB64: "Wth9VyZxoDBcbePD",
+        ciphertextB64: "NHmvq3pjuxdYsiQ=",
+        tagB64: "QsZOxYqjHIp8DpdyAWBh3g==",
+      };
+
+      // 用于解密 Hysteria2 obfs 密码的密文参数
+      const ENCRYPTED_HY2_OBFS_PASSWORD = {
+        saltB64: "zpz9GB1H973iOJJpOiRFXQ==",
+        ivB64: "dG3O4bsDKC7UJBcm",
+        ciphertextB64: "apJxFbdAtPtTUaZKuLDkow==",
+        tagB64: "7G3MHaAbXvVtLoMz2tJMTA==",
+      };
+
+      // Hysteria2 非敏感固定参数（sing-box outbound 格式）
+      const HY2_STATIC = {
+        port: 20000,
+        serverPorts: ["20000:50000"],
+        hopInterval: "30s",
+        obfsType: "salamander",
+        tag: "RackNerd-Hy2",
+        insecure: false,
+      };
+
       // =========================
       // 2) UI
       // =========================
@@ -363,7 +399,7 @@
       const btnGenerate = document.getElementById("btnGenerate");
       const btnCopy = document.getElementById("btnCopy");
 
-      const SESSION_KEY = "v2ray_gen_session_v1";
+      const SESSION_KEY = "v2ray_gen_session_v2";
       const SESSION_TTL_MS = 2 * 60 * 60 * 1000; // 2小时
       let activeSession = null;
 
@@ -550,6 +586,21 @@
           password,
           ENCRYPTED_REALITY_PASSWORD,
         );
+        const hy2Server = await decryptAesGcmText(
+          account,
+          password,
+          ENCRYPTED_HY2_SERVER,
+        );
+        const hy2AuthPassword = await decryptAesGcmText(
+          account,
+          password,
+          ENCRYPTED_HY2_AUTH_PASSWORD,
+        );
+        const hy2ObfsPassword = await decryptAesGcmText(
+          account,
+          password,
+          ENCRYPTED_HY2_OBFS_PASSWORD,
+        );
         const now = Date.now();
         return {
           account,
@@ -557,6 +608,13 @@
           ipB64: bytesToBase64(new TextEncoder().encode(ip)),
           realityPasswordB64: bytesToBase64(
             new TextEncoder().encode(realityPassword),
+          ),
+          hy2ServerB64: bytesToBase64(new TextEncoder().encode(hy2Server)),
+          hy2AuthPasswordB64: bytesToBase64(
+            new TextEncoder().encode(hy2AuthPassword),
+          ),
+          hy2ObfsPasswordB64: bytesToBase64(
+            new TextEncoder().encode(hy2ObfsPassword),
           ),
           createdAt: now,
           expiresAt: now + SESSION_TTL_MS,
@@ -568,11 +626,34 @@
           clearSession();
           return null;
         }
+        if (
+          !activeSession.hy2ServerB64 ||
+          !activeSession.hy2AuthPasswordB64 ||
+          !activeSession.hy2ObfsPasswordB64
+        ) {
+          clearSession();
+          return null;
+        }
         const ip = new TextDecoder().decode(base64ToBytes(activeSession.ipB64));
         const realityPassword = new TextDecoder().decode(
           base64ToBytes(activeSession.realityPasswordB64),
         );
-        return { ip, realityPassword };
+        const hy2Server = new TextDecoder().decode(
+          base64ToBytes(activeSession.hy2ServerB64),
+        );
+        const hy2AuthPassword = new TextDecoder().decode(
+          base64ToBytes(activeSession.hy2AuthPasswordB64),
+        );
+        const hy2ObfsPassword = new TextDecoder().decode(
+          base64ToBytes(activeSession.hy2ObfsPasswordB64),
+        );
+        return {
+          ip,
+          realityPassword,
+          hy2Server,
+          hy2AuthPassword,
+          hy2ObfsPassword,
+        };
       }
 
       async function onLogin() {
@@ -621,9 +702,73 @@
         return `vless://${encodeURIComponent(user.id)}@${vnext.address}:${vnext.port}?${params.toString()}#${encodeURIComponent("reality-auto-generated")}`;
       }
 
-      function renderOutput(config) {
-        if (elOutputFormat.value === "url") {
+      function buildHysteria2Config(secrets) {
+        const hy2 = HY2_STATIC;
+        return {
+          outbounds: [
+            {
+              type: "hysteria2",
+              tag: hy2.tag,
+              server: secrets.hy2Server,
+              server_ports: hy2.serverPorts,
+              hop_interval: hy2.hopInterval,
+              password: secrets.hy2AuthPassword,
+              obfs: {
+                type: hy2.obfsType,
+                password: secrets.hy2ObfsPassword,
+              },
+              tls: {
+                enabled: true,
+                server_name: secrets.hy2Server,
+                insecure: hy2.insecure,
+              },
+            },
+          ],
+        };
+      }
+
+      function configToHysteria2Url(config) {
+        const outbound = config.outbounds[0];
+        const mport = outbound.server_ports
+          .map((range) => range.replace(":", ","))
+          .join(",");
+
+        const params = new URLSearchParams({
+          sni: outbound.tls.server_name,
+          insecure: outbound.tls.insecure ? "1" : "0",
+          allowInsecure: outbound.tls.insecure ? "1" : "0",
+          obfs: outbound.obfs.type,
+          "obfs-password": outbound.obfs.password,
+          mport,
+        });
+
+        const auth = encodeURIComponent(outbound.password);
+        const name = encodeURIComponent(outbound.tag);
+        return `hysteria2://${auth}@${outbound.server}:${HY2_STATIC.port}?${params.toString()}#${name}`;
+      }
+
+      function getOutputFormatLabel(format) {
+        const labels = {
+          "json-vless": "JSON（vless）",
+          "url-vless": "URL（vless）",
+          "json-hysteria2": "JSON（hysteria2）",
+          "url-hysteria2": "URL（hysteria2）",
+        };
+        return labels[format] || format;
+      }
+
+      function isHysteria2Format(format) {
+        return format === "json-hysteria2" || format === "url-hysteria2";
+      }
+
+      function renderOutput(config, format) {
+        const outputFormat = format || elOutputFormat.value;
+        if (outputFormat === "url-vless") {
           elOutput.value = configToVlessUrl(config);
+          return;
+        }
+        if (outputFormat === "url-hysteria2") {
+          elOutput.value = configToHysteria2Url(config);
           return;
         }
         elOutput.value = JSON.stringify(config, null, 2);
@@ -639,13 +784,19 @@
           return;
         }
 
+        const outputFormat = elOutputFormat.value;
+
         try {
           btnGenerate.disabled = true;
           btnGenerate.textContent = "生成中...";
-          const config = buildConfig(secrets.ip, secrets.realityPassword);
-          renderOutput(config);
+
+          const config = isHysteria2Format(outputFormat)
+            ? buildHysteria2Config(secrets)
+            : buildConfig(secrets.ip, secrets.realityPassword);
+
+          renderOutput(config, outputFormat);
           showStatus(
-            `生成成功。已输出 ${elOutputFormat.value === "url" ? "URL" : "JSON"} 格式。`,
+            `生成成功。已输出 ${getOutputFormatLabel(outputFormat)} 格式。`,
             "ok",
           );
         } catch (err) {
